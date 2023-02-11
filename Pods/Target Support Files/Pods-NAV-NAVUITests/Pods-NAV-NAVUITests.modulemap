@@ -1,0 +1,6 @@
+framework module Pods_NAV_NAVUITests {
+  umbrella header "Pods-NAV-NAVUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
