@@ -1,13 +1,14 @@
 //
-//  ViewController.swift
+//  WorkoutVC.swift
 //  NAV
 //
-//  Created by Alex Chen on 2/7/23.
+//  Created by Alex Chen on 2/9/23.
 //
 
+import Foundation
 import UIKit
 
-class ViewController: UIViewController {
+class GoalsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,4 +17,3 @@ class ViewController: UIViewController {
 
 
 }
-
