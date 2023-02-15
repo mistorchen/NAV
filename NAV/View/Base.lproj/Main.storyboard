@@ -225,7 +225,7 @@
         <scene sceneID="ioo-Mj-GMm">
             <objects>
                 <viewController title="RegisterVC" id="2uY-U4-Gx8" customClass="RegisterVC" customModule="NAV" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="q3R-ma-0jF" customClass="Register">
+                    <view key="view" contentMode="scaleToFill" id="q3R-ma-0jF">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
