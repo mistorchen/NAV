@@ -10,10 +10,18 @@ import UIKit
 
 class CurrentWorkoutVC: UIViewController {
 
+    
+    @IBOutlet weak var exerciseLabel: UILabel!
+    
+    let database = FireStoreExerciseReader()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func readDB(_ sender: UIButton) {
+        database.getExercises()
+    }
+    
 }
