@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct ExerciseID{
-    
-    let difficulty: Int
+struct ExerciseInfo {
+    let name: String
     let youtube: String
+//    var difficulty: Int
+    
 }

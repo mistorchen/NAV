@@ -9,26 +9,10 @@ import FirebaseCore
 import FirebaseFirestore
 
 struct FireStoreExerciseReader{
-    let db = Firestore.firestore()
     
     
     
-    func getExercises(){
-        
-        let docRef = db.document("\(dK.category.plyo.lower)/pogoHop")
-
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-
-
-            } else {
-                print("Document does not exist")
-            }
-        }
-        
-    }
+    
 }
 
 

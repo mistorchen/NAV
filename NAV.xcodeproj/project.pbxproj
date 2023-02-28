@@ -10,7 +10,7 @@
 		6B2EE936E1DDE6483BE25615 /* Pods_NAV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2D5C91D47082988228A6D /* Pods_NAV.framework */; };
 		8F7A6D5ADDEE6FD9E83B272F /* Pods_NAV_NAVUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6620F384D9DEF0169306A8F /* Pods_NAV_NAVUITests.framework */; };
 		E3F0710B8428F3B09AE82AFC /* Pods_NAVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E68F6D3DA9C0ACD43FCA29 /* Pods_NAVTests.framework */; };
-		FA0A518229A2B40C008473E1 /* ExerciseID.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A518129A2B40C008473E1 /* ExerciseID.swift */; };
+		FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */; };
 		FA11C3032995AD23002034D3 /* FirstTimeSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */; };
 		FA11C3052995AD5C002034D3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3042995AD5C002034D3 /* HomeVC.swift */; };
 		FA11C3072995AD7F002034D3 /* WorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3062995AD7F002034D3 /* WorkoutVC.swift */; };
@@ -31,6 +31,7 @@
 		FA6AAA4B29930F3C005EFD5A /* NAVUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA4A29930F3C005EFD5A /* NAVUITestsLaunchTests.swift */; };
 		FA8CF06D29985E6700D68DA1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */; };
 		FA8CF06F29985F9600D68DA1 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CF06E29985F9600D68DA1 /* SignInVC.swift */; };
+		FAE4F59929AEACC20097857D /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE4F59829AEACC20097857D /* ExerciseTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,7 @@
 		E002E08CEB15A4EA57CED3E9 /* Pods-NAV-NAVUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV-NAVUITests.release.xcconfig"; path = "Target Support Files/Pods-NAV-NAVUITests/Pods-NAV-NAVUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E09075073D2D09F65D7D71C2 /* Pods-NAV-NAVUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV-NAVUITests.debug.xcconfig"; path = "Target Support Files/Pods-NAV-NAVUITests/Pods-NAV-NAVUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EEBC4D25D7B96FF00A54E8F4 /* Pods-NAV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV.debug.xcconfig"; path = "Target Support Files/Pods-NAV/Pods-NAV.debug.xcconfig"; sourceTree = "<group>"; };
-		FA0A518129A2B40C008473E1 /* ExerciseID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseID.swift; sourceTree = "<group>"; };
+		FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInfo.swift; sourceTree = "<group>"; };
 		FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeSetupVC.swift; sourceTree = "<group>"; };
 		FA11C3042995AD5C002034D3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		FA11C3062995AD7F002034D3 /* WorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutVC.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		FA6AAA4A29930F3C005EFD5A /* NAVUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAVUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		FA8CF06E29985F9600D68DA1 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		FAE4F59829AEACC20097857D /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,12 +133,12 @@
 		FA11C2FF2995AB1B002034D3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */,
 				FA6AAA2B29930F3B005EFD5A /* LoginVC.swift */,
 				FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */,
 				FA11C3042995AD5C002034D3 /* HomeVC.swift */,
 				FA11C3062995AD7F002034D3 /* WorkoutVC.swift */,
 				FA11C3082995ADDF002034D3 /* GoalsVC.swift */,
-				FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */,
 				FA11C30C2995AE24002034D3 /* PreviousWorkoutVC.swift */,
 				FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */,
 				FA8CF06E29985F9600D68DA1 /* SignInVC.swift */,
@@ -156,7 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				FA3DE96D29A94365000A267E /* FirestoreExerciseReader.swift */,
-				FA0A518129A2B40C008473E1 /* ExerciseID.swift */,
+				FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */,
+				FAE4F59829AEACC20097857D /* ExerciseTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -473,10 +476,11 @@
 				FA11C3052995AD5C002034D3 /* HomeVC.swift in Sources */,
 				FA6AAA2829930F3B005EFD5A /* AppDelegate.swift in Sources */,
 				FA8CF06F29985F9600D68DA1 /* SignInVC.swift in Sources */,
+				FAE4F59929AEACC20097857D /* ExerciseTableViewCell.swift in Sources */,
 				FA11C3032995AD23002034D3 /* FirstTimeSetupVC.swift in Sources */,
 				FA11C3092995ADDF002034D3 /* GoalsVC.swift in Sources */,
 				FA11C3072995AD7F002034D3 /* WorkoutVC.swift in Sources */,
-				FA0A518229A2B40C008473E1 /* ExerciseID.swift in Sources */,
+				FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */,
 				FA6AAA2A29930F3B005EFD5A /* SceneDelegate.swift in Sources */,
 				FA11C30D2995AE24002034D3 /* PreviousWorkoutVC.swift in Sources */,
 				FA8CF06D29985E6700D68DA1 /* RegisterVC.swift in Sources */,
