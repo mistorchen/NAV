@@ -16,7 +16,7 @@ target 'NAV' do
     # Pods for testing
   end
 
-pod 'FirebaseAnalytics'
+pod "youtube-ios-player-helper"
 pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
 

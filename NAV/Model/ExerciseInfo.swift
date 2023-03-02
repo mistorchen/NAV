@@ -10,6 +10,6 @@ import Foundation
 struct ExerciseInfo {
     let name: String
     let youtube: String
-//    var difficulty: Int
+    let difficulty: Int
     
 }

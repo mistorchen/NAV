@@ -18,7 +18,6 @@
 		FA11C30B2995ADF3002034D3 /* CurrentWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */; };
 		FA11C30D2995AE24002034D3 /* PreviousWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C30C2995AE24002034D3 /* PreviousWorkoutVC.swift */; };
 		FA15397C2997199200174051 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA15397B2997199200174051 /* GoogleService-Info.plist */; };
-		FA3DE96E29A94365000A267E /* FirestoreExerciseReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DE96D29A94365000A267E /* FirestoreExerciseReader.swift */; };
 		FA3DE97229A94838000A267E /* databasePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DE97129A94838000A267E /* databasePaths.swift */; };
 		FA6AAA2829930F3B005EFD5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA2729930F3B005EFD5A /* AppDelegate.swift */; };
 		FA6AAA2A29930F3B005EFD5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA2929930F3B005EFD5A /* SceneDelegate.swift */; };
@@ -31,7 +30,9 @@
 		FA6AAA4B29930F3C005EFD5A /* NAVUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA4A29930F3C005EFD5A /* NAVUITestsLaunchTests.swift */; };
 		FA8CF06D29985E6700D68DA1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */; };
 		FA8CF06F29985F9600D68DA1 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CF06E29985F9600D68DA1 /* SignInVC.swift */; };
-		FAE4F59929AEACC20097857D /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE4F59829AEACC20097857D /* ExerciseTableViewCell.swift */; };
+		FABA4CB029B1319400AE2FA5 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */; };
+		FABA4CB129B1319400AE2FA5 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FABA4CAF29B1319400AE2FA5 /* ExerciseTableViewCell.xib */; };
+		FABA4CB329B1394200AE2FA5 /* ProgramOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +70,6 @@
 		FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWorkoutVC.swift; sourceTree = "<group>"; };
 		FA11C30C2995AE24002034D3 /* PreviousWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWorkoutVC.swift; sourceTree = "<group>"; };
 		FA15397B2997199200174051 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		FA3DE96D29A94365000A267E /* FirestoreExerciseReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreExerciseReader.swift; sourceTree = "<group>"; };
 		FA3DE97129A94838000A267E /* databasePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = databasePaths.swift; sourceTree = "<group>"; };
 		FA6AAA2429930F3B005EFD5A /* NAV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NAV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6AAA2729930F3B005EFD5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,7 +86,9 @@
 		FA6AAA4A29930F3C005EFD5A /* NAVUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAVUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		FA8CF06E29985F9600D68DA1 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
-		FAE4F59829AEACC20097857D /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
+		FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
+		FABA4CAF29B1319400AE2FA5 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
+		FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramOutline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,9 +159,11 @@
 		FA11C3012995AB44002034D3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FA3DE96D29A94365000A267E /* FirestoreExerciseReader.swift */,
+				FA3DE97129A94838000A267E /* databasePaths.swift */,
 				FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */,
-				FAE4F59829AEACC20097857D /* ExerciseTableViewCell.swift */,
+				FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */,
+				FABA4CAF29B1319400AE2FA5 /* ExerciseTableViewCell.xib */,
+				FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -189,7 +193,6 @@
 		FA6AAA2629930F3B005EFD5A /* NAV */ = {
 			isa = PBXGroup;
 			children = (
-				FA3DE97129A94838000A267E /* databasePaths.swift */,
 				FA11C3012995AB44002034D3 /* Model */,
 				FA11C3002995AB28002034D3 /* View */,
 				FA11C2FF2995AB1B002034D3 /* Controller */,
@@ -341,6 +344,7 @@
 			files = (
 				FA6AAA3429930F3B005EFD5A /* LaunchScreen.storyboard in Resources */,
 				FA15397C2997199200174051 /* GoogleService-Info.plist in Resources */,
+				FABA4CB129B1319400AE2FA5 /* ExerciseTableViewCell.xib in Resources */,
 				FA6AAA3129930F3B005EFD5A /* Assets.xcassets in Resources */,
 				FA6AAA2F29930F3B005EFD5A /* Main.storyboard in Resources */,
 			);
@@ -471,12 +475,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA11C30B2995ADF3002034D3 /* CurrentWorkoutVC.swift in Sources */,
-				FA3DE96E29A94365000A267E /* FirestoreExerciseReader.swift in Sources */,
 				FA6AAA2C29930F3B005EFD5A /* LoginVC.swift in Sources */,
 				FA11C3052995AD5C002034D3 /* HomeVC.swift in Sources */,
+				FABA4CB029B1319400AE2FA5 /* ExerciseTableViewCell.swift in Sources */,
 				FA6AAA2829930F3B005EFD5A /* AppDelegate.swift in Sources */,
+				FABA4CB329B1394200AE2FA5 /* ProgramOutline.swift in Sources */,
 				FA8CF06F29985F9600D68DA1 /* SignInVC.swift in Sources */,
-				FAE4F59929AEACC20097857D /* ExerciseTableViewCell.swift in Sources */,
 				FA11C3032995AD23002034D3 /* FirstTimeSetupVC.swift in Sources */,
 				FA11C3092995ADDF002034D3 /* GoalsVC.swift in Sources */,
 				FA11C3072995AD7F002034D3 /* WorkoutVC.swift in Sources */,
