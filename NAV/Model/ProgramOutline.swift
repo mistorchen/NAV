@@ -8,9 +8,9 @@
 import Foundation
 
 struct ProgramOutline{
-    
-    
     struct program1{ // BASIC STARTING PROGRAM
-        var block1 : [Int : String] = [1 : dK.category.plyo.lower , 2 : dK.category.plyo.lower, 3 : dK.category.plyo.lower]
+        var exerciseCount = 3
+        let paths : [Int : String] = [1 : dK.category.plyo.lower , 2 : dK.category.plyo.lower, 3 : dK.category.plyo.lower]
     }
+    
 }

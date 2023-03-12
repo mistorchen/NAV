@@ -170,11 +170,40 @@
                     <navigationItem key="navigationItem" id="TtZ-yA-OEd"/>
                     <connections>
                         <outlet property="exerciseTable" destination="QNG-K4-NiV" id="Nlg-i5-AuP"/>
+                        <segue destination="Utc-CO-jDV" kind="show" identifier="viewMoreDetails" id="sIa-2e-qpW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQU-5P-8hG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2791.6030534351144" y="-8.4507042253521139"/>
+        </scene>
+        <!--More Exerise Details-->
+        <scene sceneID="07O-xu-eXa">
+            <objects>
+                <viewController id="Utc-CO-jDV" customClass="MoreExeriseDetails" customModule="NAV" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Nn-XQ-swa">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OM-K6-Mk5">
+                                <rect key="frame" x="139" y="153" width="114" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eZC-nz-G5p"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="eYU-EY-GRn"/>
+                    <connections>
+                        <outlet property="exerciseTitle" destination="3OM-K6-Mk5" id="YFb-yr-Dyl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JQs-fc-Y1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3913.740458015267" y="-8.4507042253521139"/>
         </scene>
         <!--PreviousWorkoutsVC-->
         <scene sceneID="7Hi-Hh-8SF">

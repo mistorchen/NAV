@@ -19,6 +19,8 @@
 		FA11C30D2995AE24002034D3 /* PreviousWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C30C2995AE24002034D3 /* PreviousWorkoutVC.swift */; };
 		FA15397C2997199200174051 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA15397B2997199200174051 /* GoogleService-Info.plist */; };
 		FA3DE97229A94838000A267E /* databasePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DE97129A94838000A267E /* databasePaths.swift */; };
+		FA41D3C229BE458A002D35E3 /* SetRepGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */; };
+		FA46E6AD29BA887300FCA1A0 /* MoreExerciseDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46E6AC29BA887300FCA1A0 /* MoreExerciseDetails.swift */; };
 		FA6AAA2829930F3B005EFD5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA2729930F3B005EFD5A /* AppDelegate.swift */; };
 		FA6AAA2A29930F3B005EFD5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA2929930F3B005EFD5A /* SceneDelegate.swift */; };
 		FA6AAA2C29930F3B005EFD5A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA2B29930F3B005EFD5A /* LoginVC.swift */; };
@@ -71,6 +73,8 @@
 		FA11C30C2995AE24002034D3 /* PreviousWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousWorkoutVC.swift; sourceTree = "<group>"; };
 		FA15397B2997199200174051 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA3DE97129A94838000A267E /* databasePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = databasePaths.swift; sourceTree = "<group>"; };
+		FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRepGeneration.swift; sourceTree = "<group>"; };
+		FA46E6AC29BA887300FCA1A0 /* MoreExerciseDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreExerciseDetails.swift; sourceTree = "<group>"; };
 		FA6AAA2429930F3B005EFD5A /* NAV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NAV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6AAA2729930F3B005EFD5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA6AAA2929930F3B005EFD5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 		FA11C2FF2995AB1B002034D3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */,
 				FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */,
 				FA6AAA2B29930F3B005EFD5A /* LoginVC.swift */,
 				FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */,
@@ -144,6 +149,7 @@
 				FA11C30C2995AE24002034D3 /* PreviousWorkoutVC.swift */,
 				FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */,
 				FA8CF06E29985F9600D68DA1 /* SignInVC.swift */,
+				FA46E6AC29BA887300FCA1A0 /* MoreExerciseDetails.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -161,9 +167,9 @@
 			children = (
 				FA3DE97129A94838000A267E /* databasePaths.swift */,
 				FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */,
-				FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */,
 				FABA4CAF29B1319400AE2FA5 /* ExerciseTableViewCell.xib */,
 				FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */,
+				FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -476,9 +482,11 @@
 			files = (
 				FA11C30B2995ADF3002034D3 /* CurrentWorkoutVC.swift in Sources */,
 				FA6AAA2C29930F3B005EFD5A /* LoginVC.swift in Sources */,
+				FA41D3C229BE458A002D35E3 /* SetRepGeneration.swift in Sources */,
 				FA11C3052995AD5C002034D3 /* HomeVC.swift in Sources */,
 				FABA4CB029B1319400AE2FA5 /* ExerciseTableViewCell.swift in Sources */,
 				FA6AAA2829930F3B005EFD5A /* AppDelegate.swift in Sources */,
+				FA46E6AD29BA887300FCA1A0 /* MoreExerciseDetails.swift in Sources */,
 				FABA4CB329B1394200AE2FA5 /* ProgramOutline.swift in Sources */,
 				FA8CF06F29985F9600D68DA1 /* SignInVC.swift in Sources */,
 				FA11C3032995AD23002034D3 /* FirstTimeSetupVC.swift in Sources */,
