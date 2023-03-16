@@ -59,7 +59,7 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
                 }else {
 // reads every document in collection according to field constraint. Stores in TEMP Exercises
                     for document in collection!.documents{
-                        self.tempExercises.append(ExerciseInfo(name: document["Name"] as! String, youtube: document["Youtube"] as! String, difficulty: document["difficulty"] as! Int))
+                        self.tempExercises.append(ExerciseInfo(name: document["name"] as! String, youtube: document["youtube"] as! String, difficulty: document["difficulty"] as! Int))
                     }
                 }
                 // Picks a random element from TempExercises and stores it in Exercises. Exercises is displayed later
