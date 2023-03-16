@@ -22,11 +22,9 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginPressed(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text{
-            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                if let e = error {
-                    print(e)
-                }else{
-                    self.performSegue(withIdentifier: "goToHome", sender: self)
+            Auth.auth().signIn(withEmail: email, password: password) { user, error in
+                if let _ = user {
+                    self.performSegue(withIdentifier: "loggedIn", sender: self)
                 }
             }
         }

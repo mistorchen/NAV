@@ -9,22 +9,13 @@ import Foundation
 import UIKit
 
 class HomeVC: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-    @IBAction func viewWorkouts(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToWorkouts", sender: self)
-
+    @IBAction func viewAccount(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToAccount", sender: self)
     }
-    @IBAction func viewGoals(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToGoals", sender: self)
-    }
-    
-    @IBAction func viewPreviousWorkouts(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToPreviousWorkouts", sender: self)
-    }
-    
 }
+
