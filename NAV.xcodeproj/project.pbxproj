@@ -10,6 +10,7 @@
 		6B2EE936E1DDE6483BE25615 /* Pods_NAV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2D5C91D47082988228A6D /* Pods_NAV.framework */; };
 		8F7A6D5ADDEE6FD9E83B272F /* Pods_NAV_NAVUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6620F384D9DEF0169306A8F /* Pods_NAV_NAVUITests.framework */; };
 		E3F0710B8428F3B09AE82AFC /* Pods_NAVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E68F6D3DA9C0ACD43FCA29 /* Pods_NAVTests.framework */; };
+		FA02C04029CA710D00EC1599 /* FTSQuestionaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C03F29CA710D00EC1599 /* FTSQuestionaire.swift */; };
 		FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */; };
 		FA0F01AE29C38EF1000BE7AB /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0F01AD29C38EF1000BE7AB /* AccountVC.swift */; };
 		FA0F01B029C3977F000BE7AB /* SkillTreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0F01AF29C3977F000BE7AB /* SkillTreeVC.swift */; };
@@ -66,6 +67,7 @@
 		E002E08CEB15A4EA57CED3E9 /* Pods-NAV-NAVUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV-NAVUITests.release.xcconfig"; path = "Target Support Files/Pods-NAV-NAVUITests/Pods-NAV-NAVUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E09075073D2D09F65D7D71C2 /* Pods-NAV-NAVUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV-NAVUITests.debug.xcconfig"; path = "Target Support Files/Pods-NAV-NAVUITests/Pods-NAV-NAVUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EEBC4D25D7B96FF00A54E8F4 /* Pods-NAV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV.debug.xcconfig"; path = "Target Support Files/Pods-NAV/Pods-NAV.debug.xcconfig"; sourceTree = "<group>"; };
+		FA02C03F29CA710D00EC1599 /* FTSQuestionaire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTSQuestionaire.swift; sourceTree = "<group>"; };
 		FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInfo.swift; sourceTree = "<group>"; };
 		FA0F01AD29C38EF1000BE7AB /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		FA0F01AF29C3977F000BE7AB /* SkillTreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillTreeVC.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				FABA4CAF29B1319400AE2FA5 /* ExerciseTableViewCell.xib */,
 				FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */,
 				FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */,
+				FA02C03F29CA710D00EC1599 /* FTSQuestionaire.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */,
 				FA6AAA2A29930F3B005EFD5A /* SceneDelegate.swift in Sources */,
 				FA8CF06D29985E6700D68DA1 /* RegisterVC.swift in Sources */,
+				FA02C04029CA710D00EC1599 /* FTSQuestionaire.swift in Sources */,
 				FA3DE97229A94838000A267E /* databasePaths.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

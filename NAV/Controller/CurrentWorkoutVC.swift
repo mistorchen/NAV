@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseAuth
 
 
 class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
@@ -19,7 +20,7 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
     var exerciseSelected = 0
     
     override func viewDidLoad() {
-        
+        exerciseTable.reloadData()
         exerciseTable.register(UINib(nibName: "ExerciseTableViewCell", bundle: nil), forCellReuseIdentifier: "ExerciseTableCell")
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
@@ -43,14 +44,13 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
     
     func getCollectionDocs(){
         
-        
         let program = ProgramOutline.program1()
         
         for counter in 1 ... program.exerciseCount{
             //        Get a collection and data
             let docRef = db.collection(program.paths[counter]!)
             //Sets field constraints for querying
-            docRef.whereField("index", isEqualTo: Int.random(in: 0...1)).limit(to: 1)
+//            docRef.whereField("index", isEqualTo: Int.random(in: 0...1)).limit(to: 1)
             
 
             docRef.getDocuments { (collection, error) in
@@ -59,29 +59,20 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
                 }else {
 // reads every document in collection according to field constraint. Stores in TEMP Exercises
                     for document in collection!.documents{
-                        self.tempExercises.append(ExerciseInfo(name: document["name"] as! String, youtube: document["youtube"] as! String, difficulty: document["difficulty"] as! Int))
+                        self.tempExercises.append(ExerciseInfo(name: document["name"] as! String, youtube: document["youtube"] as! String, difficulty: document["difficulty"] as! Int, docID: document.documentID))
                     }
                 }
                 // Picks a random element from TempExercises and stores it in Exercises. Exercises is displayed later
                 if let transferData = self.tempExercises.randomElement(){
-                    self.exercises.append(ExerciseInfo(name: transferData.name, youtube: transferData.youtube, difficulty: transferData.difficulty))
+                    self.exercises.append(ExerciseInfo(name: transferData.name, youtube: transferData.youtube, difficulty: transferData.difficulty, docID: transferData.docID))
+                    
+                    //SAVES DOCUMENT PATH TO USER MONTHLY PROGRAM 
+                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("march").document("day1").setData(["e1" : "\(program.paths[counter]!)/\(transferData.docID)"])
+                    
+                    
                 }
+                
             }
-            
-            
-            
-            
-            
-            //        let docRef = db.document("\(dK.category.plyo.lower)/pogoHop")
-            //        docRef.getDocuments { (document, error) in
-            //            if let document = document {
-            //                let dataDetails = document
-            //                print(dataDetails)
-            //                self.exercises.append(ExerciseInfo(name: dataDetails["Name"] as! String, youtube: dataDetails["Youtube"] as! String))
-            //            } else {
-            //                print("Document does not exist")
-            //            }
-            //        }
         }
     }
 }
