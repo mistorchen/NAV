@@ -16,13 +16,23 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
     
     let db = Firestore.firestore()
     
-    @IBOutlet weak var exerciseTable: UITableView!
     var exercises: [ExerciseInfo] = []
     var tempExercises: [ExerciseInfo] = []
     var exerciseSelected = 0
-    var exerciseCount = 0
+    var exerciseCount = 9
     var paths: [String : Any] = [:]
+    var currentDay = 1
+    var duplicate: [String] = []
+    
 
+
+    @IBOutlet weak var exerciseTable: UITableView!
+    
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         
@@ -31,7 +41,8 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
         readProgram()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.exerciseTable.reloadData()
         }
         
@@ -41,18 +52,35 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
         super.viewDidLoad()
     }
     
-    @IBAction func newProgram(_ sender: UIButton) {
-        exercises = []
-        tempExercises = []
-        getCollectionDocs()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+    @IBAction func newProgram(_ sender: UIButton){ // Uses button to write a new program. Runs from index through exerciseCount(DEFAULTED)
+        for day in 1...4{
+            duplicate = []
+            for index in 0...exerciseCount{
+                writeExercise(index: index, day: day)
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.exerciseTable.reloadData()
+            
+        }
+    }
+    
+    @IBAction func readTapped(_ sender: UIButton) { // Uses Button to read existing monthly program
+        readProgram()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.exerciseTable.reloadData()
+            
         }
         
     }
-    
-    @IBAction func readTapped(_ sender: UIButton) {
+    @IBAction func daySelector(_ sender: UISegmentedControl) { // Controls the day shows by segmented bar
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.exerciseTable.reloadData()
+        }
+        
+        currentDay = sender.selectedSegmentIndex+1
         readProgram()
         
         
@@ -60,98 +88,119 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
 
     
     // MARK: Read Exercise Database
-    func getCollectionDocs(){
+    func writeExercise(index: Int, day: Int) {
+        
+        // Reads path from program outline
+        // Selects a random document in collection
+        // Writes selected document(exercise) to users monthly program
+        // Repeats for each day (DEFAULTED)
         
         let program = ProgramOutline.program1()
+        let docRef = db.collection(program.paths[index]!)
         
-        for counter in 1 ... program.exerciseCount{ // Reads the database x times: x = exercise count determined by program
-        
-            let docRef = db.collection(program.paths[counter]!)
-            
-            //Sets field constraints for querying
-//            docRef.whereField("index", isEqualTo: Int.random(in: 0...1)).limit(to: 1)
-            
-
-            docRef.getDocuments { (collection, error) in
-                if let error = error{
-                    print(error)
-                }else {
-// reads every document in collection according to field constraint. Stores in TEMP Exercises
-                    for document in collection!.documents{
-                        self.tempExercises.append(ExerciseInfo(name: document["name"] as! String, youtube: document["youtube"] as! String, difficulty: document["difficulty"] as! Int, docID: document.documentID))
+        docRef.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print(err)
+            } else {
+                if let document = querySnapshot!.documents.randomElement() {
+                    if self.checkDuplicate(docID: document.documentID, day: day, index: index) == false{
+                        //                    self.exercises.append(ExerciseInfo(name: document["name"] as! String, level: document["level"] as! Int, docPath: "\(docRef.path)/\(document.documentID)"))
+                        self.db.collection("users").document(Auth.auth().currentUser!.uid).collection(self.findMonth()).document("day\(day)").collection("exercises").document("\(document.documentID)").setData([
+                            "name" : document["name"] as! String,
+                            "reps" : SetRepGeneration.generateReps(),
+                            "sets" : SetRepGeneration.generateSets(),
+                            "order" : index,
+                            
+                        ], merge: false)
+                    }else{
+                        self.writeExercise(index: index, day: day)
                     }
                 }
-                if let transferData = self.tempExercises.randomElement(){ // Picks a random element from TempExercises and stores it in Exercises. Exercises is displayed later
-                    
-                    self.exercises.append(ExerciseInfo(name: transferData.name, youtube: transferData.youtube, difficulty: transferData.difficulty, docID: transferData.docID))
-
-                    print(counter)
-                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("march").document("day1").setData(["e\(counter)" : "\(program.paths[counter]!)/\(transferData.docID)"], merge: true)                    //SAVES DOCUMENT PATH TO USER MONTHLY PROGRAM - DEFAULT MARHCH
-                    print(transferData.docID)
-
-                    
-                    
-                }
-                
-            } // End of Closure
+            }
+            
         }
     }
+    func checkDuplicate(docID: String, day: Int, index: Int) -> Bool{ //Checks for duplicates
+        
+        // Appends exercise docID to duplicate array
+        //if duplicate = false, proceedes with firestore write
+        //if duplicate = true, reruns func writeExercise
+        if duplicate.count == 0{
+            duplicate.append(docID)
+            return false
+        }else{
+            for name in duplicate{
+                if docID == name{
+                    print("\(docID), \(day), \(index)")
+
+                    return true
+                }else{
+                    duplicate.append(docID)
+                    return false
+                }
+            }
+        }
+        return true
+    }
+        
     
     func readProgram(){
-        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/march")
+        
+        // Reads from users monthly program based on day, default day is 1
+        // Appends exercises to exercises: [ExerciseInfo] in descending order (order of program)
+        exercises = []
+        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(currentDay)/exercises").order(by: "order", descending: false)
+        
         docRef.getDocuments { collection, error in
             if let error = error{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.paths = document.data()
+                        self.exercises.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int))
+                    
                 }
             }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.setTable()
         }
     }
-        
-    func setTable(){
-        for i in stride(from: 1, through: paths.count, by: 1){
-            let docRef = db.document(paths["e\(i)"] as! String)
-            docRef.getDocument { document, error in
-                if let error = error{
-                    print(error)
-                }else{
-                    if let document = document{
-                        self.exercises.append(ExerciseInfo(name: document["name"] as! String, youtube: document["youtube"] as! String, difficulty: document["difficulty"] as! Int, docID: document.documentID))
-                    }
-                }
-            }
-        }
+    
+    func findMonth()-> String{
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "LLLL"
+        let nameOfMonth = dateFormatter.string(from: now)
+        return(nameOfMonth)
     }
 }
+
 
 // MARK: Table View Sender
     extension CurrentWorkoutVC: UITableViewDataSource{
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return exercises.count
             
+            
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseTableCell", for: indexPath) as! ExerciseTableViewCell
             cell.nameLabel.text = exercises[indexPath.row].name
-            cell.repCount.text = SetRepGeneration.generateReps()
-            cell.setCount.text = SetRepGeneration.generateSets()
+            cell.repCount.text = "\(exercises[indexPath.row].reps)"
+            cell.setCount.text = "\(exercises[indexPath.row].sets)"
             
 //            cell.youtubeLink.text = exercises[indexPath.row].youtube
             //        cell.playerView.load(withVideoId: "bsM1qdGAVbU") // Causing runtime error Maybe switch to a "More Details Page
             return cell
         }
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 250
+            return 100
         }
+        
+        
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            self.performSegue(withIdentifier: "viewMoreDetails", sender: self)
+            
             exerciseSelected = indexPath.row
+            self.performSegue(withIdentifier: "viewMoreDetails", sender: self)
+
         }
         
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

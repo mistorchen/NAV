@@ -9,8 +9,8 @@ import Foundation
 
 struct ExerciseInfo {
     let name: String
-    let youtube: String
-    let difficulty: Int
-    let docID: String
-    
+//    let youtube: String
+    let sets: Int
+    let reps: Int
+    let order: Int
 }

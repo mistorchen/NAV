@@ -22,6 +22,7 @@
 		FA3DE97229A94838000A267E /* databasePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DE97129A94838000A267E /* databasePaths.swift */; };
 		FA41D3C229BE458A002D35E3 /* SetRepGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */; };
 		FA46E6AD29BA887300FCA1A0 /* MoreExerciseDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46E6AC29BA887300FCA1A0 /* MoreExerciseDetails.swift */; };
+		FA6352F429DC56D100E367E9 /* ProgramMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6352F329DC56D100E367E9 /* ProgramMaker.swift */; };
 		FA6AAA2829930F3B005EFD5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA2729930F3B005EFD5A /* AppDelegate.swift */; };
 		FA6AAA2A29930F3B005EFD5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA2929930F3B005EFD5A /* SceneDelegate.swift */; };
 		FA6AAA2C29930F3B005EFD5A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA2B29930F3B005EFD5A /* LoginVC.swift */; };
@@ -79,6 +80,7 @@
 		FA3DE97129A94838000A267E /* databasePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = databasePaths.swift; sourceTree = "<group>"; };
 		FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRepGeneration.swift; sourceTree = "<group>"; };
 		FA46E6AC29BA887300FCA1A0 /* MoreExerciseDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreExerciseDetails.swift; sourceTree = "<group>"; };
+		FA6352F329DC56D100E367E9 /* ProgramMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramMaker.swift; sourceTree = "<group>"; };
 		FA6AAA2429930F3B005EFD5A /* NAV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NAV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6AAA2729930F3B005EFD5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA6AAA2929930F3B005EFD5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		FA11C2FF2995AB1B002034D3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FA6352F329DC56D100E367E9 /* ProgramMaker.swift */,
 				FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */,
 				FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */,
 				FA6AAA2B29930F3B005EFD5A /* LoginVC.swift */,
@@ -505,6 +508,7 @@
 				FA11C3092995ADDF002034D3 /* GoalsVC.swift in Sources */,
 				FAF202B829C37C4200C53A30 /* SignInManager.swift in Sources */,
 				FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */,
+				FA6352F429DC56D100E367E9 /* ProgramMaker.swift in Sources */,
 				FA6AAA2A29930F3B005EFD5A /* SceneDelegate.swift in Sources */,
 				FA8CF06D29985E6700D68DA1 /* RegisterVC.swift in Sources */,
 				FA02C04029CA710D00EC1599 /* FTSQuestionaire.swift in Sources */,

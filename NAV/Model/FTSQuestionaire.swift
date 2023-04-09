@@ -9,12 +9,20 @@ import Foundation
 
 struct FTSQuestionaire{
     
-    static let Q: [String] = [
-        "Question 1",
-        "Question 2",
-        "Question 3",
-        "Question 4",
-        "Question 5",
-        "Question 6"
+    
+    static let Q: [Question] = [
+    Question(q: "How old are you", a: ["slider" as NSString, 13 as NSNumber, 100 as NSNumber]),
+    Question(q: "How much do you weigh?", a: ["slider" as NSString, 30 as NSNumber, 300 as NSNumber]),
+    Question(q: "Have you ever been formally trained by a coach?", a: ["polar" as NSString])
     ]
+}
+
+struct Question {
+    let text: String
+    let answerChoice: [AnyObject]
+    
+    init(q: String, a: [AnyObject]) {
+        text = q
+        answerChoice = a
+    }
 }
