@@ -17,5 +17,8 @@ class HomeVC: UIViewController {
     @IBAction func viewAccount(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToAccount", sender: self)
     }
+    @IBAction func goToCurrentWorkout(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToCurrentWorkout", sender: self)
+    }
 }
 

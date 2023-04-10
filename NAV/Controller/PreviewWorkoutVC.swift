@@ -12,7 +12,7 @@ import FirebaseFirestore
 import FirebaseAuth
 
 
-class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
+class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
     
     let db = Firestore.firestore()
     
@@ -174,7 +174,7 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate{
 
 
 // MARK: Table View Sender
-    extension CurrentWorkoutVC: UITableViewDataSource{
+    extension PreviewWorkoutVC: UITableViewDataSource{
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return exercises.count
             

@@ -17,7 +17,7 @@
 		FA11C3032995AD23002034D3 /* FirstTimeSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */; };
 		FA11C3052995AD5C002034D3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3042995AD5C002034D3 /* HomeVC.swift */; };
 		FA11C3092995ADDF002034D3 /* GoalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3082995ADDF002034D3 /* GoalsVC.swift */; };
-		FA11C30B2995ADF3002034D3 /* CurrentWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */; };
+		FA11C30B2995ADF3002034D3 /* PreviewWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C30A2995ADF3002034D3 /* PreviewWorkoutVC.swift */; };
 		FA15397C2997199200174051 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA15397B2997199200174051 /* GoogleService-Info.plist */; };
 		FA3DE97229A94838000A267E /* databasePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DE97129A94838000A267E /* databasePaths.swift */; };
 		FA41D3C229BE458A002D35E3 /* SetRepGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */; };
@@ -32,6 +32,7 @@
 		FA6AAA3F29930F3C005EFD5A /* NAVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA3E29930F3C005EFD5A /* NAVTests.swift */; };
 		FA6AAA4929930F3C005EFD5A /* NAVUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA4829930F3C005EFD5A /* NAVUITests.swift */; };
 		FA6AAA4B29930F3C005EFD5A /* NAVUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AAA4A29930F3C005EFD5A /* NAVUITestsLaunchTests.swift */; };
+		FA8395B629E493C800ACA154 /* BasicInfoSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8395B529E493C800ACA154 /* BasicInfoSetupVC.swift */; };
 		FA8CF06D29985E6700D68DA1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */; };
 		FA8CF06F29985F9600D68DA1 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CF06E29985F9600D68DA1 /* SignInVC.swift */; };
 		FABA4CB029B1319400AE2FA5 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */; };
@@ -75,7 +76,7 @@
 		FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeSetupVC.swift; sourceTree = "<group>"; };
 		FA11C3042995AD5C002034D3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		FA11C3082995ADDF002034D3 /* GoalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsVC.swift; sourceTree = "<group>"; };
-		FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWorkoutVC.swift; sourceTree = "<group>"; };
+		FA11C30A2995ADF3002034D3 /* PreviewWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewWorkoutVC.swift; sourceTree = "<group>"; };
 		FA15397B2997199200174051 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA3DE97129A94838000A267E /* databasePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = databasePaths.swift; sourceTree = "<group>"; };
 		FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRepGeneration.swift; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		FA6AAA4429930F3C005EFD5A /* NAVUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NAVUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6AAA4829930F3C005EFD5A /* NAVUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAVUITests.swift; sourceTree = "<group>"; };
 		FA6AAA4A29930F3C005EFD5A /* NAVUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAVUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FA8395B529E493C800ACA154 /* BasicInfoSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoSetupVC.swift; sourceTree = "<group>"; };
 		FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		FA8CF06E29985F9600D68DA1 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
@@ -148,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				FA6352F329DC56D100E367E9 /* ProgramMaker.swift */,
-				FA11C30A2995ADF3002034D3 /* CurrentWorkoutVC.swift */,
+				FA11C30A2995ADF3002034D3 /* PreviewWorkoutVC.swift */,
 				FABA4CAE29B1319400AE2FA5 /* ExerciseTableViewCell.swift */,
 				FA6AAA2B29930F3B005EFD5A /* LoginVC.swift */,
 				FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */,
@@ -161,6 +163,7 @@
 				FAF202B729C37C4200C53A30 /* SignInManager.swift */,
 				FA0F01AD29C38EF1000BE7AB /* AccountVC.swift */,
 				FA0F01AF29C3977F000BE7AB /* SkillTreeVC.swift */,
+				FA8395B529E493C800ACA154 /* BasicInfoSetupVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -492,7 +495,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA11C30B2995ADF3002034D3 /* CurrentWorkoutVC.swift in Sources */,
+				FA11C30B2995ADF3002034D3 /* PreviewWorkoutVC.swift in Sources */,
+				FA8395B629E493C800ACA154 /* BasicInfoSetupVC.swift in Sources */,
 				FA6AAA2C29930F3B005EFD5A /* LoginVC.swift in Sources */,
 				FA0F01AE29C38EF1000BE7AB /* AccountVC.swift in Sources */,
 				FA41D3C229BE458A002D35E3 /* SetRepGeneration.swift in Sources */,
