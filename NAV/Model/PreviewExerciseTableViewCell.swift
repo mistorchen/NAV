@@ -6,10 +6,16 @@
 //
 
 import UIKit
-import youtube_ios_player_helper
 
-class ExerciseTableViewCell: UITableViewCell{
+class PreviewExerciseTableCell: UITableViewCell{
 
+    static let identifier = "PreviewExerciseTableViewCell"
+    
+    static func nib() ->UINib{
+        return UINib(nibName: PreviewExerciseTableCell.identifier, bundle: nil)
+    }
+    
+    
     @IBOutlet weak var nameLabel: UILabel!
 //    @IBOutlet weak var playerView: YTPlayerView!
     

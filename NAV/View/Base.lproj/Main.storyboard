@@ -116,6 +116,9 @@
                                         </fragment>
                                     </attributedString>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="goToCurrentWorkout:" destination="IIO-sb-tgz" eventType="touchUpInside" id="cfj-jr-WZ2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="N2K-cj-qB2"/>
@@ -133,21 +136,41 @@
             </objects>
             <point key="canvasLocation" x="2467.93893129771" y="-23.239436619718312"/>
         </scene>
-        <!--View Controller-->
+        <!--Current WorkoutVC-->
         <scene sceneID="fEX-ii-xhQ">
             <objects>
-                <viewController id="Hhz-qb-ods" sceneMemberID="viewController">
+                <viewController id="Hhz-qb-ods" customClass="CurrentWorkoutVC" customModule="NAV" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Ah-va-FDY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QpK-lv-4Ba">
+                                <rect key="frame" x="16" y="129" width="361" height="620"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <sections/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o8l-Z3-dt0">
+                                <rect key="frame" x="159" y="86" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="testRead:" destination="Hhz-qb-ods" eventType="touchUpInside" id="XOM-ii-Wcr"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="jFE-XM-IJ9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="xdk-QK-Naq"/>
+                    <connections>
+                        <outlet property="exerciseTable" destination="QpK-lv-4Ba" id="PDd-9l-vsB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ati-cZ-oeD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3589" y="-23"/>
+            <point key="canvasLocation" x="3588.5496183206105" y="-23.239436619718312"/>
         </scene>
         <!--AccountVC-->
         <scene sceneID="4Mz-Te-9vY">
@@ -395,14 +418,20 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                 <connections>
-                                    <action selector="buttonTapped:" destination="Dsl-c4-VaU" eventType="touchUpInside" id="5Vb-gv-5yu"/>
+                                    <action selector="buttonTapped:" destination="Dsl-c4-VaU" eventType="touchUpInside" id="Jxf-R8-94O"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDf-aJ-RSa" customClass="YTPlayerView">
+                                <rect key="frame" x="76" y="512" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RY8-Kr-Te4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="YTPlayer" destination="pDf-aJ-RSa" id="UUL-qo-fXS"/>
                         <outlet property="blocksLabel" destination="xBk-AR-m0n" id="XcR-BR-ZLc"/>
                         <outlet property="repsLabel" destination="kt1-eQ-Gkc" id="c5x-nv-1cP"/>
                         <outlet property="setsLabel" destination="xHv-mQ-NvR" id="24B-Z9-cRI"/>
@@ -788,7 +817,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="h0l-Wb-Bgt"/>
+        <segue reference="37w-WJ-AIM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Icon" width="8334" height="8334"/>

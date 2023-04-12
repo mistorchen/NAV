@@ -37,7 +37,7 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
     override func viewDidLoad() {
         
         exerciseTable.reloadData()
-        exerciseTable.register(UINib(nibName: "ExerciseTableViewCell", bundle: nil), forCellReuseIdentifier: "ExerciseTableCell")
+        exerciseTable.register(PreviewExerciseTableCell.nib(), forCellReuseIdentifier: PreviewExerciseTableCell.identifier)
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
         readProgram()
@@ -182,17 +182,11 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseTableCell", for: indexPath) as! ExerciseTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: PreviewExerciseTableCell.identifier, for: indexPath) as! PreviewExerciseTableCell
             cell.nameLabel.text = exercises[indexPath.row].name
             cell.repCount.text = "\(exercises[indexPath.row].reps)"
             cell.setCount.text = "\(exercises[indexPath.row].sets)"
-            
-//            cell.youtubeLink.text = exercises[indexPath.row].youtube
-            //        cell.playerView.load(withVideoId: "bsM1qdGAVbU") // Causing runtime error Maybe switch to a "More Details Page
             return cell
-        }
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 100
         }
         
         

@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class ProgramMaker: UIViewController {
+
+class ProgramMaker: UIViewController{
     
     var program: [String : String] = [:]
     
