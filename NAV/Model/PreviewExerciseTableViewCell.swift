@@ -7,12 +7,12 @@
 
 import UIKit
 
-class PreviewExerciseTableCell: UITableViewCell{
+class PreviewExerciseTableViewCell: UITableViewCell{
 
     static let identifier = "PreviewExerciseTableViewCell"
     
     static func nib() ->UINib{
-        return UINib(nibName: PreviewExerciseTableCell.identifier, bundle: nil)
+        return UINib(nibName: PreviewExerciseTableViewCell.identifier, bundle: nil)
     }
     
     

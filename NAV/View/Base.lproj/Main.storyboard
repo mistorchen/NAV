@@ -269,7 +269,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="exerciseTable" destination="QNG-K4-NiV" id="Nlg-i5-AuP"/>
+                        <outlet property="exerciseTable" destination="QNG-K4-NiV" id="8KP-31-tme"/>
                         <segue destination="Utc-CO-jDV" kind="show" identifier="viewMoreDetails" id="Bcf-sx-0Q4"/>
                     </connections>
                 </viewController>
@@ -310,9 +310,6 @@
                                     <segment title="Day 3"/>
                                     <segment title="Day 4"/>
                                 </segments>
-                                <connections>
-                                    <action selector="daySelector:" destination="nsA-bN-K3Y" eventType="valueChanged" id="bKD-Ec-ybX"/>
-                                </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YQM-bj-LWC">
                                 <rect key="frame" x="16" y="103" width="361" height="32"/>
@@ -324,7 +321,6 @@
                                     <segment title="Plyo"/>
                                 </segments>
                                 <connections>
-                                    <action selector="daySelector:" destination="nsA-bN-K3Y" eventType="valueChanged" id="T8X-Eu-aJB"/>
                                     <action selector="selectedSkillTree:" destination="xCt-rX-k2O" eventType="valueChanged" id="gGN-dn-Cfe"/>
                                 </connections>
                             </segmentedControl>

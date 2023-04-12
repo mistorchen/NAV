@@ -37,7 +37,7 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
     override func viewDidLoad() {
         
         exerciseTable.reloadData()
-        exerciseTable.register(PreviewExerciseTableCell.nib(), forCellReuseIdentifier: PreviewExerciseTableCell.identifier)
+        exerciseTable.register(PreviewExerciseTableViewCell.nib(), forCellReuseIdentifier: PreviewExerciseTableViewCell.identifier)
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
         readProgram()
@@ -182,11 +182,14 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: PreviewExerciseTableCell.identifier, for: indexPath) as! PreviewExerciseTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: PreviewExerciseTableViewCell.identifier, for: indexPath) as! PreviewExerciseTableViewCell
             cell.nameLabel.text = exercises[indexPath.row].name
             cell.repCount.text = "\(exercises[indexPath.row].reps)"
             cell.setCount.text = "\(exercises[indexPath.row].sets)"
             return cell
+        }
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 120
         }
         
         
