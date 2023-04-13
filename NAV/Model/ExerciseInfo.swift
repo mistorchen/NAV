@@ -13,4 +13,5 @@ struct ExerciseInfo {
     let sets: Int
     let reps: Int
     let order: Int
+    let docID: String
 }

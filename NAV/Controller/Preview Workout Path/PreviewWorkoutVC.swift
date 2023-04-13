@@ -61,7 +61,6 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.exerciseTable.reloadData()
-            
         }
     }
     
@@ -111,7 +110,7 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
                             "sets" : SetRepGeneration.generateSets(),
                             "order" : index,
                             
-                        ], merge: false)
+                        ])
                     }else{
                         self.writeExercise(index: index, day: day)
                     }
@@ -156,7 +155,7 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
                 print(error)
             }else{
                 for document in collection!.documents{
-                        self.exercises.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int))
+                    self.exercises.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID))
                     
                 }
             }

@@ -11,9 +11,9 @@ struct FTSQuestionaire{
     
     
     static let Q: [Question] = [
-    Question(q: "How old are you", a: ["slider" as NSString, 13 as NSNumber, 100 as NSNumber]),
-    Question(q: "How much do you weigh?", a: ["slider" as NSString, 30 as NSNumber, 300 as NSNumber]),
-    Question(q: "Have you ever been formally trained by a coach?", a: ["polar" as NSString])
+    Question(q: "How cool are you", a: ["slider" as NSString, 13 as NSNumber, 100 as NSNumber]),
+    Question(q: "What is benchpress goal?", a: ["slider" as NSString, 30 as NSNumber, 300 as NSNumber]),
+    Question(q: "Would you fight a panda?", a: ["polar" as NSString])
     ]
 }
 

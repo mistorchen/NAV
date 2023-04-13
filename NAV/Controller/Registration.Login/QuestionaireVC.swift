@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class FirstTimeSetupVC: UIViewController {
+class QuestionaireVC: UIViewController {
     
     var username = ""
     var questionCount = 0
@@ -110,12 +110,9 @@ class FirstTimeSetupVC: UIViewController {
     func setData(){
         //automatically makes a new document with Current User ID
         db.collection("users").document(Auth.auth().currentUser!.uid).setData([
-            "username" : username,
             "level" : xpScore,
-            "age" : age,
-            "weight" : weight,
             //"population" : "general"
-        ])
+        ], merge: true)
     }
     
     

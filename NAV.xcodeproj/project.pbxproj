@@ -14,9 +14,8 @@
 		FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */; };
 		FA0F01AE29C38EF1000BE7AB /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0F01AD29C38EF1000BE7AB /* AccountVC.swift */; };
 		FA0F01B029C3977F000BE7AB /* SkillTreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0F01AF29C3977F000BE7AB /* SkillTreeVC.swift */; };
-		FA11C3032995AD23002034D3 /* FirstTimeSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */; };
+		FA11C3032995AD23002034D3 /* QuestionaireVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3022995AD23002034D3 /* QuestionaireVC.swift */; };
 		FA11C3052995AD5C002034D3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3042995AD5C002034D3 /* HomeVC.swift */; };
-		FA11C3092995ADDF002034D3 /* GoalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C3082995ADDF002034D3 /* GoalsVC.swift */; };
 		FA11C30B2995ADF3002034D3 /* PreviewWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA11C30A2995ADF3002034D3 /* PreviewWorkoutVC.swift */; };
 		FA15397C2997199200174051 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA15397B2997199200174051 /* GoogleService-Info.plist */; };
 		FA3DE97229A94838000A267E /* databasePaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DE97129A94838000A267E /* databasePaths.swift */; };
@@ -41,6 +40,7 @@
 		FABA4CB029B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4CAE29B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift */; };
 		FABA4CB129B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */; };
 		FABA4CB329B1394200AE2FA5 /* ProgramOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */; };
+		FACF9D6729E73BA1009C3348 /* FinishedWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACF9D6629E73BA1009C3348 /* FinishedWorkoutVC.swift */; };
 		FAF202B629C37B9300C53A30 /* AppContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF202B529C37B9300C53A30 /* AppContainerVC.swift */; };
 		FAF202B829C37C4200C53A30 /* SignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF202B729C37C4200C53A30 /* SignInManager.swift */; };
 /* End PBXBuildFile section */
@@ -76,9 +76,8 @@
 		FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInfo.swift; sourceTree = "<group>"; };
 		FA0F01AD29C38EF1000BE7AB /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		FA0F01AF29C3977F000BE7AB /* SkillTreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillTreeVC.swift; sourceTree = "<group>"; };
-		FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeSetupVC.swift; sourceTree = "<group>"; };
+		FA11C3022995AD23002034D3 /* QuestionaireVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionaireVC.swift; sourceTree = "<group>"; };
 		FA11C3042995AD5C002034D3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		FA11C3082995ADDF002034D3 /* GoalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsVC.swift; sourceTree = "<group>"; };
 		FA11C30A2995ADF3002034D3 /* PreviewWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewWorkoutVC.swift; sourceTree = "<group>"; };
 		FA15397B2997199200174051 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FA3DE97129A94838000A267E /* databasePaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = databasePaths.swift; sourceTree = "<group>"; };
@@ -107,6 +106,7 @@
 		FABA4CAE29B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviewExerciseTableViewCell.xib; sourceTree = "<group>"; };
 		FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramOutline.swift; sourceTree = "<group>"; };
+		FACF9D6629E73BA1009C3348 /* FinishedWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedWorkoutVC.swift; sourceTree = "<group>"; };
 		FAF202B529C37B9300C53A30 /* AppContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainerVC.swift; sourceTree = "<group>"; };
 		FAF202B729C37C4200C53A30 /* SignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,21 +155,14 @@
 		FA11C2FF2995AB1B002034D3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FA6352F329DC56D100E367E9 /* ProgramMaker.swift */,
-				FA11C30A2995ADF3002034D3 /* PreviewWorkoutVC.swift */,
-				FA6AAA2B29930F3B005EFD5A /* LoginVC.swift */,
-				FA11C3022995AD23002034D3 /* FirstTimeSetupVC.swift */,
+				FA65D96E29E785D200BF12C9 /* Auto Sign In Manager */,
+				FA65D96C29E7856A00BF12C9 /* Registration.Login */,
 				FA11C3042995AD5C002034D3 /* HomeVC.swift */,
-				FA11C3082995ADDF002034D3 /* GoalsVC.swift */,
-				FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */,
-				FA8CF06E29985F9600D68DA1 /* SignInVC.swift */,
-				FA46E6AC29BA887300FCA1A0 /* MoreExerciseDetails.swift */,
-				FAF202B529C37B9300C53A30 /* AppContainerVC.swift */,
-				FAF202B729C37C4200C53A30 /* SignInManager.swift */,
 				FA0F01AD29C38EF1000BE7AB /* AccountVC.swift */,
+				FA65D96B29E7855500BF12C9 /* Current Workout Path */,
+				FA65D96D29E785AA00BF12C9 /* Preview Workout Path */,
 				FA0F01AF29C3977F000BE7AB /* SkillTreeVC.swift */,
-				FA8395B529E493C800ACA154 /* BasicInfoSetupVC.swift */,
-				FA69112629E5DEB30075695D /* CurrentWorkoutVC.swift */,
+				FA6352F329DC56D100E367E9 /* ProgramMaker.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -185,17 +178,64 @@
 		FA11C3012995AB44002034D3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA65D96F29E7862800BF12C9 /* Table View Cells */,
 				FA3DE97129A94838000A267E /* databasePaths.swift */,
 				FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */,
-				FABA4CAE29B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift */,
-				FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */,
 				FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */,
 				FA41D3C129BE458A002D35E3 /* SetRepGeneration.swift */,
 				FA02C03F29CA710D00EC1599 /* FTSQuestionaire.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA65D96B29E7855500BF12C9 /* Current Workout Path */ = {
+			isa = PBXGroup;
+			children = (
+				FA69112629E5DEB30075695D /* CurrentWorkoutVC.swift */,
+				FACF9D6629E73BA1009C3348 /* FinishedWorkoutVC.swift */,
+			);
+			path = "Current Workout Path";
+			sourceTree = "<group>";
+		};
+		FA65D96C29E7856A00BF12C9 /* Registration.Login */ = {
+			isa = PBXGroup;
+			children = (
+				FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */,
+				FA8395B529E493C800ACA154 /* BasicInfoSetupVC.swift */,
+				FA11C3022995AD23002034D3 /* QuestionaireVC.swift */,
+				FA6AAA2B29930F3B005EFD5A /* LoginVC.swift */,
+			);
+			path = Registration.Login;
+			sourceTree = "<group>";
+		};
+		FA65D96D29E785AA00BF12C9 /* Preview Workout Path */ = {
+			isa = PBXGroup;
+			children = (
+				FA11C30A2995ADF3002034D3 /* PreviewWorkoutVC.swift */,
+				FA46E6AC29BA887300FCA1A0 /* MoreExerciseDetails.swift */,
+			);
+			path = "Preview Workout Path";
+			sourceTree = "<group>";
+		};
+		FA65D96E29E785D200BF12C9 /* Auto Sign In Manager */ = {
+			isa = PBXGroup;
+			children = (
+				FAF202B529C37B9300C53A30 /* AppContainerVC.swift */,
+				FA8CF06E29985F9600D68DA1 /* SignInVC.swift */,
+				FAF202B729C37C4200C53A30 /* SignInManager.swift */,
+			);
+			path = "Auto Sign In Manager";
+			sourceTree = "<group>";
+		};
+		FA65D96F29E7862800BF12C9 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FABA4CAE29B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift */,
+				FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */,
 				FA69112829E5F7EB0075695D /* CurrentWorkoutTableViewCell.swift */,
 				FA69112929E5F7EB0075695D /* CurrentWorkoutTableViewCell.xib */,
 			);
-			path = Model;
+			path = "Table View Cells";
 			sourceTree = "<group>";
 		};
 		FA6AAA1B29930F3B005EFD5A = {
@@ -518,10 +558,10 @@
 				FABA4CB029B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift in Sources */,
 				FA6AAA2829930F3B005EFD5A /* AppDelegate.swift in Sources */,
 				FA46E6AD29BA887300FCA1A0 /* MoreExerciseDetails.swift in Sources */,
+				FACF9D6729E73BA1009C3348 /* FinishedWorkoutVC.swift in Sources */,
 				FABA4CB329B1394200AE2FA5 /* ProgramOutline.swift in Sources */,
 				FA8CF06F29985F9600D68DA1 /* SignInVC.swift in Sources */,
-				FA11C3032995AD23002034D3 /* FirstTimeSetupVC.swift in Sources */,
-				FA11C3092995ADDF002034D3 /* GoalsVC.swift in Sources */,
+				FA11C3032995AD23002034D3 /* QuestionaireVC.swift in Sources */,
 				FAF202B829C37C4200C53A30 /* SignInManager.swift in Sources */,
 				FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */,
 				FA6352F429DC56D100E367E9 /* ProgramMaker.swift in Sources */,

@@ -8,11 +8,13 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
 
 class RegisterVC: UIViewController {
     
-    var username: String = ""
+    let db = Firestore.firestore()
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,6 +23,8 @@ class RegisterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+            view.addGestureRecognizer(tap)
     }
     
     @IBAction func registerPressed(_ sender: UIButton) {
@@ -29,20 +33,16 @@ class RegisterVC: UIViewController {
                 if let e = error {
                     print(e)
                 }else{
-                    self.username = username
+                    self.db.collection("users").document(Auth.auth().currentUser!.uid).setData(["username" : username], merge: true)
                     self.performSegue(withIdentifier: "goToBasicInfoSetupVC", sender: self)
                 }
             }
         }
     }
-    
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToBasicInfoSetupVC"{
-            let destinationVC = segue.destination as! FirstTimeSetupVC
-            destinationVC.username = username
-        }
+
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 }
 
