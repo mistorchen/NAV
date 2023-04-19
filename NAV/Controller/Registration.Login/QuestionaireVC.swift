@@ -101,6 +101,7 @@ class QuestionaireVC: UIViewController {
     func determineXP(){//} -> Int{
         xpScore = 15
         setData()
+        writeSkillTrees()
     }
     
     
@@ -113,6 +114,12 @@ class QuestionaireVC: UIViewController {
             "level" : xpScore,
             //"population" : "general"
         ], merge: true)
+    }
+    func writeSkillTrees(){
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("lower").setData(["exp" : 10], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("upper").setData(["exp" : 20], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("plyo").setData(["exp" : 30], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("core").setData(["exp" : 40], merge: true)
     }
     
     

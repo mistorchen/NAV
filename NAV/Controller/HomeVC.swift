@@ -20,5 +20,8 @@ class HomeVC: UIViewController {
     @IBAction func goToCurrentWorkout(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToCurrentWorkout", sender: self)
     }
+    @IBAction func goToProgramMaker(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToProgramMaker", sender: self)
+    }
 }
 

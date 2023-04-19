@@ -11,6 +11,7 @@ import UIKit
 class AppContainerVC: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
         
         SignInManager.shared.appContainer = self

@@ -15,6 +15,7 @@ class SkillTreeVC: UIViewController {
     @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
+        setTree("lower")
         super.viewDidLoad()
         
     }

@@ -43,7 +43,6 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
         set1Field.delegate = self
         set2Field.delegate = self
         set3Field.delegate = self
-        
     }
     
     @IBAction func set1TextEntered(_ sender: UITextField) {
@@ -72,7 +71,7 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     
     func writeSetWeight(set: String, weight: Int){
         let docRef = db.collection(dayWritePath).document(exerciseWritePath)
-        docRef.setData([set : weight], merge: true)
+        docRef.setData([set : weight, "buttonReady" : true], merge: true)
     }
     
     @IBAction func difficulty1(_ sender: UIButton) {
@@ -83,18 +82,6 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     }
     @IBAction func difficulty3(_ sender: UIButton) {
         writeDifficulty(3)
-    }
-    @IBAction func difficulty4(_ sender: UIButton) {
-        writeDifficulty(4)
-    }
-    @IBAction func difficulty5(_ sender: UIButton) {
-        writeDifficulty(5)
-    }
-    @IBAction func difficulty6(_ sender: UIButton) {
-        writeDifficulty(6)
-    }
-    @IBAction func difficulty7(_ sender: UIButton) {
-        writeDifficulty(7)
     }
     
     func writeDifficulty(_ difficulty: Int){

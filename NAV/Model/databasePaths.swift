@@ -1,7 +1,6 @@
 import Foundation
 
 struct dK{
-
     struct category{
         struct plyo {
             static let lower = "/database/plyo/lower"
@@ -14,7 +13,7 @@ struct dK{
         }
         struct lower {
             static let bilateral = "/database/lower/bilateral"
-            static let unilateral = "/database/upper/unilateral"
+            static let unilateral = "/database/lower/unilateral"
         }
         struct core {
             static let dynamic = "/database/core/dynamic"

@@ -14,4 +14,5 @@ struct ExerciseInfo {
     let reps: Int
     let order: Int
     let docID: String
+    let block: Int
 }
