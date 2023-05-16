@@ -20,9 +20,12 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
         return UINib(nibName: CurrentWorkoutTableViewCell.identifier, bundle: nil)
     }
     
-    var exerciseWritePath = ""
+    var inventoryWritePath = ""
     var dayWritePath = ""
+    var exerciseIndex = 0
+    var programID = 0.0
     var difficulty = 0
+    var programDay = 0
     
     let db = Firestore.firestore()
 
@@ -37,18 +40,19 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     
     override func awakeFromNib() {
 //        set4.isHidden = true // Future edit for more sets
-        
         super.awakeFromNib()
         // Initialization code
         set1Field.delegate = self
         set2Field.delegate = self
         set3Field.delegate = self
+        
+        
     }
     
     @IBAction func set1TextEntered(_ sender: UITextField) {
         if sender.text?.isEmpty == false{
             if let weight = sender.text{
-                writeSetWeight(set: "set1weight", weight: Int(weight)!)
+                writeSetWeight(1, Int(weight)!)
             }
         }
     }
@@ -56,7 +60,7 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     @IBAction func set2TextEntered(_ sender: UITextField) {
         if sender.text?.isEmpty == false{
             if let weight = sender.text{
-                writeSetWeight(set: "set2weight", weight: Int(weight)!)
+                writeSetWeight(2, Int(weight)!)
             }
         }
     }
@@ -64,14 +68,16 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     @IBAction func set3TextEntered(_ sender: UITextField) {
         if sender.text?.isEmpty == false{
             if let weight = sender.text{
-                writeSetWeight(set: "set3weight", weight: Int(weight)!)
+                writeSetWeight(3, Int(weight)!)
             }
         }
     }
     
-    func writeSetWeight(set: String, weight: Int){
-        let docRef = db.collection(dayWritePath).document(exerciseWritePath)
-        docRef.setData([set : weight, "buttonReady" : true], merge: true)
+    func writeSetWeight(_ set: Int, _ weight: Int){
+        let currentRef = db.document(dayWritePath)
+        currentRef.setData(["e\(exerciseIndex).\(set)" : weight], merge: true)
+        let inventoryRef = db.document(inventoryWritePath)
+        inventoryRef.setData(["1.\(programDay).\(set)" : weight] ,merge: true)
     }
     
     @IBAction func difficulty1(_ sender: UIButton) {
@@ -85,12 +91,9 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     }
     
     func writeDifficulty(_ difficulty: Int){
-        let docRef = db.collection(dayWritePath).document(exerciseWritePath)
+        let docRef = db.collection(dayWritePath).document(inventoryWritePath)
         docRef.setData(["difficulty" : difficulty], merge: true)
     }
-    
-    
-    
     
     
     

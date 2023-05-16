@@ -38,12 +38,15 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
         
+        setSegmetDays()
+        
+        
+        
+        super.viewDidLoad()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.exerciseTable.reloadData()
         }
-        
-        super.viewDidLoad()
     }
     @IBAction func daySelector(_ sender: UISegmentedControl) { // Controls the day shows by segmented bar
         exerciseTable.setContentOffset(.zero, animated: true)
@@ -77,6 +80,13 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
             }
         }
     }
+    func setSegmetDays() {
+        
+        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())")
+        
+        
+        
+    }
     
     func findMonth()-> String{
         let now = Date()
@@ -104,7 +114,7 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
             return cell
         }
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 120
+            return 100
         }
         
         

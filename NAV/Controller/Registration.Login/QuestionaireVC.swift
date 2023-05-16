@@ -120,6 +120,8 @@ class QuestionaireVC: UIViewController {
         db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("upper").setData(["exp" : 20], merge: true)
         db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("plyo").setData(["exp" : 30], merge: true)
         db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("core").setData(["exp" : 40], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("arms").setData(["exp" : 40], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).setData(["playerLevel" : 100, "trainingType" : 0], merge: true)
     }
     
     

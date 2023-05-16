@@ -23,6 +23,7 @@ class ProgramMaker: UIViewController{
     var totalDays = 3
     var reps = 0
     var levels: [String : Int] = [:]
+    var duration: Float = 0
     
     
     
@@ -54,26 +55,53 @@ class ProgramMaker: UIViewController{
     var blockCounters = [1,1,1,1,1]
 
     @IBOutlet weak var numberOfDays: UILabel!
+    @IBOutlet weak var workoutDuration: UILabel!
     @IBOutlet weak var dayStepper: UIStepper!
-    
     
     override func viewDidLoad() {
         getUserInfo()
-        super.viewDidLoad()
         dayStepper.value = 3.0
+        workoutDuration.text = "1 Hours"
         numberOfDays.text = "3"
+        
+        super.viewDidLoad()
+
     }
     
     @IBAction func dayStepper(_ sender: UIStepper) {
-        
-        totalDays = Int(sender.value)
+        if sender.value == 0{
+            totalDays = 1
+            sender.value = 1
+        }
+        if sender.value > 5{
+            totalDays = 5
+            sender.value = 5
+        }else{
+            totalDays = Int(sender.value)
+        }
         numberOfDays.text = "\(totalDays)"
     }
     
-    @IBAction func buttonTapped(_ sender: UIButton) {
+    
+    @IBAction func durationSlider(_ sender: UISlider) {
+        duration = round(sender.value * 4) / 4
+        workoutDuration.text = "\(duration) Hours"
+    }
+    
+    
+    
+    @IBAction func finishedButton(_ sender: UIButton) {
         dayProgramGen(totalDays)
+        generateProgramDetails()
+        self.performSegue(withIdentifier: "goToGenerating", sender: self)
     }
 }
+
+
+
+
+
+
 
 extension ProgramMaker{
     func dayProgramGen(_ totalDays: Int){
@@ -112,7 +140,6 @@ extension ProgramMaker{
             if let name = self.temp1Exercises.randomElement(){
                 if self.checkDuplicate(name , self.day1Exercises) == false{
                     self.day1Exercises.append(name)
-                    print("Day 1: \(name)")
                 }else{
                     self.exerciseCounters[day-1] -= 1
                     self.generateDay1()
@@ -125,7 +152,6 @@ extension ProgramMaker{
                     for i in 0...self.day1Exercises.count-1{
                         self.writeExercise(i , day, self.day1Exercises[i], self.day1Blocks[i])
                     }
-                    print("Day 1 Done!")
                 }else if self.exerciseCounters[day-1] == totalExercises{
                     self.exerciseCounters[day-1] = 0
                     self.day1Blocks.append(self.blockCounters[day-1])
@@ -153,7 +179,6 @@ extension ProgramMaker{
             if let name = self.temp2Exercises.randomElement(){
                 if self.checkDuplicate(name , self.day2Exercises) == false{
                     self.day2Exercises.append(name)
-                    print("Day 2: \(name)")
                 }else{
                     self.exerciseCounters[day-1] -= 1
                     self.generateDay2()
@@ -166,7 +191,6 @@ extension ProgramMaker{
                     for i in 0...self.day2Exercises.count-1{
                         self.writeExercise(i , day, self.day2Exercises[i], self.day2Blocks[i])
                     }
-                    print("Day 2 Done!")
                 }else if self.exerciseCounters[day-1] == totalExercises{
                     self.exerciseCounters[day-1] = 0
                     self.day2Blocks.append(self.blockCounters[day-1])
@@ -194,7 +218,6 @@ extension ProgramMaker{
             if let name = self.temp3Exercises.randomElement(){
                 if self.checkDuplicate(name , self.day3Exercises) == false{
                     self.day3Exercises.append(name)
-                    print("Day 3: \(name)")
                 }else{
                     self.exerciseCounters[day-1] -= 1
                     self.generateDay3()
@@ -207,7 +230,6 @@ extension ProgramMaker{
                     for i in 0...self.day3Exercises.count-1{
                         self.writeExercise(i , day, self.day3Exercises[i], self.day3Blocks[i])
                     }
-                    print("Day 3 Done!")
                 }else if self.exerciseCounters[day-1] == totalExercises{
                     self.exerciseCounters[day-1] = 0
                     self.day3Blocks.append(self.blockCounters[day-1])
@@ -235,7 +257,6 @@ extension ProgramMaker{
             if let name = self.temp4Exercises.randomElement(){
                 if self.checkDuplicate(name , self.day4Exercises) == false{
                     self.day4Exercises.append(name)
-                    print("Day 4: \(name)")
                 }else{
                     self.exerciseCounters[day-1] -= 1
                     self.generateDay4()
@@ -248,7 +269,6 @@ extension ProgramMaker{
                     for i in 0...self.day4Exercises.count-1{
                         self.writeExercise(i , day, self.day4Exercises[i], self.day4Blocks[i])
                     }
-                    print("Day 4 Done!")
                 }else if self.exerciseCounters[day-1] == totalExercises{
                     self.exerciseCounters[day-1] = 0
                     self.day4Blocks.append(self.blockCounters[day-1])
@@ -261,6 +281,13 @@ extension ProgramMaker{
                 }
             }
         }
+    }
+    func generateProgramDetails(){
+        let docRef = db.document("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/programDetails")
+        for day in 1...totalDays{
+            docRef.setData(["day\(day)Completion" : 0], merge: true)
+        }
+        docRef.setData(["totalDays" : totalDays], merge: true)
     }
     
     

@@ -2,13 +2,13 @@
 //  FinishedWorkoutVC.swift
 //  NAV
 //
-//  Created by Alex Chen on 4/12/23.
+//  Created by Alex Chen on 5/16/23.
 //
 
 import Foundation
 import UIKit
 
-class FinishedWorkoutVC: UIViewController {
+class GeneratingVC: UIViewController {
 
     override func viewDidLoad() {
         self.navigationItem.setHidesBackButton(true, animated: true)
@@ -20,3 +20,4 @@ class FinishedWorkoutVC: UIViewController {
         
     }
 }
+

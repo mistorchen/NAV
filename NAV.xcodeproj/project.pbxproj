@@ -40,6 +40,7 @@
 		FABA4CB129B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */; };
 		FABA4CB329B1394200AE2FA5 /* ProgramOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */; };
 		FACF9D6729E73BA1009C3348 /* FinishedWorkoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACF9D6629E73BA1009C3348 /* FinishedWorkoutVC.swift */; };
+		FADF012E2A140A7E0002FAE3 /* GeneratingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADF012D2A140A7E0002FAE3 /* GeneratingVC.swift */; };
 		FAF0E0B129E9FD85007BB9C7 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF0E0B029E9FD85007BB9C7 /* UserInfo.swift */; };
 		FAF0E0B329E9FF08007BB9C7 /* Keywords:Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF0E0B229E9FF08007BB9C7 /* Keywords:Constants.swift */; };
 		FAF202B629C37B9300C53A30 /* AppContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF202B529C37B9300C53A30 /* AppContainerVC.swift */; };
@@ -107,6 +108,7 @@
 		FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviewExerciseTableViewCell.xib; sourceTree = "<group>"; };
 		FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramOutline.swift; sourceTree = "<group>"; };
 		FACF9D6629E73BA1009C3348 /* FinishedWorkoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedWorkoutVC.swift; sourceTree = "<group>"; };
+		FADF012D2A140A7E0002FAE3 /* GeneratingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratingVC.swift; sourceTree = "<group>"; };
 		FAF0E0B029E9FD85007BB9C7 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		FAF0E0B229E9FF08007BB9C7 /* Keywords:Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keywords:Constants.swift"; sourceTree = "<group>"; };
 		FAF202B529C37B9300C53A30 /* AppContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainerVC.swift; sourceTree = "<group>"; };
@@ -157,7 +159,7 @@
 		FA11C2FF2995AB1B002034D3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FA6352F329DC56D100E367E9 /* ProgramMaker.swift */,
+				FADF012C2A140A660002FAE3 /* ProgramGeneration */,
 				FA65D96E29E785D200BF12C9 /* Auto Sign In Manager */,
 				FA65D96C29E7856A00BF12C9 /* Registration.Login */,
 				FA11C3042995AD5C002034D3 /* HomeVC.swift */,
@@ -294,6 +296,15 @@
 				FA6AAA4A29930F3C005EFD5A /* NAVUITestsLaunchTests.swift */,
 			);
 			path = NAVUITests;
+			sourceTree = "<group>";
+		};
+		FADF012C2A140A660002FAE3 /* ProgramGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				FA6352F329DC56D100E367E9 /* ProgramMaker.swift */,
+				FADF012D2A140A7E0002FAE3 /* GeneratingVC.swift */,
+			);
+			path = ProgramGeneration;
 			sourceTree = "<group>";
 		};
 		FDEC3F734F63A9B9E4857FCB /* Frameworks */ = {
@@ -570,6 +581,7 @@
 				FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */,
 				FA6352F429DC56D100E367E9 /* ProgramMaker.swift in Sources */,
 				FA6AAA2A29930F3B005EFD5A /* SceneDelegate.swift in Sources */,
+				FADF012E2A140A7E0002FAE3 /* GeneratingVC.swift in Sources */,
 				FA8CF06D29985E6700D68DA1 /* RegisterVC.swift in Sources */,
 				FA02C04029CA710D00EC1599 /* FTSQuestionaire.swift in Sources */,
 				FA3DE97229A94838000A267E /* databasePaths.swift in Sources */,
