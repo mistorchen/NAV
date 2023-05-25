@@ -22,14 +22,16 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
     var paths: [String : Any] = [:]
     var currentDay = 1
     var duplicate: [String] = []
-    
+    var totalDays = 0
 
 
     @IBOutlet weak var daySelector: UISegmentedControl!
     @IBOutlet weak var exerciseTable: UITableView!
-    
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
         readProgram()
+    }
+    override func viewDidLoad() {
+        
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 165.0, green: 215.0, blue: 232.0, alpha: 100.0)]
         daySelector.setTitleTextAttributes(titleTextAttributes, for: .normal)
         
@@ -38,14 +40,13 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
         
-        setSegmetDays()
+        findDays()
         
-        
-        
-        super.viewDidLoad()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.setSegments(self.totalDays)
             self.exerciseTable.reloadData()
+            super.viewDidLoad()
         }
     }
     @IBAction func daySelector(_ sender: UISegmentedControl) { // Controls the day shows by segmented bar
@@ -80,11 +81,48 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
             }
         }
     }
-    func setSegmetDays() {
+    func findDays() {
+        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())").document("programDetails")
         
-        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())")
+        docRef.getDocument { document, error in
+            if let error = error{
+                print(error)
+            }else{
+                self.totalDays = document!["totalDays"] as! Int
+            }
+        }
+    }
+    
+    func setSegments(_ days: Int){
+        daySelector.removeAllSegments()
         
-        
+        switch days{
+        case 1:
+            daySelector.insertSegment(withTitle: "Day 1", at: 0, animated: false)
+        case 2:
+            daySelector.insertSegment(withTitle: "Day 1", at: 0, animated: false)
+            daySelector.insertSegment(withTitle: "Day 2", at: 1, animated: false)
+
+        case 3:
+            daySelector.insertSegment(withTitle: "Day 1", at: 0, animated: false)
+            daySelector.insertSegment(withTitle: "Day 2", at: 1, animated: false)
+            daySelector.insertSegment(withTitle: "Day 3", at: 2, animated: false)
+        case 4:
+            daySelector.insertSegment(withTitle: "Day 1", at: 0, animated: false)
+            daySelector.insertSegment(withTitle: "Day 2", at: 1, animated: false)
+            daySelector.insertSegment(withTitle: "Day 3", at: 2, animated: false)
+            daySelector.insertSegment(withTitle: "Day 4", at: 3, animated: false)
+        case 5:
+            daySelector.insertSegment(withTitle: "Day 1", at: 0, animated: false)
+            daySelector.insertSegment(withTitle: "Day 2", at: 1, animated: false)
+            daySelector.insertSegment(withTitle: "Day 3", at: 2, animated: false)
+            daySelector.insertSegment(withTitle: "Day 4", at: 3, animated: false)
+            daySelector.insertSegment(withTitle: "Day 5", at: 4, animated: false)
+        default:
+            daySelector.insertSegment(withTitle: "Day 1", at: 0, animated: false)
+            daySelector.insertSegment(withTitle: "Day 2", at: 1, animated: false)
+            daySelector.insertSegment(withTitle: "Day 3", at: 2, animated: false)
+        }
         
     }
     

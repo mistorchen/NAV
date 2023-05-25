@@ -32,35 +32,27 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
     @IBOutlet weak var exerciseTable: UITableView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var blockExerciseTitle: UILabel!
-    
-    
-    
+
     override func viewDidLoad() {
         findDay()
         clearCurrentWorkout()
-        getWorkout()
+        
         blockExerciseTitle.text = ""
         exerciseTable.register(CurrentWorkoutTableViewCell.nib(), forCellReuseIdentifier: CurrentWorkoutTableViewCell.identifier)
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
             self.getWorkout()
-            
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
             for i in 0...self.exercises.count-1{
                 self.detBlocks(self.exercises[i].block)
             }
-            
+            self.setTitle(self.blockIndex)
+            self.exerciseTable.reloadData()
         }
         
         super.viewDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-            self.setTitle(self.blockIndex)
-            self.exerciseTable.reloadData()
-            
-        }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -70,8 +62,6 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
     
     
     @IBAction func nextBlock(_ sender: UIButton) {
-        readyForNext()
-        
         exerciseTable.setContentOffset(.zero, animated: true)
         if blockIndex < sizeOfBlocks.count-1{
             exercisePerBlock = 0
@@ -96,7 +86,6 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
         docRef.delete()
     }
     func getWorkout(){
-        
         // Reads from users monthly program based on day, default day is 1
         // Appends exercises to exercises: [ExerciseInfo] in descending order (order of program)
         let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(programDay)/exercises").order(by: "order", descending: false)
@@ -118,16 +107,24 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
             if let error = error{
                 print(error)
             }else{
+                
+                
+                // Make it based of how many days there are.
+                
+                
                 self.dayArray = [document!["day1Completion"] as! Int, document!["day2Completion"] as! Int, document!["day3Completion"] as! Int]
+                
+                
+                
+                
+                
+                
                 if self.dayArray[0] > self.dayArray[1]{
                     self.programDay = 2
-                    print(self.programDay)
                 }else if self.dayArray[1] > self.dayArray[2]{
                     self.programDay = 3
-                    print(self.programDay)
                 }else{
                     self.programDay = 1
-                    print(self.programDay)
                 }
             }
         }
@@ -157,15 +154,6 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
     }
     func setTitle(_ block: Int){
         blockExerciseTitle.text = "Block: \(block+1) Exercises: \(sizeOfBlocks[block])"
-    }
-    
-    func readyForNext(){
-        let docRef = db.document("/users/\(Auth.auth().currentUser!.uid)/exerciseInventory/\(exercises[0].docID)")
-        //FIGURING OUT HOW TO READ FROM FIREBASE TO ALLOW FOR NEXT BLOCK
-        docRef.getDocument { document, err in
-            if let document = document{
-            }
-        }
     }
     
     
@@ -241,10 +229,10 @@ extension CurrentWorkoutVC: UITableViewDataSource{
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "viewMoreDetails"{
-//            let destinationVC = segue.destination as! MoreExeriseDetails
-//            destinationVC.exerciseName = exercises[exerciseSelected].name
-//        }
+        if segue.identifier == "goToFinishedWorkoutVC"{
+            let destinationVC = segue.destination as! FinishedWorkoutVC
+            destinationVC.day = programDay
+        }
     }
     
     

@@ -26,4 +26,11 @@ struct dK{
         }
     }
     
+    struct skillTree{
+        static let plyo = "/database/skillTrees/plyo"
+        static let upper = "/database/skillTrees/upper"
+        static let lower = "/database/skillTrees/lower"
+        static let core = "/database/skillTrees/core"
+    }
+    
 }

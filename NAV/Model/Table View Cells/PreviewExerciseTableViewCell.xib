@@ -27,7 +27,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exercise Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1q-AX-Ia0">
                                         <rect key="frame" x="0.0" y="0.0" width="119" height="36.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="0.64705882349999999" green="0.84313725490000002" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="JTq-dY-pNR">
@@ -39,13 +39,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Sets:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBd-nf-chi">
                                                         <rect key="frame" x="0.0" y="0.0" width="32" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <color key="textColor" red="0.64705882349999999" green="0.84313725490000002" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reps:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5H-u2-3wx">
                                                         <rect key="frame" x="0.0" y="22.333333333333332" width="32" height="14.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <color key="textColor" red="0.64705882349999999" green="0.84313725490000002" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -56,13 +56,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="setCount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7o-eH-PMd">
                                                         <rect key="frame" x="0.0" y="0.0" width="52.666666666666664" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <color key="textColor" red="0.64705882349999999" green="0.84313725490000002" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="repCount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEe-Tl-uLa">
                                                         <rect key="frame" x="0.0" y="22.333333333333332" width="52.666666666666664" height="14.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <color key="textColor" red="0.64705882349999999" green="0.84313725490000002" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -73,7 +73,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h6t-ve-aXG"/>
-                        <color key="backgroundColor" red="0.3411764706" green="0.42352941179999998" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.098039215690000001" green="0.65490196079999996" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ehS-zZ-SYS" firstAttribute="centerX" secondItem="qqH-YJ-sHT" secondAttribute="centerX" id="nSk-kQ-z5c"/>
                             <constraint firstItem="ehS-zZ-SYS" firstAttribute="centerY" secondItem="qqH-YJ-sHT" secondAttribute="centerY" id="xFY-70-QJ4"/>

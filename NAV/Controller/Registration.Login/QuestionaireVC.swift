@@ -70,6 +70,12 @@ class QuestionaireVC: UIViewController {
                 nextQuestion.isHidden = true
                 slider.isHidden = true
                 sliderLabel.isHidden = true
+            }else if questions[questionCount].answerChoice[0] as! String == "multiple"{
+                yesButton.isHidden = true
+                noButton.isHidden = true
+                nextQuestion.isHidden = false
+                slider.isHidden = true
+                sliderLabel.isHidden = true
             }
         }else{
             determineXP()

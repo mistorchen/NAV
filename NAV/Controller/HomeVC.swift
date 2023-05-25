@@ -14,6 +14,9 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    @IBAction func editLoadout(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToLoadout", sender: self)
+    }
     @IBAction func viewAccount(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToAccount", sender: self)
     }
@@ -22,6 +25,10 @@ class HomeVC: UIViewController {
     }
     @IBAction func goToProgramMaker(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToProgramMaker", sender: self)
+    }
+    @IBAction func goToCheckIn(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToCheckIn", sender: self)
+
     }
 }
 

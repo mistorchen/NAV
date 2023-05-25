@@ -10,6 +10,8 @@
 		6B2EE936E1DDE6483BE25615 /* Pods_NAV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35C2D5C91D47082988228A6D /* Pods_NAV.framework */; };
 		8F7A6D5ADDEE6FD9E83B272F /* Pods_NAV_NAVUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6620F384D9DEF0169306A8F /* Pods_NAV_NAVUITests.framework */; };
 		E3F0710B8428F3B09AE82AFC /* Pods_NAVTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E68F6D3DA9C0ACD43FCA29 /* Pods_NAVTests.framework */; };
+		FA000EF32A1C5C4300C1BB24 /* SkillTreeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000EF12A1C5C4300C1BB24 /* SkillTreeTableViewCell.swift */; };
+		FA000EF42A1C5C4300C1BB24 /* SkillTreeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA000EF22A1C5C4300C1BB24 /* SkillTreeTableViewCell.xib */; };
 		FA02C04029CA710D00EC1599 /* FTSQuestionaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C03F29CA710D00EC1599 /* FTSQuestionaire.swift */; };
 		FA0A518229A2B40C008473E1 /* ExerciseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */; };
 		FA0F01AE29C38EF1000BE7AB /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0F01AD29C38EF1000BE7AB /* AccountVC.swift */; };
@@ -74,6 +76,8 @@
 		E002E08CEB15A4EA57CED3E9 /* Pods-NAV-NAVUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV-NAVUITests.release.xcconfig"; path = "Target Support Files/Pods-NAV-NAVUITests/Pods-NAV-NAVUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E09075073D2D09F65D7D71C2 /* Pods-NAV-NAVUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV-NAVUITests.debug.xcconfig"; path = "Target Support Files/Pods-NAV-NAVUITests/Pods-NAV-NAVUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EEBC4D25D7B96FF00A54E8F4 /* Pods-NAV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NAV.debug.xcconfig"; path = "Target Support Files/Pods-NAV/Pods-NAV.debug.xcconfig"; sourceTree = "<group>"; };
+		FA000EF12A1C5C4300C1BB24 /* SkillTreeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillTreeTableViewCell.swift; sourceTree = "<group>"; };
+		FA000EF22A1C5C4300C1BB24 /* SkillTreeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SkillTreeTableViewCell.xib; sourceTree = "<group>"; };
 		FA02C03F29CA710D00EC1599 /* FTSQuestionaire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTSQuestionaire.swift; sourceTree = "<group>"; };
 		FA0A518129A2B40C008473E1 /* ExerciseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseInfo.swift; sourceTree = "<group>"; };
 		FA0F01AD29C38EF1000BE7AB /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
@@ -239,6 +243,8 @@
 				FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */,
 				FA69112829E5F7EB0075695D /* CurrentWorkoutTableViewCell.swift */,
 				FA69112929E5F7EB0075695D /* CurrentWorkoutTableViewCell.xib */,
+				FA000EF12A1C5C4300C1BB24 /* SkillTreeTableViewCell.swift */,
+				FA000EF22A1C5C4300C1BB24 /* SkillTreeTableViewCell.xib */,
 			);
 			path = "Table View Cells";
 			sourceTree = "<group>";
@@ -430,6 +436,7 @@
 				FA15397C2997199200174051 /* GoogleService-Info.plist in Resources */,
 				FABA4CB129B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib in Resources */,
 				FA69112B29E5F7EB0075695D /* CurrentWorkoutTableViewCell.xib in Resources */,
+				FA000EF42A1C5C4300C1BB24 /* SkillTreeTableViewCell.xib in Resources */,
 				FA6AAA3129930F3B005EFD5A /* Assets.xcassets in Resources */,
 				FA6AAA2F29930F3B005EFD5A /* Main.storyboard in Resources */,
 			);
@@ -559,6 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA000EF32A1C5C4300C1BB24 /* SkillTreeTableViewCell.swift in Sources */,
 				FA69112729E5DEB30075695D /* CurrentWorkoutVC.swift in Sources */,
 				FA11C30B2995ADF3002034D3 /* PreviewWorkoutVC.swift in Sources */,
 				FA8395B629E493C800ACA154 /* BasicInfoSetupVC.swift in Sources */,

@@ -152,6 +152,7 @@ extension ProgramMaker{
                     for i in 0...self.day1Exercises.count-1{
                         self.writeExercise(i , day, self.day1Exercises[i], self.day1Blocks[i])
                     }
+                    self.writeCategory(self.totalDays, day)
                 }else if self.exerciseCounters[day-1] == totalExercises{
                     self.exerciseCounters[day-1] = 0
                     self.day1Blocks.append(self.blockCounters[day-1])
@@ -191,6 +192,7 @@ extension ProgramMaker{
                     for i in 0...self.day2Exercises.count-1{
                         self.writeExercise(i , day, self.day2Exercises[i], self.day2Blocks[i])
                     }
+                    self.writeCategory(self.totalDays, day)
                 }else if self.exerciseCounters[day-1] == totalExercises{
                     self.exerciseCounters[day-1] = 0
                     self.day2Blocks.append(self.blockCounters[day-1])
@@ -230,6 +232,7 @@ extension ProgramMaker{
                     for i in 0...self.day3Exercises.count-1{
                         self.writeExercise(i , day, self.day3Exercises[i], self.day3Blocks[i])
                     }
+                    self.writeCategory(self.totalDays, day)
                 }else if self.exerciseCounters[day-1] == totalExercises{
                     self.exerciseCounters[day-1] = 0
                     self.day3Blocks.append(self.blockCounters[day-1])
@@ -269,6 +272,7 @@ extension ProgramMaker{
                     for i in 0...self.day4Exercises.count-1{
                         self.writeExercise(i , day, self.day4Exercises[i], self.day4Blocks[i])
                     }
+                    self.writeCategory(self.totalDays, day)
                 }else if self.exerciseCounters[day-1] == totalExercises{
                     self.exerciseCounters[day-1] = 0
                     self.day4Blocks.append(self.blockCounters[day-1])
@@ -395,6 +399,15 @@ extension ProgramMaker{
 
         }
     }
+    func writeCategory(_ totalDays: Int, _ day: Int){
+        
+        let category = ProgramOutline.getCategory(totalDays, day)
+        
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection(self.findMonth()).document("day\(day)")
+        
+        docRef.setData(["skillTrees" : category], merge: true)
+    }
+    
 
     func findMonth()-> String{
         let now = Date()

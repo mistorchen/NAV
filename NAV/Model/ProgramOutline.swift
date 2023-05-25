@@ -220,6 +220,52 @@ struct ProgramOutline{
             return ["error"]
         }
     }
+    static func getCategory(_ totalDays: Int, _ day: Int) -> [String]{
+        switch totalDays{
+        case 1:
+            switch day{
+            case 1:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            default:
+                return ["error: day"]
+            }
+        case 2:
+            switch day{
+            case 1:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            case 2:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            default:
+                return ["error: day"]
+            }
+        case 3:
+            switch day{
+            case 1:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            case 2:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            case 3:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            default:
+                return ["error: day"]
+            }
+        case 4:
+            switch day{
+            case 1:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            case 2:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            case 3:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            case 4:
+                return ["plyo", "lower", "upper", "core", "arms"]
+            default:
+                return ["error: day"]
+            }
+        default:
+            return ["error"]
+        }
+    }
     
     
 //

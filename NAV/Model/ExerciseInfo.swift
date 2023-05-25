@@ -15,4 +15,10 @@ struct ExerciseInfo {
     let order: Int
     let docID: String
     let block: Int
+//    let skill: String
+}
+
+struct BasicExerciseInfo{
+    let name: String
+    let level: Int
 }
