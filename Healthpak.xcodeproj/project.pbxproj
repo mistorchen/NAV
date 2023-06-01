@@ -38,6 +38,7 @@
 		FA8395B629E493C800ACA154 /* BasicInfoSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8395B529E493C800ACA154 /* BasicInfoSetupVC.swift */; };
 		FA8CF06D29985E6700D68DA1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */; };
 		FA8CF06F29985F9600D68DA1 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CF06E29985F9600D68DA1 /* SignInVC.swift */; };
+		FA90E3022A255AD9002361F3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA90E3012A255AD9002361F3 /* TabBarViewController.swift */; };
 		FABA4CB029B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4CAE29B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift */; };
 		FABA4CB129B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */; };
 		FABA4CB329B1394200AE2FA5 /* ProgramOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */; };
@@ -108,6 +109,7 @@
 		FA8395B529E493C800ACA154 /* BasicInfoSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfoSetupVC.swift; sourceTree = "<group>"; };
 		FA8CF06C29985E6700D68DA1 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		FA8CF06E29985F9600D68DA1 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		FA90E3012A255AD9002361F3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		FABA4CAE29B1319400AE2FA5 /* PreviewExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		FABA4CAF29B1319400AE2FA5 /* PreviewExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviewExerciseTableViewCell.xib; sourceTree = "<group>"; };
 		FABA4CB229B1394200AE2FA5 /* ProgramOutline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramOutline.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				FA65D96B29E7855500BF12C9 /* Current Workout Path */,
 				FA65D96D29E785AA00BF12C9 /* Preview Workout Path */,
 				FA0F01AF29C3977F000BE7AB /* SkillTreeVC.swift */,
+				FA90E3012A255AD9002361F3 /* TabBarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -407,7 +410,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FA6AAA1F29930F3B005EFD5A /* Build configuration list for PBXProject "NAV" */;
+			buildConfigurationList = FA6AAA1F29930F3B005EFD5A /* Build configuration list for PBXProject "Healthpak" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -570,6 +573,7 @@
 				FA69112729E5DEB30075695D /* CurrentWorkoutVC.swift in Sources */,
 				FA11C30B2995ADF3002034D3 /* PreviewWorkoutVC.swift in Sources */,
 				FA8395B629E493C800ACA154 /* BasicInfoSetupVC.swift in Sources */,
+				FA90E3022A255AD9002361F3 /* TabBarViewController.swift in Sources */,
 				FAF0E0B129E9FD85007BB9C7 /* UserInfo.swift in Sources */,
 				FA6AAA2C29930F3B005EFD5A /* LoginVC.swift in Sources */,
 				FA69112A29E5F7EB0075695D /* CurrentWorkoutTableViewCell.swift in Sources */,
@@ -783,7 +787,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mistorchen.NAV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -813,7 +817,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mistorchen.NAV;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -905,7 +909,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FA6AAA1F29930F3B005EFD5A /* Build configuration list for PBXProject "NAV" */ = {
+		FA6AAA1F29930F3B005EFD5A /* Build configuration list for PBXProject "Healthpak" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FA6AAA4C29930F3C005EFD5A /* Debug */,

@@ -7,13 +7,43 @@
 
 import Foundation
 import UIKit
+import FSCalendar
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
-class HomeVC: UIViewController {
+
+class HomeVC: UIViewController , FSCalendarDelegate{
+    
+
+    
+    
+    @IBOutlet weak var calendar: FSCalendar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        calendar.delegate = self
+        
     }
+    
+}
+
+
+// MARK: Calendar Functions
+extension HomeVC{
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy"
+        
+        let string = formatter.string(from: date)
+        print("\(string)")
+        let newString = formatter.string(from: date-1)
+        print("\(newString)")
+    }
+}
+// MARK: Buttons
+
+extension HomeVC{
     @IBAction func editLoadout(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToLoadout", sender: self)
     }

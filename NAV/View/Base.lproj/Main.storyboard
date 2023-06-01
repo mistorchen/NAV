@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -96,52 +97,27 @@
                                 <color key="textColor" red="0.078431372549019607" green="0.42352941176470588" blue="0.58039215686274503" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="17M-jl-EOW">
-                                <rect key="frame" x="31" y="366.66666666666669" width="331" height="119"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2J-dH-UU8">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="43"/>
-                                        <color key="tintColor" systemColor="systemMintColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Adjust your next Program">
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="25" name="Helvetica-Bold"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                            <color key="baseBackgroundColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="goToProgramMaker:" destination="IIO-sb-tgz" eventType="touchUpInside" id="wyv-0v-CHn"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEI-wc-6hy">
-                                        <rect key="frame" x="17.666666666666657" y="76" width="296" height="43"/>
-                                        <color key="tintColor" systemColor="systemMintColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Start Today's Workout!">
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <font key="NSFont" size="25" name="Helvetica-Bold"/>
-                                                        <font key="NSOriginalFont" size="11" name="Helvetica-Bold"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                            <color key="baseBackgroundColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="goToCurrentWorkout:" destination="IIO-sb-tgz" eventType="touchUpInside" id="cfj-jr-WZ2"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2J-dH-UU8">
+                                <rect key="frame" x="156" y="283" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemMintColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Adjust your next Program">
+                                            <attributes>
+                                                <color key="NSColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="12" name="Helvetica-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="baseBackgroundColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="goToProgramMaker:" destination="IIO-sb-tgz" eventType="touchUpInside" id="wyv-0v-CHn"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWg-fG-qn9">
                                 <rect key="frame" x="288.66666666666669" y="1.6666666666666714" width="68.333333333333314" height="34.333333333333329"/>
                                 <state key="normal" title="Button"/>
@@ -150,29 +126,8 @@
                                     <action selector="viewAccount:" destination="IIO-sb-tgz" eventType="touchUpInside" id="KI5-iN-kDT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a86-nq-0KZ">
-                                <rect key="frame" x="108" y="297" width="177" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemMintColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Edit Loadout">
-                                            <attributes>
-                                                <color key="NSColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="25" name="Helvetica-Bold"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                    <color key="baseBackgroundColor" red="0.098039215690000001" green="0.65490196079999996" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="editLoadout:" destination="IIO-sb-tgz" eventType="touchUpInside" id="ZC3-rY-mkd"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i14-lY-M78">
-                                <rect key="frame" x="46" y="529" width="300" height="43"/>
+                                <rect key="frame" x="266" y="283" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemMintColor"/>
                                 <state key="normal" title="Button"/>
@@ -181,7 +136,7 @@
                                         <fragment content="Feedback Questionaire">
                                             <attributes>
                                                 <color key="NSColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" size="25" name="Helvetica-Bold"/>
+                                                <font key="NSFont" size="9" name="Helvetica-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -192,16 +147,62 @@
                                     <action selector="goToCheckIn:" destination="IIO-sb-tgz" eventType="touchUpInside" id="WTN-BB-Gg2"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHt-gI-rgd" customClass="FSCalendar">
+                                <rect key="frame" x="46" y="385" width="300" height="231"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a86-nq-0KZ">
+                                <rect key="frame" x="44" y="283" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemMintColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Edit Loadout">
+                                            <attributes>
+                                                <color key="NSColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="12" name="Helvetica-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="baseBackgroundColor" red="0.098039215690000001" green="0.65490196079999996" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="editLoadout:" destination="IIO-sb-tgz" eventType="touchUpInside" id="ZC3-rY-mkd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEI-wc-6hy">
+                                <rect key="frame" x="44" y="634" width="302" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemMintColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Start Today's Workout!">
+                                            <attributes>
+                                                <color key="NSColor" red="0.68627450980392157" green="0.82745098039215681" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="25" name="Helvetica-Bold"/>
+                                                <font key="NSOriginalFont" size="11" name="Helvetica-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="baseBackgroundColor" red="0.098039215686274508" green="0.65490196078431373" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="goToCurrentWorkout:" destination="IIO-sb-tgz" eventType="touchUpInside" id="cfj-jr-WZ2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="N2K-cj-qB2"/>
                         <color key="backgroundColor" red="0.96470588239999999" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="m3R-G6-Swe" firstAttribute="top" secondItem="Dct-vP-q8L" secondAttribute="topMargin" constant="-24" id="30f-wT-yUs"/>
-                            <constraint firstItem="17M-jl-EOW" firstAttribute="centerY" secondItem="Dct-vP-q8L" secondAttribute="centerY" id="9gy-bH-1xK"/>
                             <constraint firstItem="lAW-ga-7AQ" firstAttribute="leading" secondItem="Dct-vP-q8L" secondAttribute="leadingMargin" constant="-18" id="JeG-HN-Kzn"/>
                             <constraint firstItem="VWg-fG-qn9" firstAttribute="bottom" secondItem="lAW-ga-7AQ" secondAttribute="bottom" constant="-8" id="MhZ-bm-haJ"/>
                             <constraint firstItem="m3R-G6-Swe" firstAttribute="leading" secondItem="N2K-cj-qB2" secondAttribute="leading" constant="146" id="StU-eL-ICG"/>
-                            <constraint firstItem="17M-jl-EOW" firstAttribute="centerX" secondItem="Dct-vP-q8L" secondAttribute="centerX" id="UHN-wv-xne"/>
                             <constraint firstItem="N2K-cj-qB2" firstAttribute="trailing" secondItem="lAW-ga-7AQ" secondAttribute="trailing" constant="3" id="VPF-FC-8e9"/>
                             <constraint firstItem="tCe-nJ-Odx" firstAttribute="top" secondItem="lAW-ga-7AQ" secondAttribute="bottom" constant="40" id="ZUK-Yc-6Ck"/>
                             <constraint firstItem="VWg-fG-qn9" firstAttribute="leading" secondItem="tCe-nJ-Odx" secondAttribute="trailing" constant="54.333333333333371" id="k9F-tu-bYq"/>
@@ -214,6 +215,7 @@
                     <navigationItem key="navigationItem" id="Vhs-QS-IqA"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="calendar" destination="tHt-gI-rgd" id="2Ua-3K-g9L"/>
                         <segue destination="qZX-HL-kYw" kind="show" identifier="goToAccount" id="wJF-RZ-RYG"/>
                         <segue destination="Hhz-qb-ods" kind="show" identifier="goToCurrentWorkout" id="wu2-zJ-Iyr"/>
                         <segue destination="Dsl-c4-VaU" kind="show" identifier="goToProgramMaker" id="8Go-Xs-dWb"/>
@@ -787,32 +789,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="61" translatesAutoresizingMaskIntoConstraints="NO" id="M0R-I3-GS5">
-                                <rect key="frame" x="75" y="265" width="243" height="322.33333333333326"/>
+                                <rect key="frame" x="94.666666666666686" y="246.66666666666666" width="204" height="358.66666666666674"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questionaire" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i05-Yx-fJL">
-                                        <rect key="frame" x="73.333333333333343" y="0.0" width="96.333333333333343" height="20.333333333333332"/>
+                                        <rect key="frame" x="53.666666666666679" y="0.0" width="96.333333333333314" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.098039215690000001" green="0.2156862745" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkS-MV-Adf">
-                                        <rect key="frame" x="83" y="81.333333333333314" width="77" height="20.333333333333329"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="questionLabel" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkS-MV-Adf">
+                                        <rect key="frame" x="48.333333333333336" y="81.333333333333343" width="107.33333333333331" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.098039215690000001" green="0.2156862745" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Hq7-Vt-bCi">
-                                        <rect key="frame" x="0.0" y="162.66666666666669" width="243" height="64.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="162.66666666666666" width="204" height="100.66666666666666"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="r8d-tY-c8S">
-                                                <rect key="frame" x="59.33333333333335" y="0.0" width="124.66666666666669" height="34.333333333333336"/>
+                                                <rect key="frame" x="39.666666666666664" y="0.0" width="124.66666666666669" height="34.333333333333336"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dsb-Wj-sAV">
                                                         <rect key="frame" x="0.0" y="0.0" width="51.333333333333336" height="34.333333333333336"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Yes"/>
                                                         <connections>
-                                                            <action selector="yesTapped:" destination="jKa-QS-L2r" eventType="touchUpInside" id="ot6-A9-8do"/>
+                                                            <action selector="yesTapped:" destination="jKa-QS-L2r" eventType="touchUpInside" id="gni-LC-D3d"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ujy-1k-uWz">
@@ -820,36 +822,43 @@
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="No"/>
                                                         <connections>
-                                                            <action selector="noTapped:" destination="jKa-QS-L2r" eventType="touchUpInside" id="Rgg-Vd-ngh"/>
+                                                            <action selector="noTapped:" destination="jKa-QS-L2r" eventType="touchUpInside" id="Jdc-06-Ri7"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleAspectFit" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6DW-FY-9Xo">
-                                                <rect key="frame" x="0.0" y="34.333333333333314" width="243" height="30"/>
+                                                <rect key="frame" x="0.0" y="34.333333333333371" width="204" height="32"/>
                                                 <subviews>
-                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ocw-Yc-KHB">
-                                                        <rect key="frame" x="-2" y="0.0" width="154" height="31"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="150" id="I6P-qJ-oPS"/>
-                                                            <constraint firstAttribute="height" constant="30" id="Qvn-oW-Lrr"/>
-                                                        </constraints>
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" stepValue="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Jwi-Za-wJM">
+                                                        <rect key="frame" x="0.0" y="0.0" width="94" height="32"/>
                                                         <connections>
-                                                            <action selector="sliderValue:" destination="jKa-QS-L2r" eventType="valueChanged" id="P6C-Mj-FUW"/>
+                                                            <action selector="stepperChanged:" destination="jKa-QS-L2r" eventType="valueChanged" id="X7a-FZ-XuM"/>
                                                         </connections>
-                                                    </slider>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sliderLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGU-Am-5F0">
-                                                        <rect key="frame" x="160" y="0.0" width="83" height="30"/>
+                                                    </stepper>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="stepperLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGU-Am-5F0">
+                                                        <rect key="frame" x="104" y="0.0" width="100" height="32"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.098039215690000001" green="0.2156862745" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOi-Lp-oHj">
+                                                <rect key="frame" x="26" y="66.333333333333371" width="151.66666666666666" height="34.333333333333343"/>
+                                                <menu key="menu" id="5cS-cl-b6B">
+                                                    <children>
+                                                        <command title="Item 1" id="4Cu-94-ti8"/>
+                                                        <command title="Item 2" id="vaF-V5-dEp"/>
+                                                    </children>
+                                                </menu>
+                                                <state key="normal" title="dropdownButton"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="dropdownButton"/>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lBk-ga-JMV">
-                                        <rect key="frame" x="55.333333333333343" y="288" width="132.33333333333334" height="34.333333333333314"/>
+                                        <rect key="frame" x="35.666666666666671" y="324.33333333333337" width="132.33333333333331" height="34.333333333333314"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Next Question"/>
                                         <connections>
@@ -868,11 +877,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="9H1-Sn-Noh"/>
                     <connections>
+                        <outlet property="dropdownButton" destination="ZOi-Lp-oHj" id="ceB-ON-NXP"/>
                         <outlet property="nextQuestion" destination="lBk-ga-JMV" id="b3I-th-gY2"/>
                         <outlet property="noButton" destination="Ujy-1k-uWz" id="Xz5-O9-1Xm"/>
                         <outlet property="questionLabel" destination="nkS-MV-Adf" id="01m-vP-4o7"/>
-                        <outlet property="slider" destination="Ocw-Yc-KHB" id="UeW-3F-r6e"/>
-                        <outlet property="sliderLabel" destination="iGU-Am-5F0" id="7dq-fU-vzh"/>
+                        <outlet property="stepper" destination="Jwi-Za-wJM" id="Mcd-Ms-eue"/>
+                        <outlet property="stepperLabel" destination="iGU-Am-5F0" id="7dq-fU-vzh"/>
                         <outlet property="yesButton" destination="Dsb-Wj-sAV" id="uRy-G9-20F"/>
                         <segue destination="yH9-DY-dN3" kind="show" identifier="FTScomplete" id="PqE-K3-6Od"/>
                     </connections>
@@ -1120,10 +1130,10 @@
             </objects>
             <point key="canvasLocation" x="-341" y="-1943"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="Pca-bX-WV6">
             <objects>
-                <tabBarController storyboardIdentifier="TabController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="9ve-cs-xlh" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="9ve-cs-xlh" customClass="TabBarViewController" customModule="NAV" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OeD-Zk-hdZ">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

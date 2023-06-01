@@ -19,6 +19,7 @@ target 'NAV' do
 pod 'youtube-ios-player-helper'
 pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
+pod 'FSCalendar'
 
 post_install do |installer|
     installer.generated_projects.each do |project|

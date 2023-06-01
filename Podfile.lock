@@ -628,6 +628,7 @@ PODS:
     - "gRPC-C++ (~> 1.44.0)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FSCalendar (2.8.4)
   - GoogleUtilities/AppDelegateSwizzler (7.11.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -713,6 +714,7 @@ PODS:
 DEPENDENCIES:
   - FirebaseAuth
   - FirebaseFirestore
+  - FSCalendar
   - youtube-ios-player-helper
 
 SPEC REPOS:
@@ -724,6 +726,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreInternal
     - FirebaseFirestore
+    - FSCalendar
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -742,6 +745,7 @@ SPEC CHECKSUMS:
   FirebaseCore: e78636a990b54be427ce300aa09a0e359f4e0e87
   FirebaseCoreInternal: fa2899eb1f340054858d289e5a0fb935a0a74e52
   FirebaseFirestore: 45b8ac2def7e9b6c4c10c09521b1e0b410d211fc
+  FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   GoogleUtilities: 9aa0ad5a7bc171f8bae016300bfcfa3fb8425749
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
@@ -752,6 +756,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   youtube-ios-player-helper: e9b97535e816db3152179d84d999bc1807ecd689
 
-PODFILE CHECKSUM: 1edf8ea0dd3a2586c481b0f83dbcbb2355640751
+PODFILE CHECKSUM: e82655b8889be265073999733bd6f01979207e9d
 
 COCOAPODS: 1.12.0

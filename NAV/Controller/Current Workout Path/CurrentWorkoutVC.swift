@@ -16,15 +16,15 @@ import FirebaseFirestore
 class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDelegate, UITextFieldDelegate{
     
     let db = Firestore.firestore()
-    var exercises: [ExerciseInfo] = []
+    var selectedProgram: [ExerciseInfo] = []
     
     var exercisePerBlock: Int = 0
     var exerciseIndex: Int = 0
     var blockIndex = 0
     var sizeOfBlocks: [Int] = [0,0,0,0]
-    var programDay = 0
+    var currentDay = 0
     var dayArray: [Int] = []
-    
+    var completedCount = 1
     var weightWritten = 0
     
     let programID = 1.1
@@ -34,19 +34,19 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
     @IBOutlet weak var blockExerciseTitle: UILabel!
 
     override func viewDidLoad() {
-        findDay()
-        clearCurrentWorkout()
         
+        clearCurrentWorkout()
+        setSelectedProgram()
         blockExerciseTitle.text = ""
         exerciseTable.register(CurrentWorkoutTableViewCell.nib(), forCellReuseIdentifier: CurrentWorkoutTableViewCell.identifier)
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-            self.getWorkout()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-            for i in 0...self.exercises.count-1{
-                self.detBlocks(self.exercises[i].block)
+        
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            for count in 0...self.selectedProgram.count-1{
+                self.detBlocks(self.selectedProgram[count].block)
             }
             self.setTitle(self.blockIndex)
             self.exerciseTable.reloadData()
@@ -76,61 +76,45 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
         }else if blockIndex == ProgramOutline.program1().blockSizes.count-1 {
             self.performSegue(withIdentifier: "goToFinishedWorkoutVC", sender: self)
             let docRef = db.document("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/programDetails")
-            let completedCount = dayArray[programDay-1] + 1
-            docRef.setData(["day\(programDay)Completion" : completedCount], merge: true)
+            docRef.getDocument { document, error in
+                if let error = error{
+                    print("error")
+                }else{
+                    self.completedCount = document!["day\(self.currentDay)Completion"] as! Int
+                    docRef.setData(["day\(self.currentDay)Completion" : self.completedCount + 1], merge: true)
+                }
+            }
         }
         
     }
+    
+    
     func clearCurrentWorkout(){
         let docRef = db.document("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/currentWorkout")
         docRef.delete()
     }
-    func getWorkout(){
-        // Reads from users monthly program based on day, default day is 1
-        // Appends exercises to exercises: [ExerciseInfo] in descending order (order of program)
-        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(programDay)/exercises").order(by: "order", descending: false)
-        
-        docRef.getDocuments { collection, error in
-            if let error = error{
-                print(error)
-            }else{
-                for document in collection!.documents{
-                    self.exercises.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int))
-                    
-                }
-            }
-        }
-    }
-    func findDay(){
-        let docRef = db.document("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/programDetails")
-        docRef.getDocument { document, error in
-            if let error = error{
-                print(error)
-            }else{
-                
-                
-                // Make it based of how many days there are.
-                
-                
-                self.dayArray = [document!["day1Completion"] as! Int, document!["day2Completion"] as! Int, document!["day3Completion"] as! Int]
-                
-                
-                
-                
-                
-                
-                if self.dayArray[0] > self.dayArray[1]{
-                    self.programDay = 2
-                }else if self.dayArray[1] > self.dayArray[2]{
-                    self.programDay = 3
-                }else{
-                    self.programDay = 1
-                }
-            }
+    
+    func setSelectedProgram(){
+        let tabBar = tabBarController as! TabBarViewController
+        currentDay = tabBar.currentDay
+        switch tabBar.currentDay{
+        case 1:
+            selectedProgram = tabBar.day1Program
+        case 2:
+            selectedProgram = tabBar.day2Program
+        case 3:
+            selectedProgram = tabBar.day3Program
+        case 4:
+            selectedProgram = tabBar.day4Program
+        case 5:
+            selectedProgram = tabBar.day5Program
+        default:
+            setSelectedProgram()
         }
     }
     
     func detBlocks(_ block: Int){
+
         if block == 1{
             sizeOfBlocks[0] += 1
         }else if block == 2{
@@ -143,6 +127,26 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
             sizeOfBlocks[4] += 1
         }
     }
+    
+//    func getWorkout(){
+//        // Reads from users monthly program based on day, default day is 1
+//        // Appends exercises to exercises: [ExerciseInfo] in descending order (order of program)
+//        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(programDay)/exercises").order(by: "order", descending: false)
+//
+//        docRef.getDocuments { collection, error in
+//            if let error = error{
+//                print(error)
+//            }else{
+//                for document in collection!.documents{
+//                    self.selectedProgram.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int))
+//
+//                }
+//            }
+//        }
+//    }
+    
+    
+    
    
     
     func findMonth()-> String{
@@ -191,20 +195,20 @@ extension CurrentWorkoutVC: UITableViewDataSource{
 //            nextButton.isHidden = false
 //        }
         
-        if exercises.isEmpty{
+        if selectedProgram.isEmpty{
             exerciseTable.reloadData()
         }else if exercisePerBlock != sizeOfBlocks[blockIndex]{
             
-            cell.exerciseName.text = exercises[exerciseIndex].name
-            cell.repCount.text = String(exercises[exerciseIndex].reps)
-            cell.setCount.text = String(exercises[exerciseIndex].sets)
+            cell.exerciseName.text = selectedProgram[exerciseIndex].name
+            cell.repCount.text = String(selectedProgram[exerciseIndex].reps)
+            cell.setCount.text = String(selectedProgram[exerciseIndex].sets)
             cell.YTPlayer.delegate = self
             cell.YTPlayer.load(withVideoId: "gEZbarOeI3o") // Change to read from firebase
             
             cell.dayWritePath = "/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/currentWorkout"
-            cell.inventoryWritePath = "/users/\(Auth.auth().currentUser!.uid)/exerciseInventory/\(exercises[exerciseIndex].docID)"
+            cell.inventoryWritePath = "/users/\(Auth.auth().currentUser!.uid)/exerciseInventory/\(selectedProgram[exerciseIndex].docID)"
             cell.exerciseIndex = exerciseIndex
-            cell.programDay = programDay
+            cell.programDay = currentDay
             
             cell.set1Field.text = ""
             cell.set2Field.text = ""
@@ -231,7 +235,7 @@ extension CurrentWorkoutVC: UITableViewDataSource{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToFinishedWorkoutVC"{
             let destinationVC = segue.destination as! FinishedWorkoutVC
-            destinationVC.day = programDay
+            destinationVC.day = currentDay
         }
     }
     

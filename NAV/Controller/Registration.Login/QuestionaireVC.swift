@@ -15,97 +15,169 @@ class QuestionaireVC: UIViewController {
     var username = ""
     var questionCount = 0
     var xpScore = 0
+    
+    @IBOutlet weak var questionLabel: UILabel!
+    
+    
+    @IBOutlet weak var dropdownButton: UIButton!
+    
     @IBOutlet weak var yesButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
-    @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var sliderLabel: UILabel!
+    
     @IBOutlet weak var nextQuestion: UIButton!
+    
+    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var stepperLabel: UILabel!
+    
     
     var age = 0
     var weight = 0
-    var training = false
-    
-    
+    var trainingType = 0
+    var beginner = false
+    var previousTraining = 0.0
+    var competent = true
     
     let db = Firestore.firestore()
     
     let questions = FTSQuestionaire.Q
     
-    @IBOutlet weak var questionLabel: UILabel!
     
     override func viewDidLoad() {
+        
+        yesButton.isHidden = true
+        noButton.isHidden = true
+        stepper.isHidden = true
+        stepperLabel.isHidden = true
+        nextQuestion.isHidden = true
+        stepperLabel.text = "\(stepper.value) Years"
+        
+        
         super.viewDidLoad()
         runQuestions()
         
         
     }
     
-    @IBAction func yesTapped(_ sender: UIButton!) {
-        saveAnswer(answer: sender.titleLabel?.text! as! NSObject)
-    }
-    @IBAction func noTapped(_ sender: UIButton) {
-        saveAnswer(answer:  sender.titleLabel?.text! as! NSObject)
-    }
-    @IBAction func nextQuestionTapped(_ sender: Any) {
-        saveAnswer(answer: Int(slider.value) as NSObject)
-    }
     
     
     func runQuestions(){
         if questionCount != questions.count{
             questionLabel.text = "\(questions[questionCount].text)"
-            if questions[questionCount].answerChoice[0] as! String == "slider"{
-                yesButton.isHidden = true
-                noButton.isHidden = true
-                nextQuestion.isHidden = false
-                slider.isHidden = false
+            if questionCount == 0{
+                setDropdown()
                 
-                slider.minimumValue = questions[questionCount].answerChoice[1] as! Float
-                slider.maximumValue = questions[questionCount].answerChoice[2] as! Float
-                sliderLabel.text = "\(Int(slider.value))"
-                
-            }else if questions[questionCount].answerChoice[0] as! String == "polar"{
+            }else if questionCount == 1{
                 yesButton.isHidden = false
                 noButton.isHidden = false
-                nextQuestion.isHidden = true
-                slider.isHidden = true
-                sliderLabel.isHidden = true
-            }else if questions[questionCount].answerChoice[0] as! String == "multiple"{
+                dropdownButton.isHidden = true
+                
+            }else if questionCount == 2{
                 yesButton.isHidden = true
                 noButton.isHidden = true
+                stepper.isHidden = false
+                stepperLabel.isHidden = false
                 nextQuestion.isHidden = false
-                slider.isHidden = true
-                sliderLabel.isHidden = true
+            }else if questionCount == 3{
+                yesButton.isHidden = false
+                noButton.isHidden = false
+                stepper.isHidden = true
+                stepperLabel.isHidden = true
+                nextQuestion.isHidden = true
             }
         }else{
             determineXP()
-            self.performSegue(withIdentifier: "FTScomplete", sender: self)
-        }
-
-    }
-    func saveAnswer(answer: AnyObject){
-        if questionCount == 0{
-            age = answer as! Int
-        }else if questionCount == 1{
-            weight = answer as! Int
-        }else if questionCount == 2{
-            if answer as! String == "Yes"{
-                training = true
-            }
+            //            self.performSegue(withIdentifier: "FTScomplete", sender: self)
         }
         
+    }
+    @IBAction func nextQuestionTapped(_ sender: Any) {
+        questionCount += 1
+        runQuestions()
+    }
+    @IBAction func yesTapped(_ sender: UIButton) {
         questionCount += 1
         runQuestions()
     }
     
-    
-    @IBAction func sliderValue(_ sender: UISlider) {
-        sliderLabel.text = "\(Int(sender.value))"
+    @IBAction func noTapped(_ sender: UIButton) {
+        if questionCount == 1{
+            beginner = true
+            questionCount += 1
+        }else if questionCount == 3{
+            competent = false
+        }
+        questionCount += 1
+        runQuestions()
     }
+    
+    @IBAction func stepperChanged(_ sender: UIStepper) {
+        stepperLabel.text = "\(sender.value) Years"
+        previousTraining = sender.value
+    }
+    
+    
+    
+    func setDropdown(){
+        
+        let optionClosure = {(action : UIAction) in
+            if action.title == "Choose an option"{
+                
+            }else{
+                if action.title == self.questions[self.questionCount].answerChoice[1] as! String{
+                    self.trainingType = 0
+                    self.nextQuestion.isHidden = false
+                }else if action.title == self.questions[self.questionCount].answerChoice[2] as! String{
+                    self.trainingType = 1
+                    self.nextQuestion.isHidden = false
+                }else if action.title == self.questions[self.questionCount].answerChoice[3] as! String{
+                    self.trainingType = 2
+                    self.nextQuestion.isHidden = false
+                }else if action.title == self.questions[self.questionCount].answerChoice[4] as! String{
+                    self.trainingType = 1
+                    self.nextQuestion.isHidden = false
+                }
+            }
+            
+        }
+        
+        dropdownButton.menu = UIMenu(children: [
+            UIAction(title: "Choose an option", state: .on, handler: optionClosure),
+            UIAction(title: questions[questionCount].answerChoice[1] as! String, handler: optionClosure),
+            UIAction(title: questions[questionCount].answerChoice[2] as! String, handler: optionClosure),
+            UIAction(title: questions[questionCount].answerChoice[3] as! String, handler: optionClosure),
+            UIAction(title: questions[questionCount].answerChoice[4] as! String, handler: optionClosure)
+            
+        ])
+        dropdownButton.showsMenuAsPrimaryAction = true
+        dropdownButton.changesSelectionAsPrimaryAction = true
+    }
+    
     
     //Function to determine XP Level
     func determineXP(){//} -> Int{
-        xpScore = 15
+        var xpScore = 0
+        if previousTraining > 2{
+            xpScore += 1
+        }else if previousTraining >= 1 && previousTraining <= 2{
+            xpScore += 1
+        }
+        if beginner == false{
+            xpScore += 1
+        }
+        if competent != false{
+            xpScore += 1
+        }
+        if xpScore == 0 || xpScore == 1 {
+            print("beginner")
+        }else if  xpScore == 2{
+            print("Intermediate")
+        }else if xpScore > 2{
+            print("advanced")
+        }
+        
+        
+//        findStart() // WRITE FUNCTION TO DETERMINE STARTING LEVELS
+        
         setData()
         writeSkillTrees()
     }

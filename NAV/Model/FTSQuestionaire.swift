@@ -11,10 +11,11 @@ struct FTSQuestionaire{
     
     
     static let Q: [Question] = [
-    Question(q: "How many years have you been training?", a: ["slider" as NSString, 13 as NSNumber, 100 as NSNumber]),
-    Question(q: "What is benchpress goal?", a: ["slider" as NSString, 30 as NSNumber, 300 as NSNumber]),
-    Question(q: "Have you worked with a coach / personal trainer before?", a: ["polar" as NSString]),
-    Question(q: "Which statement best describes your goal?", a: ["multiple" as NSString, "I am looking to increase strength" as NSString, "I am trying to get in shape" as NSString, "I would like to improve my general health" as NSString])
+        Question(q: "Which statement best describes your primary training goal?", a: ["dropdown" as NSString, "I am looking to increase my strength" as NSString, "I would like a more toned body" as NSString, "I would like to lose weight" as NSString, "I would simply like to improve my physical health (no specific goal)" as NSString]),
+        Question(q: "Do you have any previous gym training experience?", a: ["polar" as NSString]),
+        Question(q: "How many years have you been training?", a: ["stepper" as NSString, 0.5 as NSNumber, 0.5 as NSNumber]),
+        Question(q: "Are you comfortable learning a new movement on your own?", a: ["polar" as NSString])
+    
     ]
 }
 
