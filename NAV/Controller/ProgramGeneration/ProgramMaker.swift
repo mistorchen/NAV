@@ -286,13 +286,7 @@ extension ProgramMaker{
             }
         }
     }
-    func generateProgramDetails(){
-        let docRef = db.document("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/programDetails")
-        for day in 1...totalDays{
-            docRef.setData(["day\(day)Completion" : 0], merge: true)
-        }
-        docRef.setData(["totalDays" : totalDays], merge: true)
-    }
+    
     
     
     
@@ -377,6 +371,15 @@ extension ProgramMaker{
 
 
 extension ProgramMaker{
+    
+    func generateProgramDetails(){
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("programDetails")
+        for day in 1...totalDays{
+            docRef.setData(["day\(day)Completion" : 0], merge: true)
+        }
+        docRef.setData(["totalDays" : totalDays, "currentDay" : 1], merge: true)
+        
+    }
     func writeExercise(_ order: Int, _ day: Int, _ path: String, _ block: Int) {
 
         let docRef = db.document(path)
@@ -386,7 +389,7 @@ extension ProgramMaker{
                 print(err)
             }else{
                 if let document = document{
-                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection(self.findMonth()).document("day\(day)").collection("exercises").document("\(document.documentID)").setData([
+                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("day\(day)").collection("exercises").document("\(document.documentID)").setData([
                         "name" : document["name"] as! String,
                         "reps" : ProgramOutline.getReps(self.user.trainingType),
                         "sets" : 3,

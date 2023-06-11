@@ -14,8 +14,11 @@ class AppContainerVC: UIViewController{
         
         super.viewDidAppear(animated)
         
-        SignInManager.shared.appContainer = self
-        SignInManager.shared.showApp()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            SignInManager.shared.appContainer = self
+            SignInManager.shared.showApp()
+        }
+
         
     }
 }

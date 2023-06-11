@@ -36,16 +36,21 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     @IBOutlet weak var set1Field: UITextField!
     @IBOutlet weak var set2Field: UITextField!
     @IBOutlet weak var set3Field: UITextField!
-
+ 
+    @IBOutlet weak var easyButton: UIButton!
+    @IBOutlet weak var mediumButton: UIButton!
+    @IBOutlet weak var hardButton: UIButton!
     
     override func awakeFromNib() {
 //        set4.isHidden = true // Future edit for more sets
-        super.awakeFromNib()
         // Initialization code
+        configureButtons()
         set1Field.delegate = self
         set2Field.delegate = self
         set3Field.delegate = self
         
+        super.awakeFromNib()
+
         
     }
     
@@ -55,6 +60,8 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
                 writeSetWeight(1, Int(weight)!)
             }
         }
+        checkButtonStatus()
+
     }
     
     @IBAction func set2TextEntered(_ sender: UITextField) {
@@ -63,6 +70,8 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
                 writeSetWeight(2, Int(weight)!)
             }
         }
+        checkButtonStatus()
+
     }
     
     @IBAction func set3TextEntered(_ sender: UITextField) {
@@ -71,6 +80,7 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
                 writeSetWeight(3, Int(weight)!)
             }
         }
+        checkButtonStatus()
     }
     
     func writeSetWeight(_ set: Int, _ weight: Int){
@@ -85,29 +95,55 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     }
     @IBAction func difficulty2(_ sender: UIButton) {
         writeDifficulty(2)
+
     }
     @IBAction func difficulty3(_ sender: UIButton) {
         writeDifficulty(3)
+
     }
     
     func writeDifficulty(_ difficulty: Int){
-        let docRef = db.collection(dayWritePath).document(inventoryWritePath)
-        docRef.setData(["difficulty" : difficulty], merge: true)
+        print("write")
     }
     
+    func resetButtons(){
+        easyButton.isEnabled = false
+        mediumButton.isEnabled = false
+        hardButton.isEnabled = false
+
+        easyButton.backgroundColor = .gray
+        mediumButton.backgroundColor = .gray
+        hardButton.backgroundColor = .gray
+        
+    }
+    func resetTextFields(){
+        set1Field.text = ""
+        set2Field.text = ""
+        set3Field.text = ""
+    }
     
+    func checkButtonStatus(){
+        if set1Field.text != "" && set2Field.text != "" && set3Field.text != ""{
+            easyButton.isEnabled = true
+            mediumButton.isEnabled = true
+            hardButton.isEnabled = true
+            
+            easyButton.backgroundColor = K.color.beige
+            mediumButton.backgroundColor = K.color.beige
+            hardButton.backgroundColor = K.color.beige
+        }
+    }
     
-    
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("\(textField.text ?? "")")
-        return true
+    func configureButtons(){
+        easyButton.layer.cornerRadius = 10
+        mediumButton.layer.cornerRadius = 10
+        hardButton.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
+    
     
 }

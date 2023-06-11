@@ -31,11 +31,11 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
 
     override func viewDidLoad() {
         let tabBar = tabBarController as! TabBarViewController
-
-        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 165.0, green: 215.0, blue: 232.0, alpha: 100.0)]
-        daySelector.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        
         selectedProgram = tabBar.day1Program
-        exerciseTable.register(PreviewExerciseTableViewCell.nib(), forCellReuseIdentifier: PreviewExerciseTableViewCell.identifier)
+        
+        exerciseTable.register(PreviewExerciseTableViewCell
+            .nib(), forCellReuseIdentifier: PreviewExerciseTableViewCell.identifier)
         exerciseTable.dataSource = self
         exerciseTable.delegate = self
         
@@ -100,6 +100,7 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
             daySelector.insertSegment(withTitle: "Day 2", at: 1, animated: false)
             daySelector.insertSegment(withTitle: "Day 3", at: 2, animated: false)
         }
+        daySelector.selectedSegmentIndex = 0
         
     }
     
@@ -124,8 +125,8 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: PreviewExerciseTableViewCell.identifier, for: indexPath) as! PreviewExerciseTableViewCell
             cell.nameLabel.text = selectedProgram[indexPath.row].name
-            cell.repCount.text = "\(selectedProgram[indexPath.row].reps)"
-            cell.setCount.text = "\(selectedProgram[indexPath.row].sets)"
+            cell.repLabel.text = "Sets: \(selectedProgram[indexPath.row].reps)"
+            cell.setLabel.text = "Reps: \(selectedProgram[indexPath.row].sets)"
             return cell
         }
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

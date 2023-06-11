@@ -33,4 +33,11 @@ struct K{
 
     }
     
+    struct color{
+        static let beige = UIColor(red: CGFloat(216.0/255.0), green: CGFloat(196.0/255.0), blue: CGFloat(182.0/255.0), alpha: 1)
+        static let winter = UIColor(red: CGFloat(245.0/255.0), green: CGFloat(239.0/255.0), blue: CGFloat(231.0/255.0), alpha: 1)
+        static let blue = UIColor(red: CGFloat(79.0/255.0), green: CGFloat(112.0/255.0), blue: CGFloat(156.0/255.0), alpha: 1)
+        static let navy = UIColor(red: CGFloat(33.0/255.0), green: CGFloat(53.0/255.0), blue: CGFloat(85.0/255.0), alpha: 1)
+    }
+    
 }

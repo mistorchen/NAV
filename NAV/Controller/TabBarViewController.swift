@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
+import FSCalendar
 
 
 class TabBarViewController: UITabBarController{
@@ -30,68 +31,78 @@ class TabBarViewController: UITabBarController{
     var dayArray:[Int] = []
     var currentDay = 0
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        findCurrentWorkout(self.totalDays)
-    }
+    var newProgram: Bool = false
+    var weeklyCheckIn: Bool = false
+    
+    var datesOnCalendar: [String] = []
+    var streakDates: [String] = []
+    let formatter = DateFormatter()
+    let calendar = FSCalendar()
     
     
     override func viewDidLoad() {
-        getProgramDetails()
         getSkillTrees()
+//        testFunction()
+        getProgram()
+        checkForNewProgram()
+        findCalendarDays()
+        setStreakDays()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            self.getProgram(self.totalDays)
-            self.findCurrentWorkout(self.totalDays)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+        
+    }
+//    func testFunction(){
+//        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory")
+//        docRef.getDocuments { document, error in
+//            if let error = error{
+//                print(error)
+//            }else{
+//                if document?.isEmpty == true{
+//                    print("asdfsadf")
+//                }
+//            }
+//        }
+//    }
 
-        }
-        
-        
-    }
-    
-    func getProgramDetails(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("\(findMonth())").document("programDetails")
-        docRef.getDocument { document, error in
-            if let error = error{
-                print(error)
-            }else{
-                self.totalDays = document!["totalDays"] as! Int
-            }
-        }
-    }
     func getSkillTrees(){
         readPlyoSkillTree()
         readCoreSkillTree()
         readLowerSkillTree()
         readUpperSkillTree()
     }
-    func getProgram(_ days: Int){
-        switch days{
-        case 1:
-            readDay1()
-        case 2:
-            readDay1()
-            readDay2()
-        case 3:
-            readDay1()
-            readDay2()
-            readDay3()
-            
-        case 4:
-            readDay1()
-            readDay2()
-            readDay3()
-            readDay4()
-        case 5:
-            readDay1()
-            readDay2()
-            readDay3()
-            readDay4()
-            readDay5()
-        default:
-            print("error getProgam")
+    func getProgram(){
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("programDetails")
+        docRef.getDocument { document, error in
+            if let error = error{
+                print(error)
+            }else{
+                self.totalDays = document!["totalDays"] as! Int
+                self.currentDay = document!["currentDay"] as! Int
+                switch self.totalDays{
+                case 1:
+                    self.readDay1()
+                case 2:
+                    self.readDay1()
+                    self.readDay2()
+                case 3:
+                    self.readDay1()
+                    self.readDay2()
+                    self.readDay3()
+                    
+                case 4:
+                    self.readDay1()
+                    self.readDay2()
+                    self.readDay3()
+                    self.readDay4()
+                case 5:
+                    self.readDay1()
+                    self.readDay2()
+                    self.readDay3()
+                    self.readDay4()
+                    self.readDay5()
+                default:
+                    print("error getProgam")
+                }
+            }
         }
     }
     
@@ -108,78 +119,54 @@ class TabBarViewController: UITabBarController{
 }
 // MARK: READ DAY PROGRAM FUNCTIONS
 extension TabBarViewController{
-    
-    
-    func findCurrentWorkout(_ days: Int){
-        let docRef = db.document("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/programDetails")
+// MARK: CHANGE THIS FUNCTION TO DETERMINE IF THE USER NEEDS A NEW PROGRAM
+
+    func checkForNewProgram(){
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("programDetails")
         docRef.getDocument { document, error in
             if let error = error{
                 print(error)
             }else{
-                
-                
-                switch days{
-                case 1:
-                    self.dayArray.append(document!["day1Completion"] as! Int)
-                    self.currentDay = 1
-                case 2:
-                    self.dayArray.append(document!["day1Completion"] as! Int)
-                    self.dayArray.append(document!["day2Completion"] as! Int)
-                    if self.dayArray[0] > self.dayArray[1]{
-                        self.currentDay = 2
-                    }else{
-                        self.currentDay = 1
-                    }
-                case 3:
-                    self.dayArray.append(document!["day1Completion"] as! Int)
-                    self.dayArray.append(document!["day2Completion"] as! Int)
-                    self.dayArray.append(document!["day3Completion"] as! Int)
-                    if self.dayArray[0] > self.dayArray[1]{
-                        self.currentDay = 2
-                    }else if self.dayArray[1] > self.dayArray[2]{
-                        self.currentDay = 3
-                    }else{
-                        self.currentDay = 1
-                    }
-                case 4:
-                    self.dayArray.append(document!["day1Completion"] as! Int)
-                    self.dayArray.append(document!["day2Completion"] as! Int)
-                    self.dayArray.append(document!["day3Completion"] as! Int)
-                    self.dayArray.append(document!["day4Completion"] as! Int)
-                    if self.dayArray[0] > self.dayArray[1]{
-                        self.currentDay = 2
-                    }else if self.dayArray[1] > self.dayArray[2]{
-                        self.currentDay = 3
-                    }else if self.dayArray[2] > self.dayArray[3]{
-                        self.currentDay = 4
-                    }else{
-                        self.currentDay = 1
-                    }
-                case 5:
-                    self.dayArray.append(document!["day1Completion"] as! Int)
-                    self.dayArray.append(document!["day2Completion"] as! Int)
-                    self.dayArray.append(document!["day3Completion"] as! Int)
-                    self.dayArray.append(document!["day4Completion"] as! Int)
-                    self.dayArray.append(document!["day5Completion"] as! Int)
-                    if self.dayArray[0] > self.dayArray[1]{
-                        self.currentDay = 2
-                    }else if self.dayArray[1] > self.dayArray[2]{
-                        self.currentDay = 3
-                    }else if self.dayArray[2] > self.dayArray[3]{
-                        self.currentDay = 4
-                    }else if self.dayArray[3] > self.dayArray[4]{
-                        self.currentDay = 5
-                    }else{
-                        self.currentDay = 1
-                    }
-                default:
-                    print("error getCurrentDay")
-                }
+                self.newProgram = document!["readyForNext"] as! Bool
+//
+//                switch days{
+//                case 1:
+//                    self.dayArray.append(document!["day1Completion"] as! Int)
+//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+//                case 2:
+//                    self.dayArray.append(document!["day1Completion"] as! Int)
+//                    self.dayArray.append(document!["day2Completion"] as! Int)
+//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+//
+//                case 3:
+//                    self.dayArray.append(document!["day1Completion"] as! Int)
+//                    self.dayArray.append(document!["day2Completion"] as! Int)
+//                    self.dayArray.append(document!["day3Completion"] as! Int)
+//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+//
+//                case 4:
+//                    self.dayArray.append(document!["day1Completion"] as! Int)
+//                    self.dayArray.append(document!["day2Completion"] as! Int)
+//                    self.dayArray.append(document!["day3Completion"] as! Int)
+//                    self.dayArray.append(document!["day4Completion"] as! Int)
+//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+//
+//                case 5:
+//                    self.dayArray.append(document!["day1Completion"] as! Int)
+//                    self.dayArray.append(document!["day2Completion"] as! Int)
+//                    self.dayArray.append(document!["day3Completion"] as! Int)
+//                    self.dayArray.append(document!["day4Completion"] as! Int)
+//                    self.dayArray.append(document!["day5Completion"] as! Int)
+//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+//
+//                default:
+//                    print("error getCurrentDay")
+//                }
             }
         }
     }
     func readDay1(){
-        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(1)/exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day1").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
@@ -193,7 +180,7 @@ extension TabBarViewController{
         }
     }
     func readDay2(){
-        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(2)/exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day2").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
@@ -207,7 +194,7 @@ extension TabBarViewController{
         }
     }
     func readDay3(){
-        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(3)/exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day3").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
@@ -221,7 +208,7 @@ extension TabBarViewController{
         }
     }
     func readDay4(){
-        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(4)/exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day4").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
@@ -235,7 +222,7 @@ extension TabBarViewController{
         }
     }
     func readDay5(){
-        let docRef = db.collection("/users/\(Auth.auth().currentUser!.uid)/\(findMonth())/day\(5)/exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day5").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
@@ -298,6 +285,46 @@ extension TabBarViewController{
                     self.upperSkillTree.append(BasicExerciseInfo(name: document["name"] as! String, level: document["level"] as! Int))
                 }
             }
+        }
+    }
+}
+
+// MARK: Calendar Data Functions
+extension TabBarViewController{
+    func setStreakDays(){
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("calendar").document("streakDates")
+        docRef.getDocument { document, error in
+            if let error = error{
+                print("error")
+            }else{
+                if self.datesOnCalendar.isEmpty{
+                    self.setStreakDays()
+                }else{
+                    for day in self.datesOnCalendar{
+                        if document!["\(day)"] != nil{
+                            self.streakDates.append(day)
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    func findCalendarDays(){
+        formatter.dateFormat = "MM-dd-yyyy"
+        var startDate: Date?
+        let endDate: Date?
+        
+        if self.calendar.scope == .month{
+            let indexPath = self.calendar.calculator.indexPath(for: self.calendar.currentPage, scope: .month)
+            startDate = self.calendar.calculator.monthHead(forSection: (indexPath?.section)!)!
+            endDate = Date()
+            
+            while startDate! <= endDate! {
+                datesOnCalendar.append(formatter.string(from: startDate!))
+                startDate! = Calendar.current.date(byAdding: .day, value: 1, to: startDate!)!
+            }
+            
         }
     }
 }

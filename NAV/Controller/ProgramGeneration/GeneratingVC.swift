@@ -8,14 +8,15 @@
 import Foundation
 import UIKit
 
-class GeneratingVC: UIViewController {
+class GeneratingVC: UIViewController{
 
+    
     override func viewDidLoad() {
+
         self.navigationItem.setHidesBackButton(true, animated: true)
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.performSegue(withIdentifier: "goToHomeVC", sender: self)
-            
+            _ = self.navigationController?.popToRootViewController(animated: true)
         }
         
     }

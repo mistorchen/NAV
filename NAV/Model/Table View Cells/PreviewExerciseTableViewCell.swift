@@ -19,8 +19,8 @@ class PreviewExerciseTableViewCell: UITableViewCell{
     @IBOutlet weak var nameLabel: UILabel!
 //    @IBOutlet weak var playerView: YTPlayerView!
     
-    @IBOutlet weak var setCount: UILabel!
-    @IBOutlet weak var repCount: UILabel!
+    @IBOutlet weak var setLabel: UILabel!
+    @IBOutlet weak var repLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

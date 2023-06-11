@@ -23,6 +23,7 @@ class FinishedWorkoutVC: UIViewController{
         self.navigationItem.setHidesBackButton(true, animated: true)
         getSkills()
         updateCurrentDay()
+        setStreak()
         
         
       
@@ -33,8 +34,7 @@ class FinishedWorkoutVC: UIViewController{
             for skill in self.usedSkills{
                self.calculateEXP(skill)
             }
-            self.performSegue(withIdentifier: "goToHomeVC", sender: self)
-            
+            _ = self.navigationController?.popToRootViewController(animated: true)
         }
         super.viewDidLoad()
 
@@ -68,7 +68,29 @@ class FinishedWorkoutVC: UIViewController{
     }
     func updateCurrentDay(){
         let tabBar = tabBarController as! TabBarViewController
-        tabBar.currentDay = tabBar.currentDay + 1
+        
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("programDetails")
+        
+        docRef.getDocument { document, error in
+            if let error = error{
+                print(error)
+            }else{
+                let oldDay = tabBar.currentDay
+                let completedCount = document!["day\(tabBar.currentDay)Completion"] as! Int
+                var nextDay = 0
+                
+                if tabBar.currentDay == tabBar.totalDays{
+                    nextDay = 1
+                }else{
+                    nextDay = tabBar.currentDay + 1
+
+                }
+                tabBar.currentDay = nextDay
+
+                docRef.setData(["currentDay" : nextDay, "day\(oldDay)Completion" : completedCount + 1], merge: true)
+            }
+        }
+        
     }
     
     
@@ -82,42 +104,30 @@ class FinishedWorkoutVC: UIViewController{
 }
 
 extension FinishedWorkoutVC{
-//    func setStreak(){
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MM-dd-yyyy"
-//        let previousDate = formatter.string(from: Date().dayBefore)
-//        let currentDate = formatter.string(from: Date())
-//
-//        print("\(previousDate)")
-//        print("\(currentDate)")
-//
-//
-//        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("streak").document("dates")
-//        docRef.getDocument { document, error in
-//            if let error = error{
-//                print("error")
-//            }else{
-//                let dayBefore = document!["\(previousDate)"] as! Bool
-//                let now = document!["\(currentDate)"] as! Bool
-//
-//                if dayBefore == true && now == true{
-//                    let streak = document!["streak"] as! Int
-//                    docRef.setData(["streak" : streak + 1], merge:true)
-//                }
-//            }
-//        }
-//
-//    }
-
-    
-}
-
-extension Date {
-    var dayAfter: Date {
-        return Calendar.current.date(byAdding: .day, value: 1, to: self)!
-    }
-
-    var dayBefore: Date {
-        return Calendar.current.date(byAdding: .day, value: -1, to: self)!
+    func setStreak(){
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy"
+        let previousDate = formatter.string(from: Date().dayBefore)
+        let currentDate = formatter.string(from: Date())
+        
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("calendar").document("streakDates")
+        docRef.getDocument { document, error in
+            if let error = error{
+                print("error")
+            }else{
+                let dayBefore = document!["\(previousDate)"]
+                let today = document!["\(currentDate)"]
+                if today == nil{
+                    if dayBefore == nil{
+                        docRef.setData(["streak" : 1, currentDate : currentDate], merge:true)
+                    }else{
+                        let streak = document!["streak"] as! Int
+                        docRef.setData(["streak" : streak + 1, currentDate : currentDate], merge:true)
+                    }
+                }
+            }
+        }
     }
 }
+
+
