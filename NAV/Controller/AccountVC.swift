@@ -9,9 +9,9 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 
-class AccountVC: UIViewController {
 
-    
+class AccountVC: UIViewController {
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +19,12 @@ class AccountVC: UIViewController {
     
     @IBAction func logOutTapped(_ sender: UIButton) {
         logout()
-        self.performSegue(withIdentifier: "loggedOut", sender: self)
+        showApp()
     }
+
+    
+    
+    
     
     func logout(){
         do {
@@ -28,5 +32,12 @@ class AccountVC: UIViewController {
         } catch let signOutError as NSError {
           print("Error signing out: %@", signOutError)
         }
+    }
+    
+    func showApp(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var  viewController: UIViewController
+        viewController = storyboard.instantiateViewController(withIdentifier: "Main")
+        self.present(viewController, animated: true, completion: nil)
     }
 }

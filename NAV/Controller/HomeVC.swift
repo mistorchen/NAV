@@ -13,7 +13,7 @@ import FirebaseCore
 import FirebaseFirestore
 
 
-class HomeVC: UIViewController , FSCalendarDelegate, FSCalendarDelegateAppearance{
+class HomeVC: UIViewController , FSCalendarDelegate, FSCalendarDelegateAppearance, FSCalendarDataSource{
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var checkInButton: UIButton!
@@ -24,21 +24,24 @@ class HomeVC: UIViewController , FSCalendarDelegate, FSCalendarDelegateAppearanc
     
     let formatter = DateFormatter()
     var streakDates: [String] = []
+    var scheduleDates: [String] = []
     
     override func viewDidLoad() {
         newProgram.isEnabled = false
+        newProgram.isHidden = true
         calendar.delegate = self
+        calendar.dataSource = self
         configureCalendar()
         configureMenuButtons()
-        self.title = "TBD"
+        self.title = "Home"
         
-        
-
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+            
             self.programMakerAccess()
             self.calendar.reloadData()
+
         }
         super.viewDidLoad()
     }
@@ -56,15 +59,32 @@ extension HomeVC{
     }
     @objc func performSegue(_ sender: UITapGestureRecognizer){
         self.performSegue(withIdentifier: "goToCalendar", sender: self)
-    }
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd-yyyy"
         
-        let string = formatter.string(from: date)
-        print("\(string)")
-        let newString = formatter.string(from: date-1)
-        print("\(newString)")
+    }
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        let tabBar = tabBarController as! TabBarViewController
+        streakDates = tabBar.streakDates
+
+        
+        formatter.dateFormat = "MM-dd-yyyy"
+        let streakDay = formatter.string(from: date)
+        
+        if streakDates.contains(streakDay){
+            return .green
+        }
+        return nil
+    }
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let tabBar = tabBarController as! TabBarViewController
+        scheduleDates = tabBar.scheduleDates
+        
+        formatter.dateFormat = "MM-dd-yyyy"
+        let scheduleDate = formatter.string(from: date)
+        
+        if scheduleDates.contains(scheduleDate){
+            return 1
+        }
+        return 0
     }
     
 }
@@ -96,6 +116,7 @@ extension HomeVC{
         let tabBar = tabBarController as! TabBarViewController
         if tabBar.newProgram == true{
             newProgram.isEnabled = true
+            newProgram.isHidden = false
         }
     }
     
@@ -109,7 +130,7 @@ extension HomeVC{
         self.performSegue(withIdentifier: "goToCurrentWorkout", sender: self)
     }
     @IBAction func goToCheckIn(_ sender: UIButton) {
-        if Date().dayNumberOfWeek() == 1{
+        if Date().dayNumberOfWeek == 1{
             self.performSegue(withIdentifier: "goToWeeklyCheckIn", sender: self)
 
         }else{
@@ -121,22 +142,3 @@ extension HomeVC{
 
     }
 }
-// MARK: Calendar Functions
-extension HomeVC{
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        let tabBar = tabBarController as! TabBarViewController
-        streakDates = tabBar.streakDates
-
-        
-        formatter.dateFormat = "MM-dd-yyyy"
-        let streakDay = formatter.string(from: date)
-        
-        if streakDates.contains(streakDay){
-            return .green
-        }
-        return nil
-        
-    }
-}
-
-

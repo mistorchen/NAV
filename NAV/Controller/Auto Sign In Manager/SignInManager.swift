@@ -9,13 +9,19 @@ import Foundation
 import UIKit
 import FirebaseAuth
 import FirebaseCore
+import GoogleSignIn
+import FirebaseFirestore
+
 
 class SignInManager{
+    let db = Firestore.firestore()
     
+    
+    // MARK: Sign/Register In
     static let shared = SignInManager()
-    
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var appContainer: AppContainerVC!
+   
     
     private init() { }
     
@@ -33,3 +39,4 @@ class SignInManager{
     
     
 }
+

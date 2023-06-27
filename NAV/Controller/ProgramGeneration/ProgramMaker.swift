@@ -20,10 +20,11 @@ class ProgramMaker: UIViewController{
     
     //Initialize empty Variables
     var user = UserInfo(playerLevel: 0, trainingType: 0, upperLevel: 0, lowerLevel: 0, plyoLevel: 0, coreLevel: 0, armsLevel: 0)
-    var totalDays = 3
+    var totalDays = 0
     var reps = 0
     var levels: [String : Int] = [:]
     var duration: Float = 0
+    var programID = 0
     
     
     
@@ -59,6 +60,10 @@ class ProgramMaker: UIViewController{
     @IBOutlet weak var dayStepper: UIStepper!
     
     override func viewDidLoad() {
+//        let tabBar = tabBarController as! TabBarViewController
+//        currentProgram = tabBar.currentProgram
+        
+        setVariables()
         getUserInfo()
         dayStepper.value = 3.0
         workoutDuration.text = "1 Hours"
@@ -131,37 +136,38 @@ extension ProgramMaker{
         done1Reading = false
         let day = 1
         let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
-        let totalExercises = pathOutline.count-1
-        let skillLevel = detSkillTree(pathOutline[exerciseCounters[day-1]])
-        temp1Exercises.removeAll()
-        readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            if let name = self.temp1Exercises.randomElement(){
-                if self.checkDuplicate(name , self.day1Exercises) == false{
-                    self.day1Exercises.append(name)
-                }else{
-                    self.exerciseCounters[day-1] -= 1
-                    self.generateDay1()
-                }
+        if pathOutline == ["66"]{
+            for i in 0...self.day1Exercises.count-1{
+                self.writeExercise(i , day, self.day1Exercises[i], self.day1Blocks[i])
             }
-            self.done1Reading = true
+        }else{
+            let totalExercises = pathOutline.count - 1
+            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
+            temp1Exercises.removeAll()
+            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                if pathOutline == ["66"]{
-                    for i in 0...self.day1Exercises.count-1{
-                        self.writeExercise(i , day, self.day1Exercises[i], self.day1Blocks[i])
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                if let name = self.temp1Exercises.randomElement(){
+                    if self.checkDuplicate(name , self.day1Exercises) == false{
+                        self.day1Exercises.append(name)
+                    }else{
+                        self.exerciseCounters[day-1] -= 1
+                        self.generateDay1()
                     }
-                    self.writeCategory(self.totalDays, day)
-                }else if self.exerciseCounters[day-1] == totalExercises{
-                    self.exerciseCounters[day-1] = 0
-                    self.day1Blocks.append(self.blockCounters[day-1])
-                    self.blockCounters[day-1] += 1
-                    self.generateDay1()
-                }else if self.done1Reading == true && self.exerciseCounters[day-1] != totalExercises{
-                    self.exerciseCounters[day-1] += 1
-                    self.day1Blocks.append(self.blockCounters[day-1])
-                    self.generateDay1()
+                }
+                self.done1Reading = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                    if self.exerciseCounters[day-1] == totalExercises{
+                        self.exerciseCounters[day-1] = 0
+                        self.day1Blocks.append(self.blockCounters[day-1])
+                        self.blockCounters[day-1] += 1
+                        self.generateDay1()
+                    }else if self.done1Reading == true && self.exerciseCounters[day-1] != totalExercises{
+                        self.exerciseCounters[day-1] += 1
+                        self.day1Blocks.append(self.blockCounters[day-1])
+                        self.generateDay1()
+                    }
                 }
             }
         }
@@ -171,37 +177,39 @@ extension ProgramMaker{
         done2Reading = false
         let day = 2
         let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
-        let totalExercises = pathOutline.count-1
-        let skillLevel = detSkillTree(pathOutline[exerciseCounters[day-1]])
-        temp2Exercises.removeAll()
-        readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            if let name = self.temp2Exercises.randomElement(){
-                if self.checkDuplicate(name , self.day2Exercises) == false{
-                    self.day2Exercises.append(name)
-                }else{
-                    self.exerciseCounters[day-1] -= 1
-                    self.generateDay2()
-                }
+        if pathOutline == ["66"]{
+            for i in 0...self.day2Exercises.count-1{
+                self.writeExercise(i , day, self.day2Exercises[i], self.day2Blocks[i])
             }
-            self.done2Reading = true
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                if pathOutline == ["66"]{
-                    for i in 0...self.day2Exercises.count-1{
-                        self.writeExercise(i , day, self.day2Exercises[i], self.day2Blocks[i])
+        }else {
+            let totalExercises = pathOutline.count - 1
+            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
+            temp2Exercises.removeAll()
+            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                if let name = self.temp2Exercises.randomElement(){
+                    if self.checkDuplicate(name , self.day2Exercises) == false{
+                        self.day2Exercises.append(name)
+                    }else{
+                        self.exerciseCounters[day-1] -= 1
+                        self.generateDay2()
                     }
-                    self.writeCategory(self.totalDays, day)
-                }else if self.exerciseCounters[day-1] == totalExercises{
-                    self.exerciseCounters[day-1] = 0
-                    self.day2Blocks.append(self.blockCounters[day-1])
-                    self.blockCounters[day-1] += 1
-                    self.generateDay2()
-                }else if self.done2Reading == true && self.exerciseCounters[day-1] != totalExercises{
-                    self.exerciseCounters[day-1] += 1
-                    self.day2Blocks.append(self.blockCounters[day-1])
-                    self.generateDay2()
+                }
+                self.done2Reading = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                    if self.exerciseCounters[day-1] == totalExercises{
+                        self.exerciseCounters[day-1] = 0
+                        self.day2Blocks.append(self.blockCounters[day-1])
+                        self.blockCounters[day-1] += 1
+                        self.generateDay2()
+                    }else if self.done2Reading == true && self.exerciseCounters[day-1] != totalExercises{
+                        self.exerciseCounters[day-1] += 1
+                        self.day2Blocks.append(self.blockCounters[day-1])
+                        self.generateDay2()
+                    }
                 }
             }
         }
@@ -211,37 +219,39 @@ extension ProgramMaker{
         done3Reading = false
         let day = 3
         let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
-        let totalExercises = pathOutline.count-1
-        let skillLevel = detSkillTree(pathOutline[exerciseCounters[day-1]])
-        temp3Exercises.removeAll()
-        readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            if let name = self.temp3Exercises.randomElement(){
-                if self.checkDuplicate(name , self.day3Exercises) == false{
-                    self.day3Exercises.append(name)
-                }else{
-                    self.exerciseCounters[day-1] -= 1
-                    self.generateDay3()
-                }
+        if pathOutline == ["66"]{
+            for i in 0...self.day3Exercises.count-1{
+                self.writeExercise(i , day, self.day3Exercises[i], self.day3Blocks[i])
             }
-            self.done3Reading = true
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                if pathOutline == ["66"]{
-                    for i in 0...self.day3Exercises.count-1{
-                        self.writeExercise(i , day, self.day3Exercises[i], self.day3Blocks[i])
+        }else {
+            let totalExercises = pathOutline.count - 1
+            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
+            temp3Exercises.removeAll()
+            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                if let name = self.temp3Exercises.randomElement(){
+                    if self.checkDuplicate(name , self.day3Exercises) == false{
+                        self.day3Exercises.append(name)
+                    }else{
+                        self.exerciseCounters[day-1] -= 1
+                        self.generateDay3()
                     }
-                    self.writeCategory(self.totalDays, day)
-                }else if self.exerciseCounters[day-1] == totalExercises{
-                    self.exerciseCounters[day-1] = 0
-                    self.day3Blocks.append(self.blockCounters[day-1])
-                    self.blockCounters[day-1] += 1
-                    self.generateDay3()
-                }else if self.done3Reading == true && self.exerciseCounters[day-1] != totalExercises{
-                    self.exerciseCounters[day-1] += 1
-                    self.day3Blocks.append(self.blockCounters[day-1])
-                    self.generateDay3()
+                }
+                self.done3Reading = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                    if self.exerciseCounters[day-1] == totalExercises{
+                        self.exerciseCounters[day-1] = 0
+                        self.day3Blocks.append(self.blockCounters[day-1])
+                        self.blockCounters[day-1] += 1
+                        self.generateDay3()
+                    }else if self.done3Reading == true && self.exerciseCounters[day-1] != totalExercises{
+                        self.exerciseCounters[day-1] += 1
+                        self.day3Blocks.append(self.blockCounters[day-1])
+                        self.generateDay3()
+                    }
                 }
             }
         }
@@ -251,37 +261,38 @@ extension ProgramMaker{
         done3Reading = false
         let day = 4
         let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
-        let totalExercises = pathOutline.count-1
-        let skillLevel = detSkillTree(pathOutline[exerciseCounters[day-1]])
-        temp4Exercises.removeAll()
-        readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            if let name = self.temp4Exercises.randomElement(){
-                if self.checkDuplicate(name , self.day4Exercises) == false{
-                    self.day4Exercises.append(name)
-                }else{
-                    self.exerciseCounters[day-1] -= 1
-                    self.generateDay4()
-                }
+        if pathOutline == ["66"]{
+            for i in 0...self.day4Exercises.count-1{
+                self.writeExercise(i , day, self.day4Exercises[i], self.day4Blocks[i])
             }
-            self.done4Reading = true
+        }else{
+            let totalExercises = pathOutline.count - 1
+            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
+            temp4Exercises.removeAll()
+            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                if pathOutline == ["66"]{
-                    for i in 0...self.day4Exercises.count-1{
-                        self.writeExercise(i , day, self.day4Exercises[i], self.day4Blocks[i])
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                if let name = self.temp4Exercises.randomElement(){
+                    if self.checkDuplicate(name , self.day4Exercises) == false{
+                        self.day4Exercises.append(name)
+                    }else{
+                        self.exerciseCounters[day-1] -= 1
+                        self.generateDay4()
                     }
-                    self.writeCategory(self.totalDays, day)
-                }else if self.exerciseCounters[day-1] == totalExercises{
-                    self.exerciseCounters[day-1] = 0
-                    self.day4Blocks.append(self.blockCounters[day-1])
-                    self.blockCounters[day-1] += 1
-                    self.generateDay4()
-                }else if self.done4Reading == true && self.exerciseCounters[day-1] != totalExercises{
-                    self.exerciseCounters[day-1] += 1
-                    self.day4Blocks.append(self.blockCounters[day-1])
-                    self.generateDay4()
+                }
+                self.done4Reading = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                    if self.exerciseCounters[day-1] == totalExercises{
+                        self.exerciseCounters[day-1] = 0
+                        self.day4Blocks.append(self.blockCounters[day-1])
+                        self.blockCounters[day-1] += 1
+                        self.generateDay4()
+                    }else if self.done4Reading == true && self.exerciseCounters[day-1] != totalExercises{
+                        self.exerciseCounters[day-1] += 1
+                        self.day4Blocks.append(self.blockCounters[day-1])
+                        self.generateDay4()
+                    }
                 }
             }
         }
@@ -349,16 +360,16 @@ extension ProgramMaker{
         
     }
     
-    func detSkillTree(_ path: String) -> Int{
-        if path == dK.category.plyo.lower || path == dK.category.plyo.upper || path == dK.category.plyo.mixed{
+    func detSkillLevel(_ path: String) -> Int{
+        if path == dK.category.plyo || path == dK.category.plyo || path == dK.category.plyo{
             return user.plyoLevel
-        }else if path == dK.category.upper.pull || path == dK.category.upper.push{
+        }else if path == dK.category.upper || path == dK.category.upper{
             return user.upperLevel
-        }else if path == dK.category.lower.bilateral || path == dK.category.lower.unilateral{
+        }else if path == dK.category.lower || path == dK.category.lower{
             return user.lowerLevel
-        }else if path == dK.category.core.dynamic || path == dK.category.core.isometric{
+        }else if path == dK.category.core || path == dK.category.core{
             return user.coreLevel
-        }else if path == dK.category.arms.bicep || path == dK.category.arms.tricep || path == dK.category.arms.shoulders{
+        }else if path == dK.category.arms || path == dK.category.arms || path == dK.category.arms{
             return user.armsLevel
         }
         return 0
@@ -373,11 +384,14 @@ extension ProgramMaker{
 extension ProgramMaker{
     
     func generateProgramDetails(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("programDetails")
+        //Sets nextProgramMade in Previous program to true and readyForNext to false
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(programID)").document("programDetails").setData(["readyForNext" : false, "nextProgramMade" : true], merge: true)
+        
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(programID + 1)").document("programDetails")
         for day in 1...totalDays{
             docRef.setData(["day\(day)Completion" : 0], merge: true)
         }
-        docRef.setData(["totalDays" : totalDays, "currentDay" : 1], merge: true)
+        docRef.setData(["totalDays" : totalDays, "currentDay" : 1, "readyForNext" : false, "nextProgramMade": false], merge: true)
         
     }
     func writeExercise(_ order: Int, _ day: Int, _ path: String, _ block: Int) {
@@ -389,27 +403,19 @@ extension ProgramMaker{
                 print(err)
             }else{
                 if let document = document{
-                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("day\(day)").collection("exercises").document("\(document.documentID)").setData([
+                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID + 1)").document("day\(day)").collection("exercises").document("\(document.documentID)").setData([
                         "name" : document["name"] as! String,
+                        "skillTree" : document["skillTree"] as! [String],
                         "reps" : ProgramOutline.getReps(self.user.trainingType),
                         "sets" : 3,
                         "order" : order,
-                        "block" : block
-
-                    ])
+                        "block" : block])
                 }
             }
 
         }
     }
-    func writeCategory(_ totalDays: Int, _ day: Int){
-        
-        let category = ProgramOutline.getCategory(totalDays, day)
-        
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection(self.findMonth()).document("day\(day)")
-        
-        docRef.setData(["skillTrees" : category], merge: true)
-    }
+
     
 
     func findMonth()-> String{
@@ -451,7 +457,7 @@ extension ProgramMaker{
                 }else{
                     
                     if let document = collection{
-                        self.levels["\(tree)"] = document["exp"] as? Int
+                        self.levels["\(tree)"] = document["level"] as? Int
                     }
                 }
             }
@@ -469,5 +475,13 @@ extension ProgramMaker{
         }
         
         
+    }
+}
+
+extension ProgramMaker{
+    func setVariables(){
+        let tabBar = tabBarController as! TabBarViewController
+        totalDays = tabBar.totalDays
+        programID = tabBar.programID
     }
 }

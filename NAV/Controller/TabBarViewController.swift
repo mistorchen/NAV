@@ -16,52 +16,76 @@ import FSCalendar
 class TabBarViewController: UITabBarController{
     let db = Firestore.firestore()
     
+    
+    //User Info Variables
+    var levels: [String : Int] = [:]
+    var userInfo: UserInfo?
+    let selectedTree = [K.s.skillTree.upper, K.s.skillTree.lower, K.s.skillTree.plyo, K.s.skillTree.core, K.s.skillTree.arms]
+    
+    // Skill Tree Variables
+    var plyoSkillTree: [BasicExerciseInfo] = []
+    var upperSkillTree: [BasicExerciseInfo] = []
+    var lowerSkillTree: [BasicExerciseInfo] = []
+    var coreSkillTree: [BasicExerciseInfo] = []
+    
+    
+    //Program Variables
+    var totalDays = 0
+    var dayArray:[Int] = []
+    var currentDay = 0
+    var programID = 0
+    var newProgram: Bool = false
+    
     var day1Program: [ExerciseInfo] = []
     var day2Program: [ExerciseInfo] = []
     var day3Program: [ExerciseInfo] = []
     var day4Program: [ExerciseInfo] = []
     var day5Program: [ExerciseInfo] = []
     
-    var plyoSkillTree: [BasicExerciseInfo] = []
-    var upperSkillTree: [BasicExerciseInfo] = []
-    var lowerSkillTree: [BasicExerciseInfo] = []
-    var coreSkillTree: [BasicExerciseInfo] = []
-    
-    var totalDays = 0
-    var dayArray:[Int] = []
-    var currentDay = 0
-    
-    var newProgram: Bool = false
+    //Check In Variables
     var weeklyCheckIn: Bool = false
     
+    
+    //Calendar Variables
     var datesOnCalendar: [String] = []
     var streakDates: [String] = []
+    var scheduleDates: [String] = []
+    var streak: Int?
     let formatter = DateFormatter()
     let calendar = FSCalendar()
     
     
     override func viewDidLoad() {
-        getSkillTrees()
-//        testFunction()
-        getProgram()
-        checkForNewProgram()
-        findCalendarDays()
-        setStreakDays()
-        
+        isNewUser()
         
     }
-//    func testFunction(){
-//        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory")
-//        docRef.getDocuments { document, error in
-//            if let error = error{
-//                print(error)
-//            }else{
-//                if document?.isEmpty == true{
-//                    print("asdfsadf")
-//                }
-//            }
-//        }
-//    }
+   func isNewUser(){
+       let docRef = db.collection("users").document(Auth.auth().currentUser!.uid)
+       docRef.getDocument { document, error in
+           if let error = error{
+               print(error)
+           }else{
+               if document?.exists == false {
+                   self.registerUser()
+               }else{
+                   self.getUserInfo()
+                   self.getSkillTrees()
+
+                   self.getProgram()
+           //        checkForNewProgram()
+                   self.findCalendarDays()
+                   self.setStreakDays()
+                   self.setScheduleDays()
+               }
+           }
+       }
+}
+    func registerUser(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var viewController: UIViewController
+        viewController = storyboard.instantiateViewController(withIdentifier: "InfoSetUp")
+        self.present(viewController, animated: true, completion: nil)
+    }
 
     func getSkillTrees(){
         readPlyoSkillTree()
@@ -70,40 +94,54 @@ class TabBarViewController: UITabBarController{
         readUpperSkillTree()
     }
     func getProgram(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("programDetails")
-        docRef.getDocument { document, error in
+        let programIDREF = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs")
+        programIDREF.getDocument { document, error in
             if let error = error{
                 print(error)
             }else{
-                self.totalDays = document!["totalDays"] as! Int
-                self.currentDay = document!["currentDay"] as! Int
-                switch self.totalDays{
-                case 1:
-                    self.readDay1()
-                case 2:
-                    self.readDay1()
-                    self.readDay2()
-                case 3:
-                    self.readDay1()
-                    self.readDay2()
-                    self.readDay3()
+                if let document = document{
+                    self.programID = document["programID"] as! Int
                     
-                case 4:
-                    self.readDay1()
-                    self.readDay2()
-                    self.readDay3()
-                    self.readDay4()
-                case 5:
-                    self.readDay1()
-                    self.readDay2()
-                    self.readDay3()
-                    self.readDay4()
-                    self.readDay5()
-                default:
-                    print("error getProgam")
+                    let docRef = self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID)").document("programDetails")
+                    docRef.getDocument { document, error in
+                        if let error = error{
+                            print(error)
+                        }else{
+                            self.totalDays = document!["totalDays"] as! Int
+                            self.currentDay = document!["currentDay"] as! Int
+                            self.newProgram = document!["readyForNext"] as! Bool
+                            switch self.totalDays{
+                            case 1:
+                                self.readDay1()
+                            case 2:
+                                self.readDay1()
+                                self.readDay2()
+                            case 3:
+                                self.readDay1()
+                                self.readDay2()
+                                self.readDay3()
+                                
+                            case 4:
+                                self.readDay1()
+                                self.readDay2()
+                                self.readDay3()
+                                self.readDay4()
+                            case 5:
+                                self.readDay1()
+                                self.readDay2()
+                                self.readDay3()
+                                self.readDay4()
+                                self.readDay5()
+                            default:
+                                print("error getProgam")
+                            }
+                        }
+                    }
                 }
             }
         }
+        
+       
     }
     
    
@@ -121,115 +159,114 @@ class TabBarViewController: UITabBarController{
 extension TabBarViewController{
 // MARK: CHANGE THIS FUNCTION TO DETERMINE IF THE USER NEEDS A NEW PROGRAM
 
-    func checkForNewProgram(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("programDetails")
-        docRef.getDocument { document, error in
-            if let error = error{
-                print(error)
-            }else{
-                self.newProgram = document!["readyForNext"] as! Bool
-//
-//                switch days{
-//                case 1:
-//                    self.dayArray.append(document!["day1Completion"] as! Int)
-//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
-//                case 2:
-//                    self.dayArray.append(document!["day1Completion"] as! Int)
-//                    self.dayArray.append(document!["day2Completion"] as! Int)
-//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
-//
-//                case 3:
-//                    self.dayArray.append(document!["day1Completion"] as! Int)
-//                    self.dayArray.append(document!["day2Completion"] as! Int)
-//                    self.dayArray.append(document!["day3Completion"] as! Int)
-//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
-//
-//                case 4:
-//                    self.dayArray.append(document!["day1Completion"] as! Int)
-//                    self.dayArray.append(document!["day2Completion"] as! Int)
-//                    self.dayArray.append(document!["day3Completion"] as! Int)
-//                    self.dayArray.append(document!["day4Completion"] as! Int)
-//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
-//
-//                case 5:
-//                    self.dayArray.append(document!["day1Completion"] as! Int)
-//                    self.dayArray.append(document!["day2Completion"] as! Int)
-//                    self.dayArray.append(document!["day3Completion"] as! Int)
-//                    self.dayArray.append(document!["day4Completion"] as! Int)
-//                    self.dayArray.append(document!["day5Completion"] as! Int)
-//                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
-//
-//                default:
-//                    print("error getCurrentDay")
-//                }
-            }
-        }
-    }
+//    func checkForNewProgram(){
+//        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(currentProgram)").document("programDetails")
+//        docRef.getDocument { document, error in
+//            if let error = error{
+//                print(error)
+//            }else{
+////
+////                switch days{
+////                case 1:
+////                    self.dayArray.append(document!["day1Completion"] as! Int)
+////                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+////                case 2:
+////                    self.dayArray.append(document!["day1Completion"] as! Int)
+////                    self.dayArray.append(document!["day2Completion"] as! Int)
+////                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+////
+////                case 3:
+////                    self.dayArray.append(document!["day1Completion"] as! Int)
+////                    self.dayArray.append(document!["day2Completion"] as! Int)
+////                    self.dayArray.append(document!["day3Completion"] as! Int)
+////                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+////
+////                case 4:
+////                    self.dayArray.append(document!["day1Completion"] as! Int)
+////                    self.dayArray.append(document!["day2Completion"] as! Int)
+////                    self.dayArray.append(document!["day3Completion"] as! Int)
+////                    self.dayArray.append(document!["day4Completion"] as! Int)
+////                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+////
+////                case 5:
+////                    self.dayArray.append(document!["day1Completion"] as! Int)
+////                    self.dayArray.append(document!["day2Completion"] as! Int)
+////                    self.dayArray.append(document!["day3Completion"] as! Int)
+////                    self.dayArray.append(document!["day4Completion"] as! Int)
+////                    self.dayArray.append(document!["day5Completion"] as! Int)
+////                    self.newProgram = self.dayArray.allSatisfy({ $0 == 3})
+////
+////                default:
+////                    print("error getCurrentDay")
+////                }
+//            }
+//        }
+//    }
     func readDay1(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day1").collection("exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID)").document("day1").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day1Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int))
+                    self.day1Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
         }
     }
     func readDay2(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day2").collection("exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID)").document("day2").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day2Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int))
+                    self.day2Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
         }
     }
     func readDay3(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day3").collection("exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID)").document("day3").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day3Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int))
+                    self.day3Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
         }
     }
     func readDay4(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day4").collection("exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID)").document("day4").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day4Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int))
+                    self.day4Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
         }
     }
     func readDay5(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program1").document("day5").collection("exercises").order(by: "order", descending: false)
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID)").document("day5").collection("exercises").order(by: "order", descending: false)
         
         docRef.getDocuments { collection, error in
             if let error = error{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day5Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int))
+                    self.day5Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
@@ -292,6 +329,7 @@ extension TabBarViewController{
 // MARK: Calendar Data Functions
 extension TabBarViewController{
     func setStreakDays(){
+        
         let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("calendar").document("streakDates")
         docRef.getDocument { document, error in
             if let error = error{
@@ -305,10 +343,26 @@ extension TabBarViewController{
                             self.streakDates.append(day)
                         }
                     }
+                    
                 }
             }
         }
+    }
+    func setScheduleDays(){
+        
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("calendar").document("schedule")
+        docRef.getDocument { document, error in
+            if let error = error{
+                print("error")
+            }else{
 
+                    for day in self.datesOnCalendar{
+                        if document!["\(day)"] != nil{
+                            self.scheduleDates.append(day)
+                        }
+                    }
+            }
+        }
     }
     func findCalendarDays(){
         formatter.dateFormat = "MM-dd-yyyy"
@@ -316,9 +370,8 @@ extension TabBarViewController{
         let endDate: Date?
         
         if self.calendar.scope == .month{
-            let indexPath = self.calendar.calculator.indexPath(for: self.calendar.currentPage, scope: .month)
-            startDate = self.calendar.calculator.monthHead(forSection: (indexPath?.section)!)!
-            endDate = Date()
+            startDate = Date().startOfMonthDate
+            endDate = Date().endOfMonthDate
             
             while startDate! <= endDate! {
                 datesOnCalendar.append(formatter.string(from: startDate!))
@@ -328,3 +381,53 @@ extension TabBarViewController{
         }
     }
 }
+
+// MARK: GET USER INFO FUNCTION
+extension TabBarViewController{
+    func getUserInfo(){
+        let docRef = db.collection(K.s.users).document(K.db.userAuth)
+        docRef.getDocument { document, err in
+            if let err = err{
+                print(err)
+            }else{
+                if let document = document{
+                    self.levels[K.s.skillTree.playerLevel] = document[K.s.skillTree.playerLevel] as? Int
+                    self.levels[K.s.skillTree.trainingType] = document[K.s.skillTree.trainingType] as? Int
+
+                }
+            }
+        }
+        
+        
+        for tree in selectedTree{
+            
+            let docRef = db.collection(K.s.users).document(K.db.userAuth).collection(K.s.skillTree.skillTree).document(tree)
+            
+            docRef.getDocument { collection, err in
+                if let err = err{
+                    print(err)
+                }else{
+                    
+                    if let document = collection{
+                        self.levels["\(tree)"] = document["exp"] as? Int
+                    }
+                }
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+            self.userInfo = UserInfo(
+                playerLevel: self.levels[K.s.skillTree.playerLevel]!,
+                trainingType: self.levels[K.s.skillTree.trainingType]!,
+                upperLevel: self.levels[K.s.skillTree.upper]!,
+                lowerLevel: self.levels[K.s.skillTree.lower]!,
+                plyoLevel: self.levels[K.s.skillTree.plyo]!,
+                coreLevel: self.levels[K.s.skillTree.core]!,
+                armsLevel: self.levels[K.s.skillTree.arms]!)
+                
+        }
+        
+        
+    }
+}
+
+

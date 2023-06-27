@@ -10,14 +10,15 @@ import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
-class QuestionaireVC: UIViewController {
+class QuestionaireVC: UIViewController{
+    
+    
     
     var username = ""
     var questionCount = 0
     var xpScore = 0
     
     @IBOutlet weak var questionLabel: UILabel!
-    
     
     @IBOutlet weak var dropdownButton: UIButton!
     
@@ -28,6 +29,9 @@ class QuestionaireVC: UIViewController {
     
     @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var stepperLabel: UILabel!
+    
+    
+    @IBOutlet weak var answerTableView: UITableView!
     
     
     var age = 0
@@ -43,6 +47,10 @@ class QuestionaireVC: UIViewController {
     
     
     override func viewDidLoad() {
+//        answerTableView.register(PolarAnswerTableViewCell.nib(), forCellReuseIdentifier: PolarAnswerTableViewCell.identifier)
+//        answerTableView.delegate = self
+//        answerTableView.dataSource = self
+        
         
         yesButton.isHidden = true
         noButton.isHidden = true
@@ -189,18 +197,65 @@ class QuestionaireVC: UIViewController {
     func setData(){
         //automatically makes a new document with Current User ID
         db.collection("users").document(Auth.auth().currentUser!.uid).setData([
-            "level" : xpScore,
-            //"population" : "general"
-        ], merge: true)
+            "level" : xpScore], merge: true)
+        showApp()
     }
+    
     func writeSkillTrees(){
-        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("lower").setData(["exp" : 10], merge: true)
-        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("upper").setData(["exp" : 20], merge: true)
-        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("plyo").setData(["exp" : 30], merge: true)
-        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("core").setData(["exp" : 40], merge: true)
-        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("arms").setData(["exp" : 40], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("lower").setData(["level": 0, "exp" : 10], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("upper").setData(["level": 0, "exp" : 20], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("plyo").setData(["level": 0, "exp" : 30], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("core").setData(["level": 0, "exp" : 40], merge: true)
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("arms").setData(["level": 0, "exp" : 40], merge: true)
         db.collection("users").document(Auth.auth().currentUser!.uid).setData(["playerLevel" : 100, "trainingType" : 0], merge: true)
     }
     
+    func showApp(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var  viewController: UIViewController
+        viewController = storyboard.instantiateViewController(withIdentifier: "ProgramMaker")
+        self.present(viewController, animated: true, completion: nil)
+    }
+}
+
+
+extension QuestionaireVC{
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if questionCount == 0{
+//            let cell = answerTableView.dequeueReusableCell(withIdentifier: PolarAnswerTableViewCell.identifier, for: indexPath) as! PolarAnswerTableViewCell
+//
+//            let yesGesture = UITapGestureRecognizer(target: self, action:  #selector (self.saveYes (_:)))
+//            yesGesture.cancelsTouchesInView = false
+//            cell.yesButton.addGestureRecognizer(yesGesture)
+//questionCount += 1
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+//                self.answerTableView.reloadData()
+//            }
+//            return cell
+//        }else if questionCount == 2{
+//            let cell = answerTableView.dequeueReusableCell(withIdentifier: SliderTableViewCell.identifier, for: indexPath) as! SliderTableViewCell
+//
+//            let yesGesture = UITapGestureRecognizer(target: self, action:  #selector (self.saveYes (_:)))
+//            yesGesture.cancelsTouchesInView = false
+//            cell.slider.addGestureRecognizer(yesGesture)
+//
+//            return cell
+//        }
+//
+//        let cell = answerTableView.dequeueReusableCell(withIdentifier: PolarAnswerTableViewCell.identifier, for: indexPath) as! PolarAnswerTableViewCell
+//
+//        let yesGesture = UITapGestureRecognizer(target: self, action:  #selector (self.saveYes (_:)))
+//        yesGesture.cancelsTouchesInView = false
+//        cell.yesButton.addGestureRecognizer(yesGesture)
+//
+//        return cell
+//    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 1
+//    }
+//
+//    @objc func saveYes(_ sender: UITapGestureRecognizer){
+//        print("yes")
+//    }
     
 }

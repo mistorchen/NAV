@@ -187,7 +187,7 @@
                         </constraints>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" red="0.098039215690000001" green="0.2156862745" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.12941176469999999" green="0.20784313730000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="fDL-vc-ujP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="M0H-z0-fec"/>
                     <constraint firstItem="fDL-vc-ujP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="OEg-nz-p95"/>

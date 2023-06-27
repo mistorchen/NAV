@@ -15,10 +15,10 @@ struct ProgramOutline{
         let exerciseCount = 9//10
         
         let paths : [Int : String] = [
-            0 : dK.category.plyo.lower , 1 : dK.category.plyo.lower, 2 : dK.category.plyo.lower,
-            3 : dK.category.lower.bilateral , 4 : dK.category.lower.bilateral,
-            5 : dK.category.upper.push, 6 : dK.category.upper.pull,
-            7 : dK.category.arms.bicep, 8 : dK.category.arms.tricep, 9 : dK.category.arms.shoulders
+            0 : dK.category.plyo , 1 : dK.category.plyo, 2 : dK.category.plyo,
+            3 : dK.category.lower , 4 : dK.category.lower,
+            5 : dK.category.upper, 6 : dK.category.upper,
+            7 : dK.category.arms, 8 : dK.category.arms, 9 : dK.category.arms
         ]
         let blocks : [Int : Int] = [
             0 : 1, 1 : 1, 2 : 1,
@@ -71,13 +71,13 @@ struct ProgramOutline{
             case 1:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
@@ -89,26 +89,26 @@ struct ProgramOutline{
             case 1:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
             case 2:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
@@ -120,39 +120,39 @@ struct ProgramOutline{
             case 1:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
             case 2:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
             case 3:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
@@ -164,52 +164,52 @@ struct ProgramOutline{
             case 1:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
             case 2:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
             case 3:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }
             case 4:
                 switch block{
                 case 1:
-                    return [dK.category.plyo.lower, dK.category.plyo.upper, dK.category.plyo.mixed]
+                    return [dK.category.plyo, dK.category.plyo, dK.category.plyo]
                 case 2:
-                    return [dK.category.lower.bilateral, dK.category.lower.unilateral]
+                    return [dK.category.lower, dK.category.lower]
                 case 3:
-                    return [dK.category.upper.push, dK.category.upper.pull]
+                    return [dK.category.upper, dK.category.upper]
                 case 4:
-                    return [dK.category.arms.bicep, dK.category.arms.tricep, dK.category.arms.shoulders]
+                    return [dK.category.arms, dK.category.arms, dK.category.arms]
                 default:
                     return ["66"]
                 }

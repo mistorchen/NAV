@@ -18,7 +18,6 @@ class RegisterVC: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var usernameTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +27,11 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func registerPressed(_ sender: UIButton) {
-        if let email = emailTextField.text, let password = passwordTextField.text, let username = usernameTextField.text{
+        if let email = emailTextField.text, let password = passwordTextField.text{
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error {
                     print(e)
                 }else{
-                    self.db.collection("users").document(Auth.auth().currentUser!.uid).setData(["username" : username], merge: true)
                     self.performSegue(withIdentifier: "goToBasicInfoSetupVC", sender: self)
                 }
             }

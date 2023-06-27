@@ -8,17 +8,18 @@
 import Foundation
 import UIKit
 
+
 class AppContainerVC: UIViewController{
-    
+
+
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+
             SignInManager.shared.appContainer = self
             SignInManager.shared.showApp()
         }
-
-        
     }
 }

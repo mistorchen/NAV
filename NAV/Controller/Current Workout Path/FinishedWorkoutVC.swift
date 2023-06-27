@@ -15,40 +15,49 @@ import FSCalendar
 class FinishedWorkoutVC: UIViewController{
     
     let db = Firestore.firestore()
+    var programID = 0
     var day = 0
     var usedSkills: [String] = []
     
     
     override func viewDidLoad() {
         self.navigationItem.setHidesBackButton(true, animated: true)
+        setVariables()
         getSkills()
         updateCurrentDay()
         setStreak()
-        
+        clearCurrentWorkout()
         
       
         
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             for skill in self.usedSkills{
                self.calculateEXP(skill)
             }
-            _ = self.navigationController?.popToRootViewController(animated: true)
+            self.showTabController()
         }
         super.viewDidLoad()
 
         
     }
+    func setVariables(){
+        let tabBar = tabBarController as! TabBarViewController
+        day = tabBar.currentDay
+        programID = tabBar.programID
+    }
     
     func getSkills(){
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection(self.findMonth()).document("day\(day)")
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(programID)").document("day\(day)").collection("exercises")
         
-        docRef.getDocument { document, error in
+        docRef.getDocuments { collection, error in
             if let error = error{
                 print(error)
             }else{
-                self.usedSkills = document!["skillTrees"] as! [String]
+                for document in collection!.documents{
+                    self.usedSkills = self.usedSkills + (document["skillTree"] as! [String])
+                }
             }
         }
     }
@@ -62,14 +71,17 @@ class FinishedWorkoutVC: UIViewController{
                 print(error)
             }else{
                 let exp = document!["exp"] as! Int
-                docRef.setData(["exp" : exp + 20], merge: true)
+                let currentLevel = document!["level"] as! Int
+                let expAdded = SkillLevelEXP.levelUp(currentLevel, exp)
+                print(expAdded)
+                docRef.setData(["level" : expAdded[0], "exp" : expAdded[1]], merge: true)
             }
         }
     }
     func updateCurrentDay(){
         let tabBar = tabBarController as! TabBarViewController
         
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("currentProgram").document("programDetails")
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(programID)").document("programDetails")
         
         docRef.getDocument { document, error in
             if let error = error{
@@ -77,22 +89,31 @@ class FinishedWorkoutVC: UIViewController{
             }else{
                 let oldDay = tabBar.currentDay
                 let completedCount = document!["day\(tabBar.currentDay)Completion"] as! Int
+                let nextProgramMade = document!["nextProgramMade"] as! Bool
+                if completedCount == 3 && nextProgramMade == false{
+                    docRef.setData(["readyForNext" : true], merge: true)
+                }
+                
                 var nextDay = 0
                 
                 if tabBar.currentDay == tabBar.totalDays{
                     nextDay = 1
+                    
+                    if completedCount == 3 && nextProgramMade == true{
+                        self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").setData(["programID" : self.programID + 1])
+                    }
+                    
                 }else{
                     nextDay = tabBar.currentDay + 1
-
                 }
                 tabBar.currentDay = nextDay
 
                 docRef.setData(["currentDay" : nextDay, "day\(oldDay)Completion" : completedCount + 1], merge: true)
+                
             }
         }
         
     }
-    
     
     func findMonth()-> String{
         let now = Date()
@@ -101,6 +122,11 @@ class FinishedWorkoutVC: UIViewController{
         let nameOfMonth = dateFormatter.string(from: now)
         return(nameOfMonth)
     }
+    func clearCurrentWorkout(){
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(programID)").document("currentWorkout")
+        docRef.delete()
+    }
+    
 }
 
 extension FinishedWorkoutVC{
@@ -127,6 +153,13 @@ extension FinishedWorkoutVC{
                 }
             }
         }
+    }
+    
+    func showTabController(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var  viewController: UIViewController
+        viewController = storyboard.instantiateViewController(withIdentifier: "TabController")
+        self.present(viewController, animated: true, completion: nil)
     }
 }
 

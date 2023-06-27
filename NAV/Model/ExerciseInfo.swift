@@ -15,7 +15,7 @@ struct ExerciseInfo {
     let order: Int
     let docID: String
     let block: Int
-//    let skill: String
+    let skillTree: [String]?
 }
 
 struct BasicExerciseInfo{

@@ -21,11 +21,16 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     }
     
     var inventoryWritePath = ""
-    var dayWritePath = ""
+    var currentWorkoutPath = ""
     var exerciseIndex = 0
-    var programID = 0.0
+    var programID = 0
     var difficulty = 0
     var programDay = 0
+    
+    
+    var set1Weight = 0
+    var set2Weight = 0
+    var set3Weight = 0
     
     let db = Firestore.firestore()
 
@@ -44,6 +49,7 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     override func awakeFromNib() {
 //        set4.isHidden = true // Future edit for more sets
         // Initialization code
+        checkButtonStatus()
         configureButtons()
         set1Field.delegate = self
         set2Field.delegate = self
@@ -84,10 +90,10 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     }
     
     func writeSetWeight(_ set: Int, _ weight: Int){
-        let currentRef = db.document(dayWritePath)
-        currentRef.setData(["e\(exerciseIndex).\(set)" : weight], merge: true)
+        let currentRef = db.document(currentWorkoutPath)
+        currentRef.setData(["e\(exerciseIndex)s\(set)" : weight], merge: true)
         let inventoryRef = db.document(inventoryWritePath)
-        inventoryRef.setData(["1.\(programDay).\(set)" : weight] ,merge: true)
+        inventoryRef.setData(["\(programID).\(programDay).\(set)" : weight] ,merge: true)
     }
     
     @IBAction func difficulty1(_ sender: UIButton) {
@@ -95,15 +101,14 @@ class CurrentWorkoutTableViewCell: UITableViewCell , UITextFieldDelegate, YTPlay
     }
     @IBAction func difficulty2(_ sender: UIButton) {
         writeDifficulty(2)
-
     }
     @IBAction func difficulty3(_ sender: UIButton) {
         writeDifficulty(3)
-
     }
     
     func writeDifficulty(_ difficulty: Int){
-        print("write")
+        let currentRef = db.document(currentWorkoutPath)
+        currentRef.setData(["e\(exerciseIndex)d" : difficulty], merge: true)
     }
     
     func resetButtons(){
