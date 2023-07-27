@@ -27,26 +27,22 @@ class HomeVC: UIViewController , FSCalendarDelegate, FSCalendarDelegateAppearanc
     var scheduleDates: [String] = []
     
     override func viewDidLoad() {
-        newProgram.isEnabled = false
-        newProgram.isHidden = true
+        
+//        newProgram.isEnabled = false
+//        newProgram.isHidden = true
         calendar.delegate = self
         calendar.dataSource = self
         configureCalendar()
         configureMenuButtons()
-        self.title = "Home"
-        
-        
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-            
             self.programMakerAccess()
             self.calendar.reloadData()
-
         }
         super.viewDidLoad()
     }
     
 }
+
 
 
 // MARK: Calendar Functions
@@ -102,6 +98,14 @@ extension HomeVC{
         checkInButton.titleLabel!.adjustsFontSizeToFitWidth = true
         checkInButton.layer.cornerRadius = 15
         
+        if Date().dayNumberOfWeek == 1{
+            checkInButton.setTitle("Weekly Check In", for: .normal)
+        }else{
+            checkInButton.setTitle("Daily Check In", for: .normal)
+        }
+        
+        
+        
         badgesButton.titleLabel!.textAlignment = .center
         badgesButton.titleLabel!.font = UIFont(name: "Helvetica Bold", size: 13.0)
         badgesButton.titleLabel!.adjustsFontSizeToFitWidth = true
@@ -128,6 +132,9 @@ extension HomeVC{
     }
     @IBAction func goToCurrentWorkout(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToCurrentWorkout", sender: self)
+    }
+    @IBAction func goToAchievements(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToAchievements", sender: self)
     }
     @IBAction func goToCheckIn(_ sender: UIButton) {
         if Date().dayNumberOfWeek == 1{

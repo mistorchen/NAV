@@ -10,6 +10,7 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
+import Charts
 
 
 class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
@@ -135,16 +136,18 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
         
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            
             exerciseSelected = indexPath.row
-            self.performSegue(withIdentifier: "viewMoreDetails", sender: self)
+            self.performSegue(withIdentifier: "viewExerciseDetails", sender: self)
 
         }
-        
+//        
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "viewMoreDetails"{
-                let destinationVC = segue.destination as! MoreExeriseDetails
+            if segue.identifier == "viewExerciseDetails"{
+                let destinationVC = segue.destination as! ExerciseDetailsVC
                 destinationVC.exerciseName = selectedProgram[exerciseSelected].name
+                destinationVC.exerciseID = selectedProgram[exerciseSelected].docID
+                
+                
             }
         }
         

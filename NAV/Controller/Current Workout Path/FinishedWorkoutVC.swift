@@ -27,6 +27,7 @@ class FinishedWorkoutVC: UIViewController{
         updateCurrentDay()
         setStreak()
         clearCurrentWorkout()
+        updateWorkoutCount()
         
       
         
@@ -34,7 +35,7 @@ class FinishedWorkoutVC: UIViewController{
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             for skill in self.usedSkills{
-               self.calculateEXP(skill)
+               self.calculateSkillEXP(skill)
             }
             self.showTabController()
         }
@@ -61,7 +62,7 @@ class FinishedWorkoutVC: UIViewController{
             }
         }
     }
-    func calculateEXP(_ skill: String){
+    func calculateSkillEXP(_ skill: String){
         //USE Skill Trees found in GetSkills and update the skillTrees in USER
         
         let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document(skill)
@@ -72,12 +73,33 @@ class FinishedWorkoutVC: UIViewController{
             }else{
                 let exp = document!["exp"] as! Int
                 let currentLevel = document!["level"] as! Int
-                let expAdded = SkillLevelEXP.levelUp(currentLevel, exp)
-                print(expAdded)
+                let expAdded = SkillLevelEXP.skillLevelUp(currentLevel, exp)
                 docRef.setData(["level" : expAdded[0], "exp" : expAdded[1]], merge: true)
             }
         }
     }
+    
+    func updatePlayerEXP(){
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("skillTree").document("player")
+        docRef.getDocument { document, error in
+            if let error = error{
+                print(error)
+            }else{
+                if let document = document{
+                        let exp = document["exp"] as! Int
+                        let currentLevel = document["level"] as! Int
+                        let expAdded = SkillLevelEXP.playerLevelUp(currentLevel, exp)
+                        docRef.setData(["level" : expAdded[0], "exp" : expAdded[1]], merge: true)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
     func updateCurrentDay(){
         let tabBar = tabBarController as! TabBarViewController
         
@@ -99,6 +121,10 @@ class FinishedWorkoutVC: UIViewController{
                 if tabBar.currentDay == tabBar.totalDays{
                     nextDay = 1
                     
+                    //Updates Week
+                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").setData(["week" : tabBar.week + 1])
+                    
+                    //Updates to New Program
                     if completedCount == 3 && nextProgramMade == true{
                         self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").setData(["programID" : self.programID + 1])
                     }
@@ -130,6 +156,20 @@ class FinishedWorkoutVC: UIViewController{
 }
 
 extension FinishedWorkoutVC{
+    func updateWorkoutCount(){
+        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs")
+        docRef.getDocument { document, error in
+            if let error = error{
+                print(error)
+            }else{
+                if let document = document{
+                    let workoutsCompletedOld = document["workoutsComplete"] as! Int
+                    docRef.setData(["workoutsComplete" : workoutsCompletedOld + 1], merge: true)
+                }
+            }
+        }
+    }
+    
     func setStreak(){
         let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
@@ -139,16 +179,16 @@ extension FinishedWorkoutVC{
         let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("calendar").document("streakDates")
         docRef.getDocument { document, error in
             if let error = error{
-                print("error")
+                print(error)
             }else{
                 let dayBefore = document!["\(previousDate)"]
                 let today = document!["\(currentDate)"]
                 if today == nil{
                     if dayBefore == nil{
-                        docRef.setData(["streak" : 1, currentDate : currentDate], merge:true)
+                        docRef.setData(["streak" : 1, currentDate : currentDate], merge: true)
                     }else{
                         let streak = document!["streak"] as! Int
-                        docRef.setData(["streak" : streak + 1, currentDate : currentDate], merge:true)
+                        docRef.setData(["streak" : streak + 1, currentDate : currentDate], merge: true)
                     }
                 }
             }

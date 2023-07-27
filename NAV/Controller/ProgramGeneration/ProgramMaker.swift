@@ -16,15 +16,14 @@ class ProgramMaker: UIViewController{
     
     let db = Firestore.firestore()
     
-    let selectedTree = [K.s.skillTree.upper, K.s.skillTree.lower, K.s.skillTree.plyo, K.s.skillTree.core, K.s.skillTree.arms]
+    let selectedTree = [K.s.skillTree.player, K.s.skillTree.upper, K.s.skillTree.lower, K.s.skillTree.plyo, K.s.skillTree.core, K.s.skillTree.arms]
     
     //Initialize empty Variables
-    var user = UserInfo(playerLevel: 0, trainingType: 0, upperLevel: 0, lowerLevel: 0, plyoLevel: 0, coreLevel: 0, armsLevel: 0)
+    var userInfo: UserInfo?
     var totalDays = 0
     var reps = 0
     var levels: [String : Int] = [:]
-    var duration: Float = 0
-    var programID = 0
+    var currentProgramID = Int()
     
     
     
@@ -32,45 +31,77 @@ class ProgramMaker: UIViewController{
     var done2Reading = false
     var done3Reading = false
     var done4Reading = false
-
+    
     
     var temp1Exercises: [String] = []
     var temp2Exercises: [String] = []
     var temp3Exercises: [String] = []
     var temp4Exercises: [String] = []
-
+    
     
     var day1Exercises: [String] = []
     var day2Exercises: [String] = []
     var day3Exercises: [String] = []
     var day4Exercises: [String] = []
-
+    
     
     var day1Blocks: [Int] = []
     var day2Blocks: [Int] = []
     var day3Blocks: [Int] = []
     var day4Blocks: [Int] = []
-
+    
     
     var exerciseCounters = [0,0,0,0,0]
     var blockCounters = [1,1,1,1,1]
+    
+    
+    
+    
+    
+    // MARK: V2 VARIABLES
+    var blocks = String()
+    var selectedSplit = String() // Full body day Split
+    var duration = Int()
+    var equipmentList = ["DB", "KB", "BENCH", "TRX", "STABILITY", "BB", "RACK", "BW", "MEDBALL", "SLED", "BOX"]
+    
+    var plyoExercises = [FirestoreExerciseInfo]()
+    var upperExercises = [FirestoreExerciseInfo]()
+    var lowerExercises = [FirestoreExerciseInfo]()
+    var coreExercises = [FirestoreExerciseInfo]()
+    var armsExercises = [FirestoreExerciseInfo]()
+    
+    var buildingDay = 0
+    
+    var day1Workout = [ChosenExercise]()
+    var day2Workout = [ChosenExercise]()
+    var day3Workout = [ChosenExercise]()
+    var day4Workout = [ChosenExercise]()
 
+    
     @IBOutlet weak var numberOfDays: UILabel!
-    @IBOutlet weak var workoutDuration: UILabel!
     @IBOutlet weak var dayStepper: UIStepper!
+    @IBOutlet weak var finishedButton: UIButton!
+    @IBOutlet weak var dropDownButton: UIButton!
+    
+    @IBOutlet weak var shortDuration: UIButton!
+    @IBOutlet weak var mediumDuration: UIButton!
+    @IBOutlet weak var longDuration: UIButton!
+    
+    @IBOutlet weak var totalDaysDescription: UILabel!
+    @IBOutlet weak var blocksDescription: UILabel!
+    @IBOutlet weak var totalExercisesDescription: UILabel!
+    @IBOutlet weak var exercisesPerBlock: UILabel!
     
     override func viewDidLoad() {
-//        let tabBar = tabBarController as! TabBarViewController
-//        currentProgram = tabBar.currentProgram
         
-        setVariables()
+        //        let tabBar = tabBarController as! TabBarViewController
+        //        currentProgram = tabBar.currentProgram
         getUserInfo()
+        setDropDown()
         dayStepper.value = 3.0
-        workoutDuration.text = "1 Hours"
-        numberOfDays.text = "3"
-        
+        numberOfDays.text = "Days: 3"
+        finishedButton.isEnabled = false
         super.viewDidLoad()
-
     }
     
     @IBAction func dayStepper(_ sender: UIStepper) {
@@ -78,225 +109,500 @@ class ProgramMaker: UIViewController{
             totalDays = 1
             sender.value = 1
         }
-        if sender.value > 5{
-            totalDays = 5
-            sender.value = 5
+        if sender.value > 6{
+            totalDays = 6
+            sender.value = 6
         }else{
             totalDays = Int(sender.value)
         }
-        numberOfDays.text = "\(totalDays)"
+        numberOfDays.text = "Days: \(totalDays)"
+        totalDaysDescription.text = "Total Days: \(totalDays)"
     }
     
-    
-    @IBAction func durationSlider(_ sender: UISlider) {
-        duration = round(sender.value * 4) / 4
-        workoutDuration.text = "\(duration) Hours"
+    @IBAction func shortSelected(_ sender: Any) {
+        durationSelected(1)
     }
     
+    @IBAction func mediumSelected(_ sender: UIButton) {
+        durationSelected(2)
+    }
     
+    @IBAction func longSelected(_ sender: UIButton) {
+        durationSelected(3)
+    }
     
+    @IBAction func useSuggestedProgram(_ sender: UIButton) {
+        setSuggested()
+    }
     @IBAction func finishedButton(_ sender: UIButton) {
-        dayProgramGen(totalDays)
-        generateProgramDetails()
-        self.performSegue(withIdentifier: "goToGenerating", sender: self)
+        buildingDay = 1
+        dayProgramGen()
+        //        generateProgramDetails()
+        //        self.performSegue(withIdentifier: "goToGenerating", sender: self)
     }
-}
-
-
-
-
-
-
-
-extension ProgramMaker{
-    func dayProgramGen(_ totalDays: Int){
-        switch totalDays{
+    
+    func durationSelected(_ length: Int){
+        switch length{
         case 1:
-            generateDay1()
+            duration = 1
+            shortDuration.backgroundColor = K.color.beige
+            mediumDuration.backgroundColor = .gray
+            longDuration.backgroundColor = .gray
+            updateDescription()
         case 2:
-            generateDay1()
-            generateDay2()
+            duration = 2
+            shortDuration.backgroundColor = .gray
+            mediumDuration.backgroundColor = K.color.beige
+            longDuration.backgroundColor = .gray
+            updateDescription()
         case 3:
-            generateDay1()
-            generateDay2()
-            generateDay3()
-        case 4:
-            generateDay1()
-            generateDay2()
-            generateDay3()
-            generateDay4()
+            duration = 3
+            shortDuration.backgroundColor = .gray
+            mediumDuration.backgroundColor = .gray
+            longDuration.backgroundColor = K.color.beige
+            updateDescription()
         default:
             print("error")
         }
-        
-        
     }
-    func generateDay1(){
-        //        print("Day 1 Generation")
-        done1Reading = false
-        let day = 1
-        let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
-        if pathOutline == ["66"]{
-            for i in 0...self.day1Exercises.count-1{
-                self.writeExercise(i , day, self.day1Exercises[i], self.day1Blocks[i])
-            }
-        }else{
-            let totalExercises = pathOutline.count - 1
-            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
-            temp1Exercises.removeAll()
-            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-                if let name = self.temp1Exercises.randomElement(){
-                    if self.checkDuplicate(name , self.day1Exercises) == false{
-                        self.day1Exercises.append(name)
-                    }else{
-                        self.exerciseCounters[day-1] -= 1
-                        self.generateDay1()
-                    }
-                }
-                self.done1Reading = true
+    func setDropDown(){
+        let optionClosure = {(action : UIAction) in
+            if action.title == "Choose an option"{
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                    if self.exerciseCounters[day-1] == totalExercises{
-                        self.exerciseCounters[day-1] = 0
-                        self.day1Blocks.append(self.blockCounters[day-1])
-                        self.blockCounters[day-1] += 1
-                        self.generateDay1()
-                    }else if self.done1Reading == true && self.exerciseCounters[day-1] != totalExercises{
-                        self.exerciseCounters[day-1] += 1
-                        self.day1Blocks.append(self.blockCounters[day-1])
-                        self.generateDay1()
-                    }
+            }else{
+                if action.title == "Push / Pull / Legs"{
+                    self.selectedSplit = "PPL"
+                    self.updateDescription()
+                }else if action.title == "Upper Body / Lower Body"{
+                    self.selectedSplit = "UL"
+                    self.updateDescription()
+                }else if action.title == "Full Body"{
+                    self.selectedSplit = "FULL"
+                    self.updateDescription()
                 }
             }
+            
+        }
+        
+        dropDownButton.menu = UIMenu(children: [
+            UIAction(title: "Choose an option", state: .on, handler: optionClosure),
+            UIAction(title: "Push / Pull / Legs", handler: optionClosure),
+            UIAction(title: "Upper Body / Lower Body", handler: optionClosure),
+            UIAction(title: "Full Body", handler: optionClosure),
+        ])
+        dropDownButton.showsMenuAsPrimaryAction = true
+        dropDownButton.changesSelectionAsPrimaryAction = true
+    }
+    
+    func setSuggested(){
+        durationSelected(2)
+        totalDays = 3
+        numberOfDays.text = "Days: \(totalDays)"
+        totalDaysDescription.text = "Total Days: \(totalDays)"
+        selectedSplit = "FULL"
+        let optionClosure = {(action : UIAction) in
+            if action.title == "Choose an option"{
+                
+            }else{
+                if action.title == "Push / Pull / Legs"{
+                    self.selectedSplit = "PPL"
+                    self.updateDescription()
+                }else if action.title == "Upper Body / Lower Body"{
+                    self.selectedSplit = "UL"
+                    self.updateDescription()
+                }else if action.title == "Full Body"{
+                    self.selectedSplit = "FULL"
+                    self.updateDescription()
+                }
+            }
+            
+        }
+        
+        dropDownButton.menu = UIMenu(children: [
+            UIAction(title: "Choose an option", handler: optionClosure),
+            UIAction(title: "Push / Pull / Legs", handler: optionClosure),
+            UIAction(title: "Upper Body / Lower Body", handler: optionClosure),
+            UIAction(title: "Full Body", state: .on, handler: optionClosure),
+        ])
+        dropDownButton.showsMenuAsPrimaryAction = true
+        dropDownButton.changesSelectionAsPrimaryAction = true
+    }
+    
+    
+    
+    
+    
+    
+    func updateDescription(){
+        switch duration{
+        case 1:
+            blocks = "SHORT"
+            blocksDescription.text = "Blocks: 3"
+            exercisesPerBlock.text = "Exercises per Block: 2-3"
+            totalExercisesDescription.text = "Total Number of Exercises: ~7"
+        case 2:
+            blocks = "MED"
+            blocksDescription.text = "Blocks: 4"
+            exercisesPerBlock.text = "Exercises per Block: 2-3"
+            totalExercisesDescription.text = "Total Number of Exercises: ~10"
+        case 3:
+            blocks = "LONG"
+            blocksDescription.text = "Blocks: 5"
+            exercisesPerBlock.text = "Exercises per Block: 2-3"
+            totalExercisesDescription.text = "Total Number of Exercises: ~13"
+        default:
+            print("error")
+        }
+    }
+    
+    
+    
+}
+
+extension ProgramMaker{
+    func dayProgramGen(){
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        if buildingDay == totalDays + 1{
+            buildingDay += 66
+        }
+        switch buildingDay{
+        case 1:
+            generateDay1()
+        case 2:
+            generateDay2()
+        case 3:
+            generateDay3()
+        case 4:
+            generateDay4()
+        default:
+            firestoreCommands.generateProgramDetails(currentProgramID, totalDays)
+        }
+    }
+    
+    func generateDay1(){
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        print("making day 1 -----")
+        switch selectedSplit{
+        case "FULL":
+            
+            let fullDayBuilder = FullDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 1)
+            day1Workout = fullDayBuilder.generateProgram(1)
+            for count in 0 ..< day1Workout.count{
+                print(day1Workout[count].docPath)
+            }
+            firestoreCommands.writeProgramToFirestore(day1Workout, 1, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        case "PPL":
+            
+            let PPLDayBuilder = PPLDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 1)
+            day1Workout = PPLDayBuilder.generateProgram(1)
+            for count in 0 ..< day1Workout.count{
+                print(day1Workout[count].docPath)
+            }
+            //            firestoreCommands.writeProgramToFirestore(day1Workout, 1, currentProgramID)
+            
+            buildingDay += 1
+            dayProgramGen()
+        case "UL":
+            
+            let ULDayBuilder = ULDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 1)
+            day1Workout = ULDayBuilder.generateProgram(1)
+            for count in 0 ..< day1Workout.count{
+                print(day1Workout[count].docPath)
+            }
+            firestoreCommands.writeProgramToFirestore(day1Workout, 1, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        default:
+            print("error Day 1")
         }
     }
     func generateDay2(){
-        //        print("Day 2 Generation")
-        done2Reading = false
-        let day = 2
-        let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
-        if pathOutline == ["66"]{
-            for i in 0...self.day2Exercises.count-1{
-                self.writeExercise(i , day, self.day2Exercises[i], self.day2Blocks[i])
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        print("making day 2 -----")
+        switch selectedSplit{
+        case "FULL":
+            let fullDayBuilder = FullDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 2)
+            fullDayBuilder.removeDuplicate(day1Workout)
+            day2Workout = fullDayBuilder.generateProgram(2)
+            for count in 0 ..< day2Workout.count{
+                print(day2Workout[count].docPath)
             }
+            firestoreCommands.writeProgramToFirestore(day2Workout, 2, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        case "PPL":
             
-        }else {
-            let totalExercises = pathOutline.count - 1
-            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
-            temp2Exercises.removeAll()
-            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-                if let name = self.temp2Exercises.randomElement(){
-                    if self.checkDuplicate(name , self.day2Exercises) == false{
-                        self.day2Exercises.append(name)
-                    }else{
-                        self.exerciseCounters[day-1] -= 1
-                        self.generateDay2()
-                    }
-                }
-                self.done2Reading = true
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                    if self.exerciseCounters[day-1] == totalExercises{
-                        self.exerciseCounters[day-1] = 0
-                        self.day2Blocks.append(self.blockCounters[day-1])
-                        self.blockCounters[day-1] += 1
-                        self.generateDay2()
-                    }else if self.done2Reading == true && self.exerciseCounters[day-1] != totalExercises{
-                        self.exerciseCounters[day-1] += 1
-                        self.day2Blocks.append(self.blockCounters[day-1])
-                        self.generateDay2()
-                    }
-                }
+            let PPLDayBuilder = PPLDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 2)
+            PPLDayBuilder.removeDuplicate(day1Workout)
+            day2Workout = PPLDayBuilder.generateProgram(2)
+            for count in 0 ..< day2Workout.count{
+                print(day2Workout[count].docPath)
             }
+            firestoreCommands.writeProgramToFirestore(day2Workout, 2, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        case "UL":
+            let ULDayBuilder = ULDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 2)
+            ULDayBuilder.removeDuplicate(day1Workout)
+            day2Workout = ULDayBuilder.generateProgram(2)
+            for count in 0 ..< day2Workout.count{
+                print(day2Workout[count].docPath)
+            }
+            firestoreCommands.writeProgramToFirestore(day2Workout, 2, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        default:
+            print("error Day 2")
         }
     }
     func generateDay3(){
-        //        print("Day 3 Generation")
-        done3Reading = false
-        let day = 3
-        let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
-        if pathOutline == ["66"]{
-            for i in 0...self.day3Exercises.count-1{
-                self.writeExercise(i , day, self.day3Exercises[i], self.day3Blocks[i])
-            }
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        print("making day 3 -----")
+        switch selectedSplit{
+        case "FULL":
+            let fullDayBuilder = FullDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 3)
+            fullDayBuilder.removeDuplicate(day1Workout + day2Workout)
+            day3Workout = fullDayBuilder.generateProgram(3)
             
-        }else {
-            let totalExercises = pathOutline.count - 1
-            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
-            temp3Exercises.removeAll()
-            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-                if let name = self.temp3Exercises.randomElement(){
-                    if self.checkDuplicate(name , self.day3Exercises) == false{
-                        self.day3Exercises.append(name)
-                    }else{
-                        self.exerciseCounters[day-1] -= 1
-                        self.generateDay3()
-                    }
-                }
-                self.done3Reading = true
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                    if self.exerciseCounters[day-1] == totalExercises{
-                        self.exerciseCounters[day-1] = 0
-                        self.day3Blocks.append(self.blockCounters[day-1])
-                        self.blockCounters[day-1] += 1
-                        self.generateDay3()
-                    }else if self.done3Reading == true && self.exerciseCounters[day-1] != totalExercises{
-                        self.exerciseCounters[day-1] += 1
-                        self.day3Blocks.append(self.blockCounters[day-1])
-                        self.generateDay3()
-                    }
-                }
+            for count in 0 ..< day3Workout.count{
+                print(day3Workout[count].docPath)
             }
+            firestoreCommands.writeProgramToFirestore(day3Workout, 3, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        case "PPL":
+            let PPLDayBuilder = PPLDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 3)
+            PPLDayBuilder.removeDuplicate(day1Workout + day2Workout)
+            day3Workout = PPLDayBuilder.generateProgram(3)
+            for count in 0 ..< day3Workout.count{
+                print(day3Workout[count].docPath)
+            }
+            firestoreCommands.writeProgramToFirestore(day3Workout, 3, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        case "UL":
+            let ULDayBuilder = ULDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 3)
+            ULDayBuilder.removeDuplicate(day1Workout + day2Workout)
+            day3Workout = ULDayBuilder.generateProgram(3)
+            
+            for count in 0 ..< day3Workout.count{
+                print(day3Workout[count].docPath)
+            }
+            firestoreCommands.writeProgramToFirestore(day3Workout, 3, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        default:
+            print("error Day3")
         }
     }
     func generateDay4(){
-        //        print("Day 4 Generation")
-        done3Reading = false
-        let day = 4
-        let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
-        if pathOutline == ["66"]{
-            for i in 0...self.day4Exercises.count-1{
-                self.writeExercise(i , day, self.day4Exercises[i], self.day4Blocks[i])
-            }
-        }else{
-            let totalExercises = pathOutline.count - 1
-            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
-            temp4Exercises.removeAll()
-            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
+        print("making day 4-----")
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        switch selectedSplit{
+        case "FULL":
+            let fullDayBuilder = FullDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 4)
+            fullDayBuilder.removeDuplicate(day1Workout + day2Workout + day3Workout)
+            day4Workout = fullDayBuilder.generateProgram(4)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
-                if let name = self.temp4Exercises.randomElement(){
-                    if self.checkDuplicate(name , self.day4Exercises) == false{
-                        self.day4Exercises.append(name)
-                    }else{
-                        self.exerciseCounters[day-1] -= 1
-                        self.generateDay4()
-                    }
-                }
-                self.done4Reading = true
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                    if self.exerciseCounters[day-1] == totalExercises{
-                        self.exerciseCounters[day-1] = 0
-                        self.day4Blocks.append(self.blockCounters[day-1])
-                        self.blockCounters[day-1] += 1
-                        self.generateDay4()
-                    }else if self.done4Reading == true && self.exerciseCounters[day-1] != totalExercises{
-                        self.exerciseCounters[day-1] += 1
-                        self.day4Blocks.append(self.blockCounters[day-1])
-                        self.generateDay4()
-                    }
-                }
+            for count in 0 ..< day4Workout.count{
+                print(day4Workout[count].docPath)
             }
+            firestoreCommands.writeProgramToFirestore(day4Workout, 4, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        case "PPL":
+            let circuitDayBuilder = CircuitDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 4)
+            day4Workout = circuitDayBuilder.generateProgram()
+            for count in 0 ..< day4Workout.count{
+                print(day4Workout[count].docPath)
+            }
+            firestoreCommands.writeProgramToFirestore(day4Workout, 4, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        case "UL":
+            let ULDayBuilder = ULDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 4)
+            ULDayBuilder.removeDuplicate(day1Workout + day2Workout + day3Workout)
+            day4Workout = ULDayBuilder.generateProgram(4)
+            
+            for count in 0 ..< day4Workout.count{
+                print(day4Workout[count].docPath)
+            }
+            firestoreCommands.writeProgramToFirestore(day4Workout, 4, currentProgramID)
+            buildingDay += 1
+            dayProgramGen()
+        default:
+            print("error Day3")
         }
     }
+    
+    //    func generateDay1(){
+    //        //        print("Day 1 Generation")
+    //        done1Reading = false
+    //        let day = 1
+    //        let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
+    //        if pathOutline == ["66"]{
+    //            for i in 0...self.day1Exercises.count-1{
+    //                self.writeExercise(i , day, self.day1Exercises[i], self.day1Blocks[i])
+    //            }
+    //        }else{
+    //            let totalExercises = pathOutline.count - 1
+    //            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
+    //            temp1Exercises.removeAll()
+    //            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
+    //
+    //            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+    //                if let name = self.temp1Exercises.randomElement(){
+    //                    if self.checkDuplicate(name , self.day1Exercises) == false{
+    //                        self.day1Exercises.append(name)
+    //                    }else{
+    //                        self.exerciseCounters[day-1] -= 1
+    //                        self.generateDay1()
+    //                    }
+    //                }
+    //                self.done1Reading = true
+    //
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+    //                    if self.exerciseCounters[day-1] == totalExercises{
+    //                        self.exerciseCounters[day-1] = 0
+    //                        self.day1Blocks.append(self.blockCounters[day-1])
+    //                        self.blockCounters[day-1] += 1
+    //                        self.generateDay1()
+    //                    }else if self.done1Reading == true && self.exerciseCounters[day-1] != totalExercises{
+    //                        self.exerciseCounters[day-1] += 1
+    //                        self.day1Blocks.append(self.blockCounters[day-1])
+    //                        self.generateDay1()
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //    func generateDay2(){
+    //        //        print("Day 2 Generation")
+    //        done2Reading = false
+    //        let day = 2
+    //        let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
+    //        if pathOutline == ["66"]{
+    //            for i in 0...self.day2Exercises.count-1{
+    //                self.writeExercise(i , day, self.day2Exercises[i], self.day2Blocks[i])
+    //            }
+    //
+    //        }else {
+    //            let totalExercises = pathOutline.count - 1
+    //            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
+    //            temp2Exercises.removeAll()
+    //            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
+    //
+    //            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+    //                if let name = self.temp2Exercises.randomElement(){
+    //                    if self.checkDuplicate(name , self.day2Exercises) == false{
+    //                        self.day2Exercises.append(name)
+    //                    }else{
+    //                        self.exerciseCounters[day-1] -= 1
+    //                        self.generateDay2()
+    //                    }
+    //                }
+    //                self.done2Reading = true
+    //
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+    //                    if self.exerciseCounters[day-1] == totalExercises{
+    //                        self.exerciseCounters[day-1] = 0
+    //                        self.day2Blocks.append(self.blockCounters[day-1])
+    //                        self.blockCounters[day-1] += 1
+    //                        self.generateDay2()
+    //                    }else if self.done2Reading == true && self.exerciseCounters[day-1] != totalExercises{
+    //                        self.exerciseCounters[day-1] += 1
+    //                        self.day2Blocks.append(self.blockCounters[day-1])
+    //                        self.generateDay2()
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //    func generateDay3(){
+    //        //        print("Day 3 Generation")
+    //        done3Reading = false
+    //        let day = 3
+    //        let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
+    //        if pathOutline == ["66"]{
+    //            for i in 0...self.day3Exercises.count-1{
+    //                self.writeExercise(i , day, self.day3Exercises[i], self.day3Blocks[i])
+    //            }
+    //
+    //        }else {
+    //            let totalExercises = pathOutline.count - 1
+    //            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
+    //            temp3Exercises.removeAll()
+    //            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
+    //
+    //            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+    //                if let name = self.temp3Exercises.randomElement(){
+    //                    if self.checkDuplicate(name , self.day3Exercises) == false{
+    //                        self.day3Exercises.append(name)
+    //                    }else{
+    //                        self.exerciseCounters[day-1] -= 1
+    //                        self.generateDay3()
+    //                    }
+    //                }
+    //                self.done3Reading = true
+    //
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+    //                    if self.exerciseCounters[day-1] == totalExercises{
+    //                        self.exerciseCounters[day-1] = 0
+    //                        self.day3Blocks.append(self.blockCounters[day-1])
+    //                        self.blockCounters[day-1] += 1
+    //                        self.generateDay3()
+    //                    }else if self.done3Reading == true && self.exerciseCounters[day-1] != totalExercises{
+    //                        self.exerciseCounters[day-1] += 1
+    //                        self.day3Blocks.append(self.blockCounters[day-1])
+    //                        self.generateDay3()
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //    func generateDay4(){
+    //        //        print("Day 4 Generation")
+    //        done3Reading = false
+    //        let day = 4
+    //        let pathOutline = ProgramOutline.getOutline(totalDays, day, blockCounters[day-1])
+    //        if pathOutline == ["66"]{
+    //            for i in 0...self.day4Exercises.count-1{
+    //                self.writeExercise(i , day, self.day4Exercises[i], self.day4Blocks[i])
+    //            }
+    //        }else{
+    //            let totalExercises = pathOutline.count - 1
+    //            let skillLevel = detSkillLevel(pathOutline[exerciseCounters[day-1]])
+    //            temp4Exercises.removeAll()
+    //            readDB(day, pathOutline[exerciseCounters[day-1]], skillLevel)
+    //
+    //            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+    //                if let name = self.temp4Exercises.randomElement(){
+    //                    if self.checkDuplicate(name , self.day4Exercises) == false{
+    //                        self.day4Exercises.append(name)
+    //                    }else{
+    //                        self.exerciseCounters[day-1] -= 1
+    //                        self.generateDay4()
+    //                    }
+    //                }
+    //                self.done4Reading = true
+    //
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+    //                    if self.exerciseCounters[day-1] == totalExercises{
+    //                        self.exerciseCounters[day-1] = 0
+    //                        self.day4Blocks.append(self.blockCounters[day-1])
+    //                        self.blockCounters[day-1] += 1
+    //                        self.generateDay4()
+    //                    }else if self.done4Reading == true && self.exerciseCounters[day-1] != totalExercises{
+    //                        self.exerciseCounters[day-1] += 1
+    //                        self.day4Blocks.append(self.blockCounters[day-1])
+    //                        self.generateDay4()
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     
     
@@ -362,15 +668,15 @@ extension ProgramMaker{
     
     func detSkillLevel(_ path: String) -> Int{
         if path == dK.category.plyo || path == dK.category.plyo || path == dK.category.plyo{
-            return user.plyoLevel
+            return userInfo!.plyoLevel
         }else if path == dK.category.upper || path == dK.category.upper{
-            return user.upperLevel
+            return userInfo!.upperLevel
         }else if path == dK.category.lower || path == dK.category.lower{
-            return user.lowerLevel
+            return userInfo!.lowerLevel
         }else if path == dK.category.core || path == dK.category.core{
-            return user.coreLevel
+            return userInfo!.coreLevel
         }else if path == dK.category.arms || path == dK.category.arms || path == dK.category.arms{
-            return user.armsLevel
+            return userInfo!.armsLevel
         }
         return 0
     }
@@ -383,41 +689,41 @@ extension ProgramMaker{
 
 extension ProgramMaker{
     
-    func generateProgramDetails(){
-        //Sets nextProgramMade in Previous program to true and readyForNext to false
-        db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(programID)").document("programDetails").setData(["readyForNext" : false, "nextProgramMade" : true], merge: true)
-        
-        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(programID + 1)").document("programDetails")
-        for day in 1...totalDays{
-            docRef.setData(["day\(day)Completion" : 0], merge: true)
-        }
-        docRef.setData(["totalDays" : totalDays, "currentDay" : 1, "readyForNext" : false, "nextProgramMade": false], merge: true)
-        
-    }
-    func writeExercise(_ order: Int, _ day: Int, _ path: String, _ block: Int) {
-
-        let docRef = db.document(path)
-
-        docRef.getDocument() { (document, err) in
-            if let err = err {
-                print(err)
-            }else{
-                if let document = document{
-                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID + 1)").document("day\(day)").collection("exercises").document("\(document.documentID)").setData([
-                        "name" : document["name"] as! String,
-                        "skillTree" : document["skillTree"] as! [String],
-                        "reps" : ProgramOutline.getReps(self.user.trainingType),
-                        "sets" : 3,
-                        "order" : order,
-                        "block" : block])
-                }
-            }
-
-        }
-    }
-
+    //    func generateProgramDetails(){
+    //        //Sets nextProgramMade in Previous program to true and readyForNext to false
+    //        db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(currentProgramID)").document("programDetails").setData(["readyForNext" : false, "nextProgramMade" : true], merge: true)
+    //
+    //        let docRef = db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(currentProgramID + 1)").document("programDetails")
+    //        for day in 1...totalDays{
+    //            docRef.setData(["day\(day)Completion" : 0], merge: true)
+    //        }
+    //        docRef.setData(["totalDays" : totalDays, "currentDay" : 1, "week" : 0, "readyForNext" : false, "nextProgramMade": false], merge: true)
+    //
+    //    }
+    //    func writeExercise(_ order: Int, _ day: Int, _ path: String, _ block: Int) {
+    //
+    //        let docRef = db.document(path)
+    //
+    //        docRef.getDocument() { (document, err) in
+    //            if let err = err {
+    //                print(err)
+    //            }else{
+    //                if let document = document{
+    //                    self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.currentProgramID + 1)").document("day\(day)").collection("exercises").document("\(document.documentID)").setData([
+    //                        "name" : document["name"] as! String,
+    //                        "skillTree" : document["skillTree"] as! [String],
+    //                        "reps" : ProgramOutline.getReps(self.userInfo!.trainingType),
+    //                        "sets" : 3,
+    //                        "order" : order,
+    //                        "block" : block])
+    //                }
+    //            }
+    //
+    //        }
+    //    }
     
-
+    
+    
     func findMonth()-> String{
         let now = Date()
         let dateFormatter = DateFormatter()
@@ -431,57 +737,69 @@ extension ProgramMaker{
 
 // MARK: Gets User Data
 extension ProgramMaker{
-    
     func getUserInfo(){
+        let tabBar = tabBarController as! TabBarViewController
+        totalDays = tabBar.totalDays
+        currentProgramID = tabBar.programID
         let docRef = db.collection(K.s.users).document(K.db.userAuth)
-        
         docRef.getDocument { document, err in
             if let err = err{
                 print(err)
             }else{
                 if let document = document{
-                    self.levels[K.s.skillTree.playerLevel] = document[K.s.skillTree.playerLevel] as? Int
-                    self.levels[K.s.skillTree.trainingType] = document[K.s.skillTree.trainingType] as? Int
-
+                    self.levels[K.s.skillTree.trainingType] = document[K.s.skillTree.trainingType] as! Int
+                    
                 }
             }
         }
+        let skillTreeRef = db.collection(K.s.users).document(K.db.userAuth).collection(K.s.skillTree.skillTree)
         
-        
-        for tree in selectedTree{
-            let docRef = db.collection(K.s.users).document(K.db.userAuth).collection(K.s.skillTree.skillTree).document(tree)
-            
-            docRef.getDocument { collection, err in
-                if let err = err{
-                    print(err)
-                }else{
-                    
-                    if let document = collection{
-                        self.levels["\(tree)"] = document["level"] as? Int
+        skillTreeRef.getDocuments { collection, error in
+            if let error = error{
+                print(error)
+            }else{
+                if let collection = collection{
+                    for document in collection.documents{
+                        self.levels[document.documentID] = document["level"] as! Int
                     }
                 }
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
-            self.user = UserInfo(
-                playerLevel: self.levels[K.s.skillTree.playerLevel]!,
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+            self.userInfo = UserInfo(
+                playerLevel: self.levels[K.s.skillTree.player]!,
                 trainingType: self.levels[K.s.skillTree.trainingType]!,
                 upperLevel: self.levels[K.s.skillTree.upper]!,
                 lowerLevel: self.levels[K.s.skillTree.lower]!,
                 plyoLevel: self.levels[K.s.skillTree.plyo]!,
                 coreLevel: self.levels[K.s.skillTree.core]!,
                 armsLevel: self.levels[K.s.skillTree.arms]!)
-                
+            
+            self.retrievePossibleExercises()
         }
-        
-        
     }
-}
-
-extension ProgramMaker{
-    func setVariables(){
-        let tabBar = tabBarController as! TabBarViewController
-        totalDays = tabBar.totalDays
-        programID = tabBar.programID
+    func retrievePossibleExercises(){
+        if let userInfo = userInfo{
+            let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+            firestoreCommands.fetchPossibleExercises("plyo", userInfo.plyoLevel) { exercises in
+                self.plyoExercises = exercises
+            }
+            firestoreCommands.fetchPossibleExercises("upper", userInfo.upperLevel) { exercises in
+                self.upperExercises = exercises
+            }
+            firestoreCommands.fetchPossibleExercises("lower", userInfo.lowerLevel) { exercises in
+                self.lowerExercises = exercises
+            }
+            firestoreCommands.fetchPossibleExercises("core", userInfo.coreLevel) { exercises in
+                self.coreExercises = exercises
+            }
+            firestoreCommands.fetchPossibleExercises("arms", userInfo.armsLevel) { exercises in
+                self.armsExercises = exercises
+            }
+            finishedButton.isEnabled = true
+            
+        }
     }
+    
+    
 }

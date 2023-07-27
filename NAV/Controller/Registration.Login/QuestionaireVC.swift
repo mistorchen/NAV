@@ -31,8 +31,6 @@ class QuestionaireVC: UIViewController{
     @IBOutlet weak var stepperLabel: UILabel!
     
     
-    @IBOutlet weak var answerTableView: UITableView!
-    
     
     var age = 0
     var weight = 0

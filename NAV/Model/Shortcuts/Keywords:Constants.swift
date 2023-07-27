@@ -18,7 +18,7 @@ struct K{
             static let plyo = "plyo"
             static let core = "core"
             static let arms = "arms"
-            static let playerLevel = "playerLevel"
+            static let player = "player"
             static let trainingType = "trainingType"
 
             

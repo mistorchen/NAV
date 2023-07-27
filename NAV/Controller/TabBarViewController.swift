@@ -35,6 +35,7 @@ class TabBarViewController: UITabBarController{
     var currentDay = 0
     var programID = 0
     var newProgram: Bool = false
+    var week = 0
     
     var day1Program: [ExerciseInfo] = []
     var day2Program: [ExerciseInfo] = []
@@ -101,7 +102,6 @@ class TabBarViewController: UITabBarController{
             }else{
                 if let document = document{
                     self.programID = document["programID"] as! Int
-                    
                     let docRef = self.db.collection("users").document(Auth.auth().currentUser!.uid).collection("programInventory").document("programs").collection("program\(self.programID)").document("programDetails")
                     docRef.getDocument { document, error in
                         if let error = error{
@@ -110,6 +110,7 @@ class TabBarViewController: UITabBarController{
                             self.totalDays = document!["totalDays"] as! Int
                             self.currentDay = document!["currentDay"] as! Int
                             self.newProgram = document!["readyForNext"] as! Bool
+                            self.week = document!["week"] as! Int
                             switch self.totalDays{
                             case 1:
                                 self.readDay1()
@@ -391,32 +392,27 @@ extension TabBarViewController{
                 print(err)
             }else{
                 if let document = document{
-                    self.levels[K.s.skillTree.playerLevel] = document[K.s.skillTree.playerLevel] as? Int
-                    self.levels[K.s.skillTree.trainingType] = document[K.s.skillTree.trainingType] as? Int
+                    self.levels[K.s.skillTree.trainingType] = document[K.s.skillTree.trainingType] as! Int
 
                 }
             }
         }
+        let skillTreeRef = db.collection(K.s.users).document(K.db.userAuth).collection(K.s.skillTree.skillTree)
         
-        
-        for tree in selectedTree{
-            
-            let docRef = db.collection(K.s.users).document(K.db.userAuth).collection(K.s.skillTree.skillTree).document(tree)
-            
-            docRef.getDocument { collection, err in
-                if let err = err{
-                    print(err)
-                }else{
-                    
-                    if let document = collection{
-                        self.levels["\(tree)"] = document["exp"] as? Int
+        skillTreeRef.getDocuments { collection, error in
+            if let error = error{
+                print(error)
+            }else{
+                if let collection = collection{
+                    for document in collection.documents{
+                        self.levels[document.documentID] = document["level"] as! Int
                     }
                 }
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2){
             self.userInfo = UserInfo(
-                playerLevel: self.levels[K.s.skillTree.playerLevel]!,
+                playerLevel: self.levels[K.s.skillTree.player]!,
                 trainingType: self.levels[K.s.skillTree.trainingType]!,
                 upperLevel: self.levels[K.s.skillTree.upper]!,
                 lowerLevel: self.levels[K.s.skillTree.lower]!,

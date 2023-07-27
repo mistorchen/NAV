@@ -8,11 +8,7 @@
 import Foundation
 
 struct SkillLevelEXP{
-    
-    
-    
-    
-    static func levelUp(_ currentLevel: Int, _ exp: Int) -> [Int]{
+    static func skillLevelUp(_ currentLevel: Int, _ exp: Int) -> [Int]{
         let newExp = exp + 50
 
         if currentLevel <= 20{
@@ -36,6 +32,14 @@ struct SkillLevelEXP{
         }
         return [0,0]
     }
-    
+    static func playerLevelUp(_ currentLevel: Int, _ exp: Int) -> [Int]{
+        let newExp = exp + 50
+
+        if newExp >= 200{
+            return [currentLevel + 1, newExp - 200]
+        }else{
+            return [currentLevel, newExp]
+        }
+    }
     
 }

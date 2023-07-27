@@ -25,6 +25,7 @@ class CurrentWorkoutVC: UIViewController, UITableViewDelegate, YTPlayerViewDeleg
     var dayArray: [Int] = []
     var completedCount = 1
     var weightWritten = 0
+    var week = 0
     
     var programID = 0
     
@@ -202,6 +203,7 @@ extension CurrentWorkoutVC: UITableViewDataSource{
             
             cell.exerciseName.text = selectedProgram[exerciseIndex].name
             cell.repCount.text = String(selectedProgram[exerciseIndex].reps)
+            cell.reps = selectedProgram[exerciseIndex].reps
             cell.setCount.text = String(selectedProgram[exerciseIndex].sets)
             cell.YTPlayer.delegate = self
             cell.YTPlayer.load(withVideoId: "gEZbarOeI3o") // Change to read from firebase
@@ -212,6 +214,8 @@ extension CurrentWorkoutVC: UITableViewDataSource{
             cell.exerciseIndex = exerciseIndex
             cell.programDay = day
             cell.programID = programID
+            cell.week = week
+            
             
             //Reset Interactible Fields Color
             cell.resetTextFields()
@@ -243,25 +247,32 @@ extension CurrentWorkoutVC: UITableViewDataSource{
                     
                     if let weight = document!["e\(index)s1"]{
                         cell.set1Field.text = "\(weight)"
+                        cell.weightLifted[0] = weight as! Int
                         cell.checkButtonStatus()
                     }
                     if let weight = document!["e\(index)s2"]{
                         cell.set2Field.text = "\(weight)"
+                        cell.weightLifted[1] = weight as! Int
                         cell.checkButtonStatus()
                     }
                     if let weight = document!["e\(index)s2"]{
                         cell.set3Field.text = "\(weight)"
+                        cell.weightLifted[2] = weight as! Int
                         cell.checkButtonStatus()
                     }
-                    if let _ = document!["e\(index)d"]{
+                    let difficulty = document!["e\(index)d"] as! Int
+                        cell.buttonSelected(difficulty)
+                        
+                        
+                        
                         self.unlockNext[indexPath.row] = 0
                         if self.unlockNext.allSatisfy({ $0 == 0 }) == true{
                             self.nextButton.isEnabled = true
-                            self.nextButton.backgroundColor = UIColor(red: CGFloat(216.0/255.0), green: CGFloat(196.0/255.0), blue: CGFloat(182.0/255.0), alpha: 1)
+                            self.nextButton.backgroundColor = K.color.beige
                         }
                     }
                 }
-            }
+            
             
             
             exerciseIndex += 1
@@ -318,5 +329,6 @@ extension CurrentWorkoutVC{
         let tabBar = tabBarController as! TabBarViewController
         day = tabBar.currentDay
         programID = tabBar.programID
+        week = tabBar.week
     }
 }
