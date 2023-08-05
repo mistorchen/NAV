@@ -224,68 +224,68 @@ class ULDayBuilder{
             if numberOfExercises == 3{
                 //Upper body Warm Up Exercise
                 let firstExercise = fetchExerciseWith(K.s.skillTree.upper, upperPool, blockID, [""]) // Fetch Exercise
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree)) // Append Exercise To Workout
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree)) // Append Exercise To Workout
                 upperExercises = upperExercises.filter{ $0 != firstExercise} // Filter from Global Exercise Pool
                 
                 // Plyo Exercise
                 let secondExercise = fetchExerciseWith(K.s.skillTree.plyo, plyoExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 plyoExercises = plyoExercises.filter{ $0 != secondExercise}
                 
                 //Core Exercise
                 let thirdExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
             }
         case "LOWER":
             if numberOfExercises == 3{
                 //Upper body Warm Up Exercise
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerPool, blockID, [""]) // Fetch Exercise
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree)) // Append Exercise To Workout
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree)) // Append Exercise To Workout
                 upperExercises = upperExercises.filter{ $0 != firstExercise} // Filter from Global Exercise Pool
                 
                 // Plyo Exercise
                 let secondExercise = fetchExerciseWith(K.s.skillTree.plyo, plyoExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 plyoExercises = plyoExercises.filter{ $0 != secondExercise}
                 
                 //Core Exercise
                 let thirdExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
             }
         case "UPPER2":
             if numberOfExercises == 3{
                 //Upper body Warm Up Exercise
                 let firstExercise = fetchExerciseWith(K.s.skillTree.upper, upperPool, blockID, [""]) // Fetch Exercise
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree)) // Append Exercise To Workout
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree)) // Append Exercise To Workout
                 upperExercises = upperExercises.filter{ $0 != firstExercise} // Filter from Global Exercise Pool
                 
                 // Plyo Exercise
                 let secondExercise = fetchExerciseWith(K.s.skillTree.plyo, plyoExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 plyoExercises = plyoExercises.filter{ $0 != secondExercise}
                 
                 //Core Exercise
                 let thirdExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
             }
         case "LOWER2":
             if numberOfExercises == 3{
                 //Upper body Warm Up Exercise
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerPool, blockID, [""]) // Fetch Exercise
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree)) // Append Exercise To Workout
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree)) // Append Exercise To Workout
                 upperExercises = upperExercises.filter{ $0 != firstExercise} // Filter from Global Exercise Pool
                 
                 // Plyo Exercise
                 let secondExercise = fetchExerciseWith(K.s.skillTree.plyo, plyoExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 plyoExercises = plyoExercises.filter{ $0 != secondExercise}
                 
                 //Core Exercise
                 let thirdExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
             }
         default:
@@ -304,113 +304,113 @@ class ULDayBuilder{
         case "UPPER":
             if numberOfExercises == 3 {
                 let mainExercise = fetchMainExerciseWith(upperMainPool, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != mainExercise}
                 
                 let secondExercise = fetchExerciseWith(K.s.skillTree.upper, upperAccessoryPool, blockID, mainExercise.tags)
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != secondExercise}
                 
                 let coreExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: coreExercise.docID, docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != coreExercise}
             }
             if numberOfExercises == 2 {
                 let mainExercise = fetchMainExerciseWith(upperMainPool, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != mainExercise}
                 
                 let coreExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: coreExercise.docID, docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != coreExercise}
             }
             if numberOfExercises == 1 {
                 let mainExercise = fetchMainExerciseWith(upperMainPool, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != mainExercise}
             }
         case "LOWER":
             if numberOfExercises == 3 {
                 let mainExercise = fetchMainExerciseWith(lowerMainPool, ["SQUAT"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != mainExercise}
                 
                 let secondExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != secondExercise}
                 
                 let coreExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: coreExercise.docID, docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != coreExercise}
             }
             if numberOfExercises == 2 {
                 let mainExercise = fetchMainExerciseWith(lowerMainPool, ["SQUAT"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != mainExercise}
                 
                 let coreExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: coreExercise.docID, docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != coreExercise}
             }
             if numberOfExercises == 1 {
                 let mainExercise = fetchMainExerciseWith(lowerMainPool, ["SQUAT"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != mainExercise}
             }
         case "UPPER2":
             if numberOfExercises == 3 {
                 let mainExercise = fetchMainExerciseWith(upperMainPool, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != mainExercise}
                 
                 let secondExercise = fetchExerciseWith(K.s.skillTree.upper, upperAccessoryPool, blockID, mainExercise.tags)
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != secondExercise}
                 
                 let coreExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: coreExercise.docID, docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != coreExercise}
             }
             if numberOfExercises == 2 {
                 let mainExercise = fetchMainExerciseWith(upperMainPool, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != mainExercise}
                 
                 let coreExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: coreExercise.docID, docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != coreExercise}
             }
             if numberOfExercises == 1 {
                 let mainExercise = fetchMainExerciseWith(upperMainPool, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != mainExercise}
             }
         case "LOWER2":
             if numberOfExercises == 3 {
                 let mainExercise = fetchMainExerciseWith(lowerMainPool, ["HINGE"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != mainExercise}
                 
                 let secondExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != secondExercise}
                 
                 let coreExercise = fetchExerciseWith(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: coreExercise.docID, docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != coreExercise}
             }
             if numberOfExercises == 2 {
                 let mainExercise = fetchMainExerciseWith(lowerMainPool, ["HINGE"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != mainExercise}
                 
                 let coreExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: coreExercise.docID, docPath: coreExercise.docPath, order: 2, block: blockID, priority: coreExercise.priority, skillTree: coreExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != coreExercise}
             }
             if numberOfExercises == 1 {
                 let mainExercise = fetchMainExerciseWith(lowerMainPool, ["HINGE"])
-                builtWorkout.append(ChosenExercise(docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: mainExercise.docID, docPath: mainExercise.docPath, order: 0, block: blockID, priority: mainExercise.priority, skillTree: mainExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != mainExercise}
             }
         default:
@@ -429,119 +429,119 @@ class ULDayBuilder{
         case "UPPER":
             if numberOfExercises == 3 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.upper, upperAccessoryPool, blockID, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 upperAccessoryPool = upperAccessoryPool.filter{ $0 != firstExercise}
                 upperExercises = upperExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWithout(K.s.skillTree.upper, upperAccessoryPool, blockID, firstExercise.tags)
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != secondExercise}
                 
                 let thirdExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
             }
             if numberOfExercises == 2 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.upper, upperAccessoryPool, blockID, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWithout(K.s.skillTree.upper, upperAccessoryPool, blockID, firstExercise.tags)
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != secondExercise}
             }
             if numberOfExercises == 1 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.upper, upperAccessoryPool, blockID, ["PUSH"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != firstExercise}
             }
         case "LOWER":
             if numberOfExercises == 3 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["SQUAT"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerAccessoryPool = lowerAccessoryPool.filter{ $0 != firstExercise}
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != secondExercise}
                 
                 let thirdExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
             }
             if numberOfExercises == 2 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["SQUAT"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 2, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 2, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != secondExercise}
                 
             }
             if numberOfExercises == 1 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["SQUAT"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
             }
         case "UPPER2":
             if numberOfExercises == 3 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.upper, upperAccessoryPool, blockID, ["PULL"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 upperAccessoryPool = upperAccessoryPool.filter{ $0 != firstExercise}
                 upperExercises = upperExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWithout(K.s.skillTree.upper, upperAccessoryPool, blockID, firstExercise.tags)
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != secondExercise}
                 
                 let thirdExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
             }
             if numberOfExercises == 2 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.upper, upperAccessoryPool, blockID, ["PULL"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWithout(K.s.skillTree.upper, upperAccessoryPool, blockID, firstExercise.tags)
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != secondExercise}
             }
             if numberOfExercises == 1 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.upper, upperAccessoryPool, blockID, ["PULL"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 upperExercises = upperExercises.filter{ $0 != firstExercise}
             }
         case "LOWER2":
             if numberOfExercises == 3 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["HINGE"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerAccessoryPool = lowerAccessoryPool.filter{ $0 != firstExercise}
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != secondExercise}
                 
                 let thirdExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
             }
             if numberOfExercises == 2 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["HINGE"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 2, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 2, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != secondExercise}
                 
             }
             if numberOfExercises == 1 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["HINGE"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
             }
         default:
@@ -556,98 +556,98 @@ class ULDayBuilder{
         switch daySplit{
         case "UPPER":
             let firstExercise = fetchExerciseWith(K.s.skillTree.arms, armsAccessoryPool, blockID, ["BICEP"])
-            builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+            builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
             armsAccessoryPool = armsAccessoryPool.filter{ $0 != firstExercise}
             armsExercises = armsExercises.filter{ $0 != firstExercise}
             
             let secondExercise = fetchExerciseWith(K.s.skillTree.arms, armsAccessoryPool, blockID, ["TRICEP"])
-            builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+            builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
             armsExercises = armsExercises.filter{ $0 != secondExercise}
             
             let thirdExercise = fetchExerciseWith(K.s.skillTree.arms, armsAccessoryPool, blockID, ["SHOULDER"])
-            builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+            builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
             armsExercises = armsExercises.filter{ $0 != thirdExercise}
             
             let fourthExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-            builtWorkout.append(ChosenExercise(docPath: fourthExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+            builtWorkout.append(ChosenExercise(docID: fourthExercise.docID, docPath: fourthExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
             coreExercises = coreExercises.filter{ $0 != fourthExercise}
             
             
         case "LOWER":
             if numberOfExercises == 3 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != secondExercise}
                 
                 let thirdExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
                 
             }
             if numberOfExercises == 2 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 2, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 2, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != secondExercise}
             }
             if numberOfExercises == 1 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
             }
         case "UPPER2": // SAME AS UPPER 7/26/23
             let firstExercise = fetchExerciseWith(K.s.skillTree.arms, armsAccessoryPool, blockID, ["BICEP"])
-            builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+            builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
             armsAccessoryPool = armsAccessoryPool.filter{ $0 != firstExercise}
             armsExercises = armsExercises.filter{ $0 != firstExercise}
             
             let secondExercise = fetchExerciseWith(K.s.skillTree.arms, armsAccessoryPool, blockID, ["TRICEP"])
-            builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+            builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
             armsExercises = armsExercises.filter{ $0 != secondExercise}
             
             let thirdExercise = fetchExerciseWith(K.s.skillTree.arms, armsAccessoryPool, blockID, ["SHOULDER"])
-            builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+            builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
             armsExercises = armsExercises.filter{ $0 != thirdExercise}
             
             let fourthExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-            builtWorkout.append(ChosenExercise(docPath: fourthExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+            builtWorkout.append(ChosenExercise(docID: fourthExercise.docID, docPath: fourthExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
             coreExercises = coreExercises.filter{ $0 != fourthExercise}
             
             
         case "LOWER2": // SAME AS LOWER 7/26/23
             if numberOfExercises == 3 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 1, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != secondExercise}
                 
                 let thirdExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: thirdExercise.docID, docPath: thirdExercise.docPath, order: 2, block: blockID, priority: thirdExercise.priority, skillTree: thirdExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != thirdExercise}
                 
             }
             if numberOfExercises == 2 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
                 
                 let secondExercise = fetchExerciseWithout(K.s.skillTree.core, coreExercises, blockID, [""])
-                builtWorkout.append(ChosenExercise(docPath: secondExercise.docPath, order: 2, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: secondExercise.docID, docPath: secondExercise.docPath, order: 2, block: blockID, priority: secondExercise.priority, skillTree: secondExercise.skillTree))
                 coreExercises = coreExercises.filter{ $0 != secondExercise}
             }
             if numberOfExercises == 1 {
                 let firstExercise = fetchExerciseWith(K.s.skillTree.lower, lowerAccessoryPool, blockID, ["OTHER"])
-                builtWorkout.append(ChosenExercise(docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
+                builtWorkout.append(ChosenExercise(docID: firstExercise.docID, docPath: firstExercise.docPath, order: 0, block: blockID, priority: firstExercise.priority, skillTree: firstExercise.skillTree))
                 lowerExercises = lowerExercises.filter{ $0 != firstExercise}
             }
         default:

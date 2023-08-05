@@ -30,18 +30,18 @@ class TabBarViewController: UITabBarController{
     
     
     //Program Variables
-    var totalDays = 0
-    var dayArray:[Int] = []
-    var currentDay = 0
-    var programID = 0
-    var newProgram: Bool = false
-    var week = 0
+    var totalDays = Int()
+    var dayArray = [Int]()
+    var currentDay = Int()
+    var programID = Int()
+    var newProgram = Bool()
+    var week = Int()
     
-    var day1Program: [ExerciseInfo] = []
-    var day2Program: [ExerciseInfo] = []
-    var day3Program: [ExerciseInfo] = []
-    var day4Program: [ExerciseInfo] = []
-    var day5Program: [ExerciseInfo] = []
+    var day1Program: [ProgramExerciseInfo] = []
+    var day2Program: [ProgramExerciseInfo] = []
+    var day3Program: [ProgramExerciseInfo] = []
+    var day4Program: [ProgramExerciseInfo] = []
+    var day5Program: [ProgramExerciseInfo] = []
     
     //Check In Variables
     var weeklyCheckIn: Bool = false
@@ -71,7 +71,6 @@ class TabBarViewController: UITabBarController{
                }else{
                    self.getUserInfo()
                    self.getSkillTrees()
-
                    self.getProgram()
            //        checkForNewProgram()
                    self.findCalendarDays()
@@ -211,7 +210,7 @@ extension TabBarViewController{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day1Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
+                    self.day1Program.append(ProgramExerciseInfo(docID: document.documentID, name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
@@ -225,7 +224,7 @@ extension TabBarViewController{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day2Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
+                    self.day2Program.append(ProgramExerciseInfo(docID: document.documentID, name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
@@ -239,7 +238,7 @@ extension TabBarViewController{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day3Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
+                    self.day3Program.append(ProgramExerciseInfo(docID: document.documentID, name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
@@ -253,7 +252,7 @@ extension TabBarViewController{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day4Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
+                    self.day4Program.append(ProgramExerciseInfo(docID: document.documentID, name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }
@@ -267,7 +266,7 @@ extension TabBarViewController{
                 print(error)
             }else{
                 for document in collection!.documents{
-                    self.day5Program.append(ExerciseInfo(name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, docID: document.documentID, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
+                    self.day5Program.append(ProgramExerciseInfo(docID: document.documentID, name: document["name"] as! String, sets: document["sets"] as! Int , reps: document["reps"] as! Int, order: document["order"] as! Int, block: document["block"] as! Int, skillTree: document["skillTree"] as! [String]))
                     
                 }
             }

@@ -20,6 +20,7 @@ class SignInVc: UIViewController {
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
     
     override func viewDidLoad() {
+//        configureButtons()
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
@@ -43,6 +44,7 @@ class SignInVc: UIViewController {
         // Create Google Sign In configuration object.
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
+        
         
         // Start the sign in flow!
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
@@ -72,6 +74,14 @@ class SignInVc: UIViewController {
         viewController = storyboard.instantiateViewController(withIdentifier: "Main")
         self.present(viewController, animated: true, completion: nil)
     }
+//
+//    func configureButtons(){
+//        let testframe = CGRect(x: 0, y: 0, width: 240, height: 50)
+//        var testView = UIView(frame: testframe)
+//        testView.addGestureRecognizer(#selector(setUpGoogle()))
+//        googleSignInButton.addSubview(testView)
+//
+//    }
 }
     
 

@@ -8,6 +8,7 @@
 import Foundation
 
 struct FirestoreExerciseInfo: Equatable{ // Exercise Information Read From Firestore, Read as All Possible Exercises
+    let docID: String
     let docPath: String
     let priority: Int
     let tags: [String]
@@ -17,6 +18,7 @@ struct FirestoreExerciseInfo: Equatable{ // Exercise Information Read From Fires
 }
 
 struct ChosenExercise: Equatable{ // Exercise Data after being chosen for Built Workout, without sets or reps data
+    let docID: String
     let docPath: String
     let order: Int
     let block: Int
@@ -25,6 +27,7 @@ struct ChosenExercise: Equatable{ // Exercise Data after being chosen for Built 
 }
 
 struct CompleteExerciseInfo{ // Chosen Exercise Information with set and rep data, ready to be written to Client Firestore Program Data
+    let docID: String
     let docPath: String
     let order: Int
     let block: Int
@@ -34,13 +37,12 @@ struct CompleteExerciseInfo{ // Chosen Exercise Information with set and rep dat
     let reps: Int
 }
 
-struct ExerciseInfo {
+struct ProgramExerciseInfo {
+    let docID: String
     let name: String
-//    let youtube: String
     let sets: Int
     let reps: Int
     let order: Int
-    let docID: String
     let block: Int
     let skillTree: [String]
 }

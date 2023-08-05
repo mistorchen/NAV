@@ -39,10 +39,10 @@ class ProgramMaker: UIViewController{
     var temp4Exercises: [String] = []
     
     
-    var day1Exercises: [String] = []
-    var day2Exercises: [String] = []
-    var day3Exercises: [String] = []
-    var day4Exercises: [String] = []
+    //    var day1Exercises: [String] = []
+    //    var day2Exercises: [String] = []
+    //    var day3Exercises: [String] = []
+    //    var day4Exercises: [String] = []
     
     
     var day1Blocks: [Int] = []
@@ -62,7 +62,6 @@ class ProgramMaker: UIViewController{
     var blocks = String()
     var selectedSplit = String() // Full body day Split
     var duration = Int()
-    var equipmentList = ["DB", "KB", "BENCH", "TRX", "STABILITY", "BB", "RACK", "BW", "MEDBALL", "SLED", "BOX"]
     
     var plyoExercises = [FirestoreExerciseInfo]()
     var upperExercises = [FirestoreExerciseInfo]()
@@ -72,11 +71,16 @@ class ProgramMaker: UIViewController{
     
     var buildingDay = 0
     
-    var day1Workout = [ChosenExercise]()
-    var day2Workout = [ChosenExercise]()
-    var day3Workout = [ChosenExercise]()
-    var day4Workout = [ChosenExercise]()
-
+    var day1Exercises = [ChosenExercise]()
+    var day2Exercises = [ChosenExercise]()
+    var day3Exercises = [ChosenExercise]()
+    var day4Exercises = [ChosenExercise]()
+    
+    var day1CompleteWorkout = [CompleteExerciseInfo]()
+    var day2CompleteWorkout = [CompleteExerciseInfo]()
+    var day3CompleteWorkout = [CompleteExerciseInfo]()
+    var day4CompleteWorkout = [CompleteExerciseInfo]()
+    
     
     @IBOutlet weak var numberOfDays: UILabel!
     @IBOutlet weak var dayStepper: UIStepper!
@@ -94,8 +98,8 @@ class ProgramMaker: UIViewController{
     
     override func viewDidLoad() {
         
-        //        let tabBar = tabBarController as! TabBarViewController
-        //        currentProgram = tabBar.currentProgram
+        let tabBar = tabBarController as! TabBarViewController
+        currentProgramID = tabBar.programID
         getUserInfo()
         setDropDown()
         dayStepper.value = 3.0
@@ -261,7 +265,7 @@ class ProgramMaker: UIViewController{
 
 extension ProgramMaker{
     func dayProgramGen(){
-        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo)
         if buildingDay == totalDays + 1{
             buildingDay += 66
         }
@@ -275,166 +279,117 @@ extension ProgramMaker{
         case 4:
             generateDay4()
         default:
-            firestoreCommands.generateProgramDetails(currentProgramID, totalDays)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                firestoreCommands.generateProgramDetails(self.currentProgramID, self.totalDays)
+                firestoreCommands.writeProgramToFirestore(self.day1CompleteWorkout, 1, self.currentProgramID)
+                firestoreCommands.writeProgramToFirestore(self.day2CompleteWorkout, 2, self.currentProgramID)
+                firestoreCommands.writeProgramToFirestore(self.day3CompleteWorkout, 3, self.currentProgramID)
+                firestoreCommands.writeProgramToFirestore(self.day4CompleteWorkout, 4, self.currentProgramID)
+            }
+            
         }
     }
     
     func generateDay1(){
-        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo)
         print("making day 1 -----")
         switch selectedSplit{
         case "FULL":
-            
             let fullDayBuilder = FullDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 1)
-            day1Workout = fullDayBuilder.generateProgram(1)
-            for count in 0 ..< day1Workout.count{
-                print(day1Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day1Workout, 1, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            day1Exercises = fullDayBuilder.generateProgram(1)
         case "PPL":
-            
             let PPLDayBuilder = PPLDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 1)
-            day1Workout = PPLDayBuilder.generateProgram(1)
-            for count in 0 ..< day1Workout.count{
-                print(day1Workout[count].docPath)
-            }
-            //            firestoreCommands.writeProgramToFirestore(day1Workout, 1, currentProgramID)
-            
-            buildingDay += 1
-            dayProgramGen()
+            day1Exercises = PPLDayBuilder.generateProgram(1)
         case "UL":
-            
             let ULDayBuilder = ULDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 1)
-            day1Workout = ULDayBuilder.generateProgram(1)
-            for count in 0 ..< day1Workout.count{
-                print(day1Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day1Workout, 1, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            day1Exercises = ULDayBuilder.generateProgram(1)
         default:
             print("error Day 1")
         }
+        let setRepGenerator = SetRepGeneration(userInfo: userInfo!, firestoreCommands: firestoreCommands, builtWorkout: day1Exercises)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            self.day1CompleteWorkout = setRepGenerator.completeWorkout
+        }
+        buildingDay += 1
+        dayProgramGen()
+        
     }
     func generateDay2(){
-        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo)
         print("making day 2 -----")
         switch selectedSplit{
         case "FULL":
             let fullDayBuilder = FullDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 2)
-            fullDayBuilder.removeDuplicate(day1Workout)
-            day2Workout = fullDayBuilder.generateProgram(2)
-            for count in 0 ..< day2Workout.count{
-                print(day2Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day2Workout, 2, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            fullDayBuilder.removeDuplicate(day1Exercises)
+            day2Exercises = fullDayBuilder.generateProgram(2)
         case "PPL":
             
             let PPLDayBuilder = PPLDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 2)
-            PPLDayBuilder.removeDuplicate(day1Workout)
-            day2Workout = PPLDayBuilder.generateProgram(2)
-            for count in 0 ..< day2Workout.count{
-                print(day2Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day2Workout, 2, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            PPLDayBuilder.removeDuplicate(day1Exercises)
+            day2Exercises = PPLDayBuilder.generateProgram(2)
         case "UL":
             let ULDayBuilder = ULDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 2)
-            ULDayBuilder.removeDuplicate(day1Workout)
-            day2Workout = ULDayBuilder.generateProgram(2)
-            for count in 0 ..< day2Workout.count{
-                print(day2Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day2Workout, 2, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            ULDayBuilder.removeDuplicate(day1Exercises)
+            day2Exercises = ULDayBuilder.generateProgram(2)
         default:
             print("error Day 2")
         }
+        let setRepGenerator = SetRepGeneration(userInfo: userInfo!, firestoreCommands: firestoreCommands, builtWorkout: day2Exercises)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            self.day2CompleteWorkout = setRepGenerator.completeWorkout
+        }
+        buildingDay += 1
+        dayProgramGen()
     }
     func generateDay3(){
-        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo)
         print("making day 3 -----")
         switch selectedSplit{
         case "FULL":
             let fullDayBuilder = FullDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 3)
-            fullDayBuilder.removeDuplicate(day1Workout + day2Workout)
-            day3Workout = fullDayBuilder.generateProgram(3)
-            
-            for count in 0 ..< day3Workout.count{
-                print(day3Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day3Workout, 3, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            fullDayBuilder.removeDuplicate(day1Exercises + day2Exercises)
+            day3Exercises = fullDayBuilder.generateProgram(3)
         case "PPL":
             let PPLDayBuilder = PPLDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 3)
-            PPLDayBuilder.removeDuplicate(day1Workout + day2Workout)
-            day3Workout = PPLDayBuilder.generateProgram(3)
-            for count in 0 ..< day3Workout.count{
-                print(day3Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day3Workout, 3, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            PPLDayBuilder.removeDuplicate(day1Exercises + day2Exercises)
+            day3Exercises = PPLDayBuilder.generateProgram(3)
         case "UL":
             let ULDayBuilder = ULDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 3)
-            ULDayBuilder.removeDuplicate(day1Workout + day2Workout)
-            day3Workout = ULDayBuilder.generateProgram(3)
-            
-            for count in 0 ..< day3Workout.count{
-                print(day3Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day3Workout, 3, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            ULDayBuilder.removeDuplicate(day1Exercises + day2Exercises)
+            day3Exercises = ULDayBuilder.generateProgram(3)
         default:
             print("error Day3")
         }
+        let setRepGenerator = SetRepGeneration(userInfo: userInfo!, firestoreCommands: firestoreCommands, builtWorkout: day3Exercises)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            self.day3CompleteWorkout = setRepGenerator.completeWorkout
+        }
+        buildingDay += 1
+        dayProgramGen()
     }
     func generateDay4(){
         print("making day 4-----")
-        let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+        let firestoreCommands = FirestoreCommands(userInfo: userInfo)
         switch selectedSplit{
         case "FULL":
             let fullDayBuilder = FullDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 4)
-            fullDayBuilder.removeDuplicate(day1Workout + day2Workout + day3Workout)
-            day4Workout = fullDayBuilder.generateProgram(4)
-            
-            for count in 0 ..< day4Workout.count{
-                print(day4Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day4Workout, 4, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            fullDayBuilder.removeDuplicate(day1Exercises + day2Exercises + day3Exercises)
+            day4Exercises = fullDayBuilder.generateProgram(4)
         case "PPL":
             let circuitDayBuilder = CircuitDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 4)
-            day4Workout = circuitDayBuilder.generateProgram()
-            for count in 0 ..< day4Workout.count{
-                print(day4Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day4Workout, 4, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            day4Exercises = circuitDayBuilder.generateProgram()
         case "UL":
             let ULDayBuilder = ULDayBuilder(plyoExercises: plyoExercises, upperExercises: upperExercises, lowerExercises: lowerExercises, coreExercises: coreExercises, armsExercises: armsExercises, userInfo: userInfo!, blocks: blocks, buildingDay: 4)
-            ULDayBuilder.removeDuplicate(day1Workout + day2Workout + day3Workout)
-            day4Workout = ULDayBuilder.generateProgram(4)
-            
-            for count in 0 ..< day4Workout.count{
-                print(day4Workout[count].docPath)
-            }
-            firestoreCommands.writeProgramToFirestore(day4Workout, 4, currentProgramID)
-            buildingDay += 1
-            dayProgramGen()
+            ULDayBuilder.removeDuplicate(day1Exercises + day2Exercises + day3Exercises)
+            day4Exercises = ULDayBuilder.generateProgram(4)
         default:
             print("error Day3")
         }
+        let setRepGenerator = SetRepGeneration(userInfo: userInfo!, firestoreCommands: firestoreCommands, builtWorkout: day4Exercises)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            self.day4CompleteWorkout = setRepGenerator.completeWorkout
+        }
+        buildingDay += 1
     }
     
     //    func generateDay1(){
@@ -780,7 +735,7 @@ extension ProgramMaker{
     }
     func retrievePossibleExercises(){
         if let userInfo = userInfo{
-            let firestoreCommands = FirestoreCommands(userInfo: userInfo, equipmentList: equipmentList)
+            let firestoreCommands = FirestoreCommands(userInfo: userInfo)
             firestoreCommands.fetchPossibleExercises("plyo", userInfo.plyoLevel) { exercises in
                 self.plyoExercises = exercises
             }

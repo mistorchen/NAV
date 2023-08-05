@@ -17,7 +17,7 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
     
     let db = Firestore.firestore()
     
-    var selectedProgram: [ExerciseInfo] = []
+    var selectedProgram: [ProgramExerciseInfo] = []
 
     
     var exerciseSelected = 0
@@ -69,6 +69,12 @@ class PreviewWorkoutVC: UIViewController, UITableViewDelegate{
         default:
             print("error getProgam")
         }
+    }
+    
+    @IBAction func updateDayButton(_ sender: UIButton) {
+        let tabBar = TabBarViewController()
+        let firestoreCommands = FirestoreCommands(userInfo: tabBar.userInfo)
+        firestoreCommands.updateCurrentDay()
     }
     
     func setSegments(_ days: Int){

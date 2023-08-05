@@ -83,6 +83,5 @@ extension Date {
     
 }
 
-class DifficultyButtonGesture: UITapGestureRecognizer {
-    var exerciseIndex = Int()
-}
+
+
